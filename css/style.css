@@ -5,7 +5,7 @@
   }
 
     body {
-        background-color: black;
+        background-color: f8f8f8;
     }
 
     * {
@@ -16,9 +16,11 @@
       color: white;
     }
     /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
+ 
+
+      .nav-item.dropdown {
+        display: inline;
+        float: left;
       }
       
       /* Add a gray background color and some padding to the footer */
@@ -27,23 +29,43 @@
         padding: 25px;
       }
 
-      .logo {
+      .navbar {
+        z-index: 999;
+        height: 20rem;
+        /* background-color: grey; */
+      }
+
+      .navbar-brand {
+        display: block;
         position: absolute;
-        z-index: 9999;
-        height: 10rem;
         left: 3rem;
         top: 3rem;
       }
+
+      .navbar-brand-small {
+        height: 7rem;
+      }
+
+      .logo {
+        height: 100%;
+      }
     
-    /* .text-wrapper {
+    .text-wrapper {
+      background: red;
       display: flex;
+      height: 100%;
       justify-content: center;
       align-items: center;
       width: auto;
-      margin: auto;
-    } */
+    }
 
-    
+    .carousel.slide {
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      height: 100vh !important;
+    }
+    /* version f. nebenseiten (imprint, faq, ect) */
     .carousel.slide.small {
       height: 40vh !important;
     }
@@ -66,20 +88,12 @@
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
-      width: 100%;
+      width: 100vw;
     }
-
-
-
-
-
-    
+  
     /* Hide the carousel text when the screen is less than 600 pixels wide */
     @media (max-width: 600px) {
       .carousel-caption {
-        display: none; 
+        display:none;
       }
     }
-
-
-
