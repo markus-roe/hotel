@@ -1,0 +1,85 @@
+  @font-face {      
+    font-family: "Visia Pro";
+    font-style: oblique 0deg 12deg;
+    src: url("../fonts/VisiaPro-Bold.woff");
+  }
+
+    body {
+        background-color: black;
+    }
+
+    * {
+      font-family: "Visia Pro";
+    }
+    
+    h1, h2, h3, h4, p {
+      color: white;
+    }
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+      
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+
+      .logo {
+        position: absolute;
+        z-index: 9999;
+        height: 10rem;
+        left: 3rem;
+        top: 3rem;
+      }
+    
+    /* .text-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+      margin: auto;
+    } */
+
+    
+    .carousel.slide.small {
+      height: 40vh !important;
+    }
+    
+    .carousel-inner {
+      height: 100%;
+    }
+      
+    .carousel-inner .item {
+        width: 100%; 
+        height: 100% !important;
+        background: red;
+    } 
+
+    .carousel-inner .item img{
+      object-fit: cover;
+      background-position: 50% 50%;
+      background-position: center;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100%;
+    }
+
+
+
+
+
+    
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display: none; 
+      }
+    }
+
+
+
