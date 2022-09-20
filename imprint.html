@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/style_screen_small.css">
+    <link rel="stylesheet" type="text/css" href="./css/style_mobile.css">
+    <script src="./menu.js" defer ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Imprint</title>
+    <title>Hotel Ipsum</title>
 </head>
 <body> 
 
 
 
-  <div id="top-section">
-
+  <div class="top-section">
 
     <div class="navbar">
         <div class="logo-div">
@@ -25,16 +25,34 @@
             </a>
         </div>
         <ul class="nav-links">
-            <li><a href="">Home</a></li>
-            <li><a href="">Book</a></li>
-            <li><a href="">Help</a></li>
-            <li><a href="">Imprint</a></li>
-            <li><a href="">Contact</a></li>
+            <li><a href="/index.html">Home</a></li>
+            <li><a href="#">Book</a></li>
+            <li><a href="#">Help</a></li>
+            <li><a href="#">Imprint</a></li>
+            <li><a href="#">Contact</a></li>
         </ul>
-            <!-- <div class="nav-links" style="width: 80%"></div></div> -->
+    
+    </div>
 
+    <div class="navbar-mobile">
+
+        <div id="hamburger" onclick="myFunction(this)">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
         
-
+        <a class="navbar-brand" href="#">
+            <img class="logo" src="./images/Logo.svg" />
+        </a>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="#">Book</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">Imprint</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+    
     </div>
 
 
@@ -64,6 +82,10 @@
         
     </div>
 </div>
+
+<section class="main-section">
+    <h1 class="main-header">Imprint</h1>
+</section>
 
   
 

@@ -1,3 +1,7 @@
+  :root {
+    --link-underline: 1.5px;
+  }
+  
   @font-face {      
     font-family: "Visia Pro";
     font-style: oblique 0deg 12deg;
@@ -12,7 +16,7 @@
       font-family: "Visia Pro";
     }
     
-    h1, h2, h3, h4, p {
+    h1, h2, h3, h4, p{
       color: white;
     }
 
@@ -66,13 +70,15 @@
         content: "";
         display: block;
         width: 0%;
+        height: var(--link-underline);
         transition: all 200ms;
       }
+
       .nav-links a:hover::after {
         content: "";
         display: block;
+        height: var(--link-underline);
         width: 100%;
-        height: 1.2px;
         background-color: white;;
       }
 
@@ -82,6 +88,7 @@
 
       .navbar-brand {
         display: block;
+        z-index: 9999;
         position: relative;
         padding-left: 1.5rem;
         padding-top: 1.5rem;
@@ -115,7 +122,8 @@
       top: 0px;
       left: 0px;
       position: absolute;
-      height: 100% !important;
+      height: inherit;
+      width: inherit;
     }
     /* version f. nebenseiten (imprint, faq, ect) */
     /* .carousel.slide.small {
@@ -129,7 +137,7 @@
     .carousel-inner .item {
         width: 100%; 
         height: 100%;
-        background: red;
+
     } 
 
     .carousel-inner .item img{
@@ -150,7 +158,26 @@
       }
     }
 
-    #top-section {
+    .top-section-main {
       width: 100vw;
       height: 100vh;
     }
+
+    .top-section {
+      width: 100vw;
+      height: 35vh;
+    }
+
+    .main-section {
+      max-width: 75%;
+      min-height: 500px;
+      margin:auto;
+
+    }
+
+
+    .main-header {
+      text-align: center;
+      color: black;
+    }
+
