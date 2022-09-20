@@ -15,6 +15,11 @@
     h1, h2, h3, h4, p {
       color: white;
     }
+
+    .nav-links {
+      display: flex;
+      
+    }
     /* Remove the navbar's default margin-bottom and rounded borders */ 
  
 
@@ -30,19 +35,64 @@
       }
 
       .navbar {
+        /* display: inline-bloc; */
+        display: flex;
         z-index: 999;
         height: 20rem;
-        /* background-color: grey; */
+        width: 100%;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        width: 80%;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .nav-links li {
+        display: block;
+        list-style: none;
+        
+      }
+      
+      .nav-links a {
+        font-size: 1.75rem;
+        text-shadow: 1px 1px 2px #00000033;
+        color:white;
+      }
+
+      .nav-links a::after {
+        content: "";
+        display: block;
+        width: 0%;
+        transition: all 200ms;
+      }
+      .nav-links a:hover::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1.2px;
+        background-color: white;;
+      }
+
+      .nav-links a:hover {
+        text-decoration: none;
       }
 
       .navbar-brand {
         display: block;
-        position: absolute;
-        left: 3rem;
-        top: 3rem;
+        position: relative;
+        padding-left: 1.5rem;
+        padding-top: 1.5rem;
+        height: 20rem;
       }
 
       .navbar-brand-small {
+        display: block;
+        position: relative;
+        left: 3rem;
+        top: 3rem;
         height: 7rem;
       }
 
@@ -59,16 +109,18 @@
       width: auto;
     }
 
+    
+
     .carousel.slide {
       top: 0px;
       left: 0px;
       position: absolute;
-      height: 100vh !important;
+      height: 100% !important;
     }
     /* version f. nebenseiten (imprint, faq, ect) */
-    .carousel.slide.small {
+    /* .carousel.slide.small {
       height: 40vh !important;
-    }
+    } */
     
     .carousel-inner {
       height: 100%;
@@ -76,7 +128,7 @@
       
     .carousel-inner .item {
         width: 100%; 
-        height: 100% !important;
+        height: 100%;
         background: red;
     } 
 
@@ -96,4 +148,9 @@
       .carousel-caption {
         display:none;
       }
+    }
+
+    #top-section {
+      width: 100vw;
+      height: 100vh;
     }
