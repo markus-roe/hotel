@@ -167,6 +167,10 @@
       width: 100vw;
       height: 35vh;
     }
+    /* Carousel Indikatoren auf Side-Pages (alle außer index-Page) */
+    .top-section .carousel.slide ol li {
+      display: none;
+    }
 
     .main-section {
       max-width: 75%;
@@ -181,3 +185,6 @@
       color: black;
     }
 
+.navbar-mobile {
+  display: none;
+}
