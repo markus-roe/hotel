@@ -2,25 +2,21 @@
     --link-underline: 1.5px;
   }
   
-  @font-face {      
-    font-family: "Visia Pro";
-    font-style: oblique 0deg 12deg;
-    src: url("../fonts/VisiaPro-Bold.woff");
-  }
 
     body {
         background-color: f8f8f8;
+        overflow-x: hidden;
     }
 
     * {
-      font-family: "Visia Pro";
+      font-family: "Poppins";
     }
     
-    h1, h2, h3, h4, p{
+    /* h1, h2, h3, h4, p{
       color: white;
-    }
+    } */
 
-    .nav-links {
+    .menu-links {
       display: flex;
       
     }
@@ -46,7 +42,7 @@
         width: 100%;
       }
 
-      .nav-links {
+      .menu-links {
         display: flex;
         align-items: center;
         width: 80%;
@@ -54,19 +50,19 @@
         justify-content: space-evenly;
       }
 
-      .nav-links li {
+      .menu-links li {
         display: block;
         list-style: none;
         
       }
       
-      .nav-links a {
+      .menu-links a {
         font-size: 1.75rem;
         text-shadow: 1px 1px 2px #00000033;
         color:white;
       }
 
-      .nav-links a::after {
+      .menu-links a::after {
         content: "";
         display: block;
         width: 0%;
@@ -74,7 +70,7 @@
         transition: all 200ms;
       }
 
-      .nav-links a:hover::after {
+      .menu-links a:hover::after {
         content: "";
         display: block;
         height: var(--link-underline);
@@ -82,20 +78,20 @@
         background-color: white;;
       }
 
-      .nav-links a:hover {
+      .menu-links a:hover {
         text-decoration: none;
       }
 
-      .navbar-brand {
+      .navbar-logo {
         display: block;
         z-index: 9999;
         position: relative;
-        padding-left: 1.5rem;
-        padding-top: 1.5rem;
+        margin-left: 1.5rem;
+        margin-top: 1.5rem;
         height: 20rem;
       }
 
-      .navbar-brand-small {
+      .navbar-logo-small {
         display: block;
         position: relative;
         left: 3rem;
@@ -105,6 +101,7 @@
 
       .logo {
         height: 100%;
+        width: 100%;
       }
     
     .text-wrapper {

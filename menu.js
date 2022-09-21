@@ -1,7 +1,7 @@
 
 function Menu() {
     this.hamburger = document.querySelector(".hamburger")
-    this.menu = document.querySelector("#nav-links")
+    this.menu = document.querySelector("#menu-links")
     this.menuIsOpen = false;
 }
 function open() {
