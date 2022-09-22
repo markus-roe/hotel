@@ -11,7 +11,7 @@
     <script src="./menu.js" defer ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Hotel Ipsum</title>
+    <title>Hotel Ipsum - Help</title>
 </head>
 <body> 
 
@@ -21,13 +21,13 @@
     <div class="navbar">
         <div class="logo-div">
             <a class="navbar-logo" href="./index.html">
-                <img class="logo" src="./images/Logo.svg" />
+                <img class="logo" src="./images/Logo.png" />
             </a>
         </div>
-        <ul class="nav-links">
-            <li><a href="/index.html">Home</a></li>
+        <ul class="menu-links">
+            <li><a href="./index.html">Home</a></li>
             <li><a href="#">Book</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="./help.html">Help</a></li>
             <li><a href="./imprint.html">Imprint</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
@@ -35,9 +35,8 @@
     </div>
 
     <div class="navbar-mobile">
-        <div id="mobileBar">
             <a class="navbar-logo" href="./index.html">
-                <img class="logo" src="./images/Logo.svg" />
+                <img class="logo" src="./images/Logo.png" />
             </a>
         <div class="hamburger">
             <div class="bar1"></div>
@@ -46,13 +45,12 @@
         </div>
         
 
-    </div>
 
-            <ul id="nav-links" class="nav-links closed">
-                <li><a href="/index.html">Home</a></li>
+            <ul id="menu-links" class="menu-links closed">
+                <li><a href="./index.html">Home</a></li>
                 <li><a href="#">Book</a></li>
-                <li><a href="#">Help</a></li>
-                <li><a href="#">Imprint</a></li>
+                <li><a href="./help.html">Help</a></li>
+                <li><a href="./imprint.html">Imprint</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
     
@@ -87,22 +85,60 @@
 </div>
 
 <section class="main-section">
-    <h1 class="main-header">Imprint</h1>
-    
-    <h3>Ipsum Hotel Group GmbH</h3>
-        <p>Lorem Ipsum Straße 69<br/>
-            <p>0420 Wien<br/>
-        Österreich<br/>
-        Telefon: +43 1 578 293<br/>
-        Mail: contact@ipsum.com<br/>
-        Geschäftsführer: Markus Rösner, Maximilian Sinnl<br/>
-        Handelsregister: Amtsgericht München, HRB 213099<br/>
-        Umsatzsteuer-Identifikationsnummer: DE296812119<br/>
-        Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, die Sie hier finden
-        <a href="https://ec.europa.eu/consumers/odr/">www.ec.europa.eu</a>.<br/>
-        Wir sind bereit, an einem außergerichtlichen Schlichtungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.<br/>
-        Impressum erstellt mit dem Trusted Shops Rechtstexter in Kooperation mit FÖHLISCH Rechtsanwälte.
-    </p>
+    <h1 class="main-header">Help</h1>
+
+    <div class="help-text">
+        <h4>Willkommen auf der Hotel Ipsum Hilfe Seite.</h4>
+        <h5>Antworten auf häufig gestellte Fragen finden Sie hier:</h5>
+    </div>
+
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Wie buche ich ein Zimmer?
+              </a>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              Auf unserer <a target="_blank" style="cursor:pointer;font-weight: bold;text-decoration: none;">Buchungsseite</a> finden Sie alle verfügbaren Zimmer und Unterknüfte. Dort können Sie sich einen Wunschzeitraum auswählen und es für die gewünschte Anzahl an Personen buchen.
+            </div>
+          </div>
+        </div>
+        
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingTwo">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Was ist das Motto dieses Hotels?
+              </a>
+            </h4>
+          </div>
+          <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+            <div class="panel-body">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
+          </div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading" role="tab" id="headingThree">
+            <h4 class="panel-title">
+              <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Wie lauten die Stornobedingungen?
+              </a>
+            </h4>
+          </div>
+          <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+            <div class="panel-body">
+                Sie können bis zu 3 Tage vor Beginn Ihres gebuchten Aufenthalts, Ihre Buchung storieren. Dies ist möglich auf der Bestellseite in Ihrem <a>Konto</a> oder Sie schreiben uns eine <a href="mailto:contact@hotelipsum.at">Email</a>.
+            </div>
+          </div>
+        </div>
+        
+      </div>
 
 
 </section>
