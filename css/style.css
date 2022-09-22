@@ -185,3 +185,48 @@
 .navbar-mobile {
   display: none;
 }
+
+.imprint-images {
+  display: flex;
+}
+
+.imprint-image-div {
+  justify-content: center;
+  margin: auto;
+}
+
+.imprint-image-div p {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.column {
+  width: 50%;
+}
+
+.imprint-image-name {
+  font-size: 1.4rem;
+  margin: 0.75rem;
+}
+
+.help-text {
+  text-align: center;
+  margin: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+.row {
+  display: block;
+  width: 100%;
+
+}
+
+.column {
+  width: 100%;
+}
+}
