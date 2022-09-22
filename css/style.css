@@ -57,7 +57,7 @@
       }
       
       .menu-links a {
-        font-size: 1.75rem;
+        font-size: 1.95rem;
         text-shadow: 1px 1px 2px #00000033;
         color:white;
       }
@@ -173,6 +173,7 @@
       max-width: 75%;
       min-height: 500px;
       margin:auto;
+      padding-bottom: 6rem;
 
     }
 
@@ -184,4 +185,28 @@
 
 .navbar-mobile {
   display: none;
+}
+
+
+#imgWrapper {
+  display: flex;
+  width: 100%;
+  justify-content:baseline;
+}
+
+.img-card {
+  text-align: end;
+  margin: 2rem;
+  height: 25rem;
+}
+
+.img-card img {
+  width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+footer {
+  height: 2rem;
+  background-color: black;
 }
