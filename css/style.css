@@ -75,8 +75,17 @@
         display: block;
         height: var(--link-underline);
         width: 100%;
-        background-color: white;;
+        background-color: white;
       }
+
+      
+      /* .menu-links a.active::after {
+        content: "";
+        display: block;
+        height: var(--link-underline);
+        width: 100%;
+        background-color: white;
+      } */
 
       .menu-links a:hover {
         text-decoration: none;
