@@ -8,15 +8,16 @@
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/style_mobile.css">
+    <link rel="stylesheet" type="text/css" href="./css/ipsum_form.css">
     <script src="./js/menu.js" defer ></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Hotel Ipsum</title>
+    <title>Hotel Ipsum - Login</title>
 </head>
 <body> 
 
 
-  <div class="top-section-main">
+  <div class="top-section">
 
     <div class="navbar">
         <div class="logo-div">
@@ -28,7 +29,7 @@
             <li><a href="./index.html">Home</a></li>
             <li><a href="#">Book</a></li>
             <li><a href="./help.html">Help</a></li>
-            <li><a href="./imprint.html">Imprint</a></li>
+            <li><a class="active" href="./imprint.html">Imprint</a></li>
             <li><a href="#">Contact</a></li>
         </ul>
     
@@ -38,16 +39,19 @@
             <a class="navbar-logo" href="./index.html">
                 <img class="logo" src="./images/Logo.png" />
             </a>
-            <div class="hamburger">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
-            </div>
+        <div class="hamburger">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        
+
+
             <ul id="menu-links" class="menu-links closed">
                 <li><a href="./index.html">Home</a></li>
                 <li><a href="#">Book</a></li>
                 <li><a href="./help.html">Help</a></li>
-                <li><a href="./imprint.html">Imprint</a></li>
+                <li><a class="active" href="./imprint.html">Imprint</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
     
@@ -65,7 +69,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img src="./images/bg_1.jpeg" alt="Image">
+            <img src="./images/bg_1.jpeg" alt="Image" >
             <div class="carousel-caption">
             </div>      
         </div>
@@ -81,7 +85,42 @@
     </div>
 </div>
 
-  
 
+<section class="main-section">
+    <h1 class="main-header">Login</h1>
+        <div class="ipsum-form">
+            <form action="" method="POST">
+                <div class="ipsum-fieldset">
+                    <div class="ipsum-input-wrapper">
+                        <div class="ipsum-input-container">
+                            <input class="ipsum-input text" type="text" name="username" placeholder="Benutzername"/>                            
+                        </div>
+                        <div class="ipsum-input-container">
+                            <input class="ipsum-input text" type="password" name="password" placeholder="Passwort"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="spaceBetween font-small">
+                    <div class="ipsum-checkbox">
+                        <input class="ipsum-input" type="checkbox" id="remember" name="remember">
+                        <label for="remember">Remember me</label>
+                    </div>
+                    <a style="display: block;" href="">Passwort vergessen</a>
+
+                </div>
+
+                <div class="center">
+                <button class="ipsum-button affirm" type="submit">Login</button>
+                Don't have an account yet? <a style="display: block" href="./register.html">Register</a>
+            </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+  
+<footer></footer>
 </body>
 </html>
