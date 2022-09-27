@@ -91,13 +91,26 @@
         text-decoration: none;
       }
 
+      .active-link {
+
+      }
+
+      .active-link::after {
+        content: "";
+        display: block;
+        height: var(--link-underline);
+        width: 100% !important;
+        background-color: white;
+      }
+
       .navbar-logo {
         display: block;
         z-index: 9999;
         position: relative;
         margin-left: 1.5rem;
         margin-top: 1.5rem;
-        height: 20rem;
+        width: 20rem;
+        
       }
 
       .navbar-logo-small {
@@ -174,7 +187,7 @@
       height: 35vh;
     }
     /* Carousel Indikatoren auf Side-Pages (alle außer index-Page) */
-    .top-section .carousel.slide ol li {
+    .top-section .carousel.slide ol {
       display: none;
     }
 

@@ -5,7 +5,7 @@
 }
 
 
-@media screen and (max-width: 600px), (max-height: 600px) {
+@media screen and (max-width: 780px), (max-height: 600px) {
     .carousel-indicators {
         display: none;
     }
@@ -16,6 +16,7 @@
 
     .navbar-logo {
         height: var(--logo-mobile-size);
+        width: var(--logo-mobile-size);
         margin: 0;
     }
 
