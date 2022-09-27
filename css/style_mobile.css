@@ -37,6 +37,12 @@
       z-index: 9999;
     }
 
+    .navbar-mobile li:last-child  {
+      position: absolute;
+      bottom: 3rem;
+      
+    }
+
     #nav-bar-background {
       display: flex;
       flex-wrap: wrap;
@@ -52,7 +58,7 @@
       align-content: space-around;
       align-items: center;
   }
-    }
+    
 
 
     .navbar-mobile .menu-links {
