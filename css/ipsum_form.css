@@ -40,6 +40,8 @@
 }
 
 [type="checkbox"], label  {
+
+    margin: auto 3px !important;
     cursor: pointer;
 } 
 
@@ -52,6 +54,7 @@
     margin-right: 1rem;
     height: 3rem;
     width: 100%;
+    font-size: 1.25rem;
 }
 
 .ipsum-input.text:last-child {
