@@ -103,14 +103,35 @@
         <div class="ipsum-form">
             <form action="" method="POST">
                 <div class="ipsum-fieldset">
-                    <div class="ipsum-input-wrapper">
-                        <div class="ipsum-input-container">
-                            <input class="ipsum-input text" type="text" name="username" placeholder="Username"/>                            
+                    <div class="ipsum-input gender">
+
+                        <div class="col first">
+                            <p>Gender:</p>
                         </div>
+                        <div class="col">
+                            <input class="ipsum-input" type="radio" name="inlineRadioOptions" id="female"
+                            value="female" />
+                          <label  for="female">Female</label>
+                        </div>
+                        <div class="col">
+                            <input class="ipsum-input" type="radio" name="inlineRadioOptions" id="male"
+                            value="male" />
+                          <label for="male">Male</label>
+                        </div>
+                        <div class="col">
+                            <input class="ipsum-input" type="radio" name="inlineRadioOptions" id="other"
+                            value="other" />
+                          <label for="other">Other</label>
+                        </div>
+                    </div>
+
                         <div class="ipsum-input-container">
                             <input class="ipsum-input text" type="text" name="fname" placeholder="First name"/>                            
                             <input class="ipsum-input text" type="text" name="lname" placeholder="Last name"/>                            
                         </div>
+
+                    <div class="ipsum-input-container">
+                        <input class="ipsum-input text" type="text" name="username" placeholder="Username"/>                            
                     </div>
                     <div class="ipsum-input-container">
                         <input type="password" class="ipsum-input text" name="password" placeholder="Password">
