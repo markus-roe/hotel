@@ -1,0 +1,22 @@
+[
+    {
+        "textContent": "Home",
+        "href": "./index.php"
+    },
+    {
+        "textContent": "Book",
+        "href": "./book.php"
+    },
+    {
+        "textContent": "Help",
+        "href": "./help.php"
+    },
+    {
+        "textContent": "Imprint",
+        "href": "./imprint.php"
+    },
+    {
+        "textContent": "Contact",
+        "href": "./contact.php"
+    }
+]
