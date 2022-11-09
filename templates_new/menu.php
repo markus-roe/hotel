@@ -1,5 +1,5 @@
 <body>
-    <div class="headsection {{menu-size}}">
+    <div class="headsection large">
         <div id="navbar-mobile">
             <div class="logo-div mobile">
                 <a class="navbar-logo" href="./index.html">
@@ -41,7 +41,11 @@
                 <div class="col-7" id="link-column">
                     <div id="link-wrapper">
                         <ul>
-                           {{menu-links}}
+                            <li><a>Home</a></li>
+                            <li><a>Buchen</a></li>
+                            <li><a>Buchen</a></li>
+                            <li><a>Buchen</a></li>
+                            <li><a>Buchen</a></li>
                         </ul>
                     </div>
 

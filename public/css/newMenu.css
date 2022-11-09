@@ -1,0 +1,156 @@
+.carousel.slide {
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    height: inherit;
+    width: inherit;
+}
+
+.headsection {
+    display: block;
+    width: 100vw;
+    height: 50vh;
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.headsection.large {
+    height: 100vh;
+}
+
+/* .headsection .carousel.slide {
+    height: 100% !important;
+} */
+
+/* .headsection .carousel.slide img {
+    height: inherit;
+    width: 100%;
+} */
+
+#ipsum-navbar [class^="col-"] {
+    /* display: block !important; */
+    align-self: center;
+    z-index: 2;
+}
+
+#ipsum-navbar {
+    position: relative;
+    width: inherit;
+    height: inherit;
+    max-width: 100vw;
+    margin: 0px !important;
+    padding: 0 !important;
+}
+
+#ipsum-navbar .row {
+    position: relative;
+    left: 0;
+    height: auto;
+    justify-content: space-between;
+    margin: 0 !important;
+    padding: 1rem;
+    align-items: flex-start !important;
+}
+
+
+.logo-div {
+    width: 8rem;
+}
+
+.carousel-image {
+    /* background-image: url(../images/bg_2.jpeg) !important; */
+    background-size: cover !important;
+    background-position: center bottom;
+    background-repeat: no-repeat !important;
+    width: inherit;
+    height: 100%;
+}
+
+.navbar-logo {
+    display: block;
+    z-index: 9999;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    margin: 0 !important;
+}
+
+.navbar-logo img {
+    width: 100%;
+}
+
+.row ul {
+    float: left;
+}
+
+.row ul li {
+    float: left;
+    display: inline;
+}
+
+.carousel-item {
+    height: inherit;
+}
+
+#link-column {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    /* margin-top: 2.7rem; */
+    /* align-self: flex-end; */
+}
+
+#account-logo-container {
+    top: -10px;
+    position: relative;
+}
+
+#account-logo-container a {
+    text-shadow: 1px 1px 2px #00000033;
+    color: white;
+}
+
+#link-wrapper {
+    width: 100%;
+    margin-right: 3rem;
+}
+
+#link-wrapper ul {
+    display: flex;
+    width: inherit;
+    justify-content: space-around;
+    font-size: 1.4rem;
+}
+
+#link-wrapper ul li {
+    display: block;
+    padding-right: 1rem;
+}
+
+#link-wrapper a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#navbar-carousel {
+    height: inherit;
+}
+
+#link-wrapper ul li a::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    transition: all 200ms;
+}
+
+#link-wrapper ul li a:hover::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+}

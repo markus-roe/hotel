@@ -2,46 +2,30 @@
 
 // INSPIRATION https://www.php.net/manual/en/language.oop5.overloading.php
 
-// FIXME wie $templatePath angeben?
+// FIXME wie $templatePathPrefix angeben?
 class View
 {
     public $templates = [];
-    protected $params = [];
-    // IMPROVE params die Konstruktor übergeben werden
-    // direkt über assignNecessaryParams gefiltert in $params speichern
+    protected $params = null;
     protected $externalParams = [];
+    protected $requiredParams = null;
     public $name;
     protected $view = '';
 
-    protected $views;
-
-    /* ? in View::params ist festgelegt welche Parameter
-    ** View sich im Kontext einer Komposit-Templates (zB Home)
-    ** herauspicken soll, damit nicht immer über alle
-    ** Parameter beim Rendern iteriert werden muss
-    */
-
-    // IMPROVE Constructor is voll hässlich
-    function __construct($params = null, $fileName=null)
+    function __construct($fileName=null, $requiredParams = null)
     {
-        $this->templatePath = getcwd()."/public/templates/";
-
+        $this->requiredParams = $requiredParams;
         $this->name = $fileName;
         if ($fileName != null)
         {
-            $this->view = $this->readFromFile($fileName);
+            $templatePathPrefix = getcwd()."/public/templates/";
+            $this->view = View::readFromFile($templatePathPrefix.$fileName);
         }
-
-        if ($params != null)
-        {
-            $this->setParams($params);
-        }
-
     }
 
-    public function readFromFile($templateName)
+    public static function readFromFile($templateName)
     {
-        $fileName = $this->templatePath.$templateName.".php";
+        $fileName = $templateName.".php";
         if (file_exists($fileName))
         {
             return file_get_contents($fileName);
@@ -66,19 +50,16 @@ class View
         return $renderedTemplate;
     }
 
-    public function render() 
+    public function render($params=null) 
     {
+        $this->extractRequiredParams($params);
         $this->before();
-        if ($this->view == "")
-        {
-            $rawTemplate = $this->readFromFile($this->name);
-            $this->view = View::renderTemplate($rawTemplate, $this->params);
-            return 0;
-        }
 
+        if (($this->params))
         $this->view = View::renderTemplate($this->view, $this->params);
+
         $this->after();
-        // var_dump($this->params);
+
         return 1;
     }
 
@@ -88,12 +69,12 @@ class View
         {
             return 0;
         }
-        echo $this->view;
+        echo html_entity_decode($this->view);
         
         
         return 1;
     }
-
+    // OBSOLETE
     public function displayAll()
     {
         if (count($this->views) == 0)
@@ -109,15 +90,32 @@ class View
         return 1;
     }
 
-    // TODO noch nicht in Verwendung
-
-    protected function assignNessecaryParams($externalParams)
+    // IMPROVE Conditions könnten hübscher sein
+    protected function extractRequiredParams($externalParams)
     {
-        foreach($this->params as $param)
+        // if (count($this->requiredParams) == 0)
+        // {
+        //     $this->setParams($externalParams);
+        //     return;
+        // }
+        if ($this->requiredParams == null)
         {
-            if (in_array($param, $externalParams))
+            return 0;
+        }
+        foreach($this->requiredParams as $requiredParamKey => $requiredParamValue)
+        {
+            // wenn Array nur Namen der Schlüssel aber keine vordefinierten Values enthält,
+            // ist $requiredParamKey automatisch Index im Array -> gettype...
+            // echo gettype($requiredParamKey);
+            if (gettype($requiredParamKey) == "integer" && array_key_exists($requiredParamValue, $externalParams))
             {
-                $this->params[$param] = $externalParams[$param];
+                $this->params[$requiredParamValue] = $externalParams[$requiredParamValue];
+                continue;
+            }
+            else
+            {
+                $this->params[$requiredParamKey] = $requiredParamValue;
+
             }
         }
     }
@@ -150,7 +148,7 @@ class View
         return $this->params;
     }
 
-    public function changeParam($key, $value)
+    public function updateParam($key, $value)
     {
         $this->params[$key] = $value;
     }

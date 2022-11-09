@@ -8,10 +8,10 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <!-- <link rel="stylesheet" type="text/css" href="./css/style.css"> -->
-    <link rel="stylesheet" type="text/css" href="./public/css/styleNew.css">
-    <link rel="stylesheet" type="text/css" href="./public/css/newMenu.css">
-    <link rel="stylesheet" type="text/css" href="./public/css/newMenuMobile.css">
+    <link rel="stylesheet" type="text/css" href="./css/styleNew.css">
+    <link rel="stylesheet" type="text/css" href="./css/newMenu.css">
+    <link rel="stylesheet" type="text/css" href="./css/newMenuMobile.css">
     <!-- <link rel="stylesheet" type="text/css" href="./css/ipsum_form.css"> -->
-    <script src="./public/js/menu.js" defer ></script>
-    <title>{{documentTitle}}</title>
+    <script src="./js/menu.js" defer ></script>
+    <title>Hotel Ipsum - Register</title>
 </head>

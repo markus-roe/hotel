@@ -14,11 +14,12 @@ class Compound extends View
     protected $params = [];
     protected $virtualViews = [];
     protected $views = [];
+    protected $viewsAlreadyExtracted = false;
 
-    function __construct($params)
+    function __construct()
     {
-        parent::__construct($params, null);
-
+        // parent::__construct(null, null);
+        // $this->params;
         // foreach ($this->views as $viewName => $viewEl) {
         //     $this->setName($viewName, $viewName);
         // }
@@ -27,32 +28,58 @@ class Compound extends View
     // IMPROVE voll hässlich und unübersichtlich
     // ? bei nested-compounds -> sollte jeder compound sich selbst rendern und
     // parent-compound nur resultat (eigenes $virtualViews) returnen?
-    public function render()
+    public function extractViewsFromCompounds()
     {
-        $this->before();
         // gibt Views in virtualViews-Array
         // checkt ob Objekt vom Typ View ist oder Compound
         // extrahiert View-Objekt falls es sich um Compound handelt
+        if ($this->viewsAlreadyExtracted)
+        {
+            return;
+        }
         foreach ($this->views as $viewNameKey => $viewObj) {
             if (get_class($viewObj) != "View") {
                 foreach ($viewObj->views as $viewCompoundEl) {
                     $view = $this->filterViews($viewCompoundEl);
-                    $view->render();
+                    // $view->render();
                     array_push($this->virtualViews, $view);
                 }
             } else {
                 array_push($this->virtualViews, $viewObj);
             }
 
-            $this->virtualViews[count($this->virtualViews) - 1]->render();
+            // $this->virtualViews[count($this->virtualViews) - 1]->render();
+        }
+        $this->viewsAlreadyExtracted = true;
+    }
+
+    public function render($params=null)
+    {
+        if (!$this->viewsAlreadyExtracted)
+        {
+            $this->extractViewsFromCompounds();
+        }
+
+        $this->before();
+
+        foreach($this->virtualViews as $view)
+        {
+            $view->render($params);
         }
         $this->after();
+
+        $this->display();
     }
 
     public function display()
     {
+        if (!$this->viewsAlreadyExtracted)
+        {
+            return 0;
+        }
+
         foreach ($this->virtualViews as $viewObj => $view) {
-            echo html_entity_decode($view->view);
+            $view->display();
         }
     }
 
