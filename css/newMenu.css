@@ -101,12 +101,16 @@
     /* align-self: flex-end; */
 }
 
-#account-logo-container {
+.account-logo-container {
     top: -10px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center;
 }
 
-#account-logo-container a {
+.account-logo-container a {
     text-shadow: 1px 1px 2px #00000033;
     color: white;
 }
