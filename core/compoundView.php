@@ -14,6 +14,7 @@ class Compound extends View
     protected $params = [];
     protected $virtualViews = [];
     protected $views = [];
+    protected $view = "";
     protected $viewsAlreadyExtracted = false;
 
     function __construct()
@@ -52,35 +53,36 @@ class Compound extends View
         }
         $this->viewsAlreadyExtracted = true;
     }
+    
 
-    public function render($params=null)
+    public function parse($params)
     {
-        if (!$this->viewsAlreadyExtracted)
-        {
-            $this->extractViewsFromCompounds();
-        }
+        $this->params = $params;
 
-        $this->before();
+        // if (!$this->viewsAlreadyExtracted)
+        // {
+        //     $this->extractViewsFromCompounds();
+        // }
+        $this->extractViewsFromCompounds();
 
         foreach($this->virtualViews as $view)
         {
-            $view->render($params);
+            $view->parse($params);
+            $this->view .= $view->getView();
         }
+    }
+
+    public function render()
+    {
+        $this->before();
+        parent::display();
         $this->after();
 
-        $this->display();
     }
 
     public function display()
     {
-        if (!$this->viewsAlreadyExtracted)
-        {
-            return 0;
-        }
-
-        foreach ($this->virtualViews as $viewObj => $view) {
-            $view->display();
-        }
+        
     }
 
     // extrahiert View-Objekte aus Compound-Objekten

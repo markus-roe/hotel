@@ -33,7 +33,7 @@ class View
         throw new Exception("File ". $fileName. " not found...");
     }
 
-     public static function renderTemplate($template, $params=null)
+     public static function parseTemplate($template, $params=null)
     {
         if ($params == null || count($params) <= 0) 
         {
@@ -43,23 +43,25 @@ class View
 
         foreach($params as $key=>$value)
             {
-                $renderedTemplate = preg_replace("/(\{\{". $key ."\}\})/", htmlspecialchars($value), $renderedTemplate);
+                $renderedTemplate = preg_replace("/(\{\{". $key ."\}\})/", $value, $renderedTemplate);
 
             }
         
         return $renderedTemplate;
     }
 
-    public function render($params=null) 
+    public function parse($params)
     {
         $this->extractRequiredParams($params);
+
+        $this->view = View::parseTemplate($this->view, $this->params);
+    }
+
+    public function render() 
+    {
         $this->before();
-
-        if (($this->params))
-        $this->view = View::renderTemplate($this->view, $this->params);
-
+        echo html_entity_decode($this->view);
         $this->after();
-
         return 1;
     }
 

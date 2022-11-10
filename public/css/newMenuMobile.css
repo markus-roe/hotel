@@ -8,8 +8,8 @@
         display: none;
     }
 
-    #account-logo-large {
-        display: none;
+    .account-logo-large {
+        display: block;
     }
 
     #hamburger {
@@ -26,7 +26,7 @@
     }
 
     #hamburger.closed div:first-child {
-        transform: rotate(45deg);
+        transform: rotate(45deg) translate(1px, 0px);
         transform-origin: left center;
     }
 

@@ -1,18 +1,17 @@
 <?php
 
 require_once getcwd()."/core/compoundView.php";
+require_once getcwd()."/public/views/menu.php";
 
-class Home extends Compound
+class HomePage extends Compound
 {
     function __construct()
     {
-        // parent::__construct($params);
-        
-        $this->views = 
+        $this->views =
         [
-            "header" => new View(["documentTitle"=>"Ipsum Hotel"], "header"),
-            "menu" => new View(["menu-links"], "menu"),
-            "footer" => new View($this->params, "footer")
+            "header" => new View("header", ["documentTitle"=>"IPSUM-HOTEL"]),
+            "menu" => new MenuLarge(),
+            "footer" => new View("footer")
         ];
     }
 }

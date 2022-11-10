@@ -37,7 +37,7 @@ abstract class Menu extends Compound
 
         $this->views = 
         [
-            "menu" => new View("menu", ["menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize])
+            "menu" => new View("menu", ["menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "menu-username"])
         ];
     }
 
