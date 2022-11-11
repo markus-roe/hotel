@@ -1,10 +1,5 @@
 <?php
 
-
-require_once("./public/views/page.php");
-require_once "./core/app.php";
-require_once "./core/router.php";
-
 $mock_params = ["menu-username"=>"Maximilian Sinnl", "documentTitle"=>"Ipsum-Hotel", "menu-links"=>"TEST LINK", "content-headline" => "CONTENT-HEADLINE"];
 $mock_params["content-body"] = "    <b>Lorem ipsum dolor</b> sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
 
@@ -14,15 +9,3 @@ Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lo
 
 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
     ";
-
-
-
-$app = new App();
-
-$app->router->get("/{controller}");
-
-$app->run();
-
-// $page = new Page();
-// $page->parse($mock_params);
-// $page->render();

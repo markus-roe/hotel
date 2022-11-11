@@ -1,14 +1,11 @@
 <?php
 
-// INSPIRATION https://www.php.net/manual/en/language.oop5.overloading.php
-
-// FIXME wie $templatePathPrefix angeben?
 class View
 {
     public $templates = [];
-    protected $params = null;
+    protected $params = [];
     protected $externalParams = [];
-    protected $requiredParams = null;
+    protected $requiredParams = [];
     public $name;
     protected $view = '';
 
@@ -62,6 +59,7 @@ class View
         $this->before();
         echo html_entity_decode($this->view);
         $this->after();
+
         return 1;
     }
 

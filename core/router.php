@@ -2,12 +2,12 @@
 
 class Router
 {
-    private $routingInfo = [];
+    private $request = [];
     protected array $routes = [
         "GET" => [],
         "POST" => []
     ];
-    // (noch) nicht in Verwendung
+    // OBSOLETE?
     private $regexSubstitutes = [
         ":str" => "([a-zA-Z]+?)",
         ":int" => "([0-9]+?)",
@@ -17,8 +17,8 @@ class Router
     function __construct()
     {
     }
-
-    public function get($path, $callback)
+    // ? $callback notwendig
+    public function get($path, $callback=null)
     {
         $regexPath = $this->createRegexPattern(($path));
         array_push($this->routes["GET"], $regexPath);
@@ -43,7 +43,7 @@ class Router
     public function matchRoute($route, $method)
     {
         
-        $this->setRoutingInfo("routeExists", false);
+        $this->setRequest("routeExists", false);
         /* CHANGE: "mvc_test" muss, wenn implementiert in Hotel-Seite wsl
         ** durch "Präfix" der Hotel URL ersetzt werden (zB "ipsumhotel")
         **/
@@ -53,29 +53,29 @@ class Router
         {
             if (preg_match($pattern, $route, $matches))
             {
-                $this->routingInfo["routeExists"] = true;
+                $this->request["routeExists"] = true;
                 // var_dump($matches);
                 $namedGroupMatches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
 
                 foreach($namedGroupMatches as $key=>$value)
                 {
                     // echo "\n". $matches["view"];
-                    $this->setRoutingInfo($key, $value);
+                    $this->setRequest($key, $value);
                 }
             }
         }
-        return $this->routingInfo;
+        return $this->request;
     }
-    protected function setRoutingInfo($key, $value)
+    protected function setRequest($key, $value)
     {
-        $this->routingInfo[$key] = $value;
+        $this->request[$key] = $value;
     }
 
     public function dispatch($route, $method)
     {
         // get query-params here?
-        $this->routingInfo = $this->matchRoute($route, $method);
+        $this->request = $this->matchRoute($route, $method);
 
-        return $this->routingInfo;
+        return $this->request;
     }
 }

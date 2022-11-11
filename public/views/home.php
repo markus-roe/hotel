@@ -1,9 +1,9 @@
 <?php
 
-require_once getcwd()."/core/compoundView.php";
+require_once getcwd()."/core/component.php";
 require_once getcwd()."/public/views/menu.php";
 
-class HomePage extends Compound
+class HomePage extends Component
 {
     function __construct()
     {

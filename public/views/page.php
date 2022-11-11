@@ -1,10 +1,10 @@
 <?php
 
-require_once getcwd()."/core/compoundView.php";
+require_once getcwd()."/core/component.php";
 require_once getcwd()."/public/views/menu.php";
 require_once getcwd()."/public/views/content.php";
 
-class Page extends Compound
+class Page extends Component
 {
     function __construct()
     {

@@ -1,8 +1,8 @@
 <?php
 
-require_once getcwd()."/core/compoundView.php";
+require_once getcwd()."/core/component.php";
 
-class Content extends Compound
+class Content extends Component
 {
     function __construct()
     {

@@ -1,8 +1,8 @@
 <?php
 
-require_once getcwd()."/core/compoundView.php";
+require_once getcwd()."/core/component.php";
 
-abstract class Menu extends Compound
+abstract class Menu extends Component
 {
     private $menuLinksConfig;
 
@@ -13,7 +13,7 @@ abstract class Menu extends Compound
         [
             [
                 "textContent"=> "Home",
-                "href"=> "./index"
+                "href"=> "./"
             ],
             [
                 "textContent"=> "Book",
