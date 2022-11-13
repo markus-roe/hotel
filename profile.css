@@ -1,0 +1,9 @@
+.profile-pic {
+    width: 150px;
+    margin: 1em;
+    border-radius: 0.5em;
+}
+
+.username {
+    cursor: not-allowed
+}
