@@ -1,5 +1,5 @@
 <body>
-    <div class="headsection large">
+    <div class="headsection">
         <div id="navbar-mobile">
             <div class="logo-div mobile" title="Homepage">
                 <a class="navbar-logo" href="./index">

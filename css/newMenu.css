@@ -9,7 +9,7 @@
 .headsection {
     display: block;
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
     position: relative;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@
 .carousel-image {
     /* background-image: url(../images/bg_2.jpeg) !important; */
     background-size: cover !important;
-    background-position: center bottom;
+    background-position: center;
     background-repeat: no-repeat !important;
     width: inherit;
     height: 100%;
