@@ -27,14 +27,18 @@
         </div>
   
         <div class="row">
-                <div class="center">
+            <div class="col-sm-4 center">
+                <div class="row">
                     <div class="avatar-container">
-                        <img src="https://as2.ftcdn.net/v2/jpg/02/68/84/77/500_F_268847710_PDEAr42m97aVQZFDv5yFPPBtdQ7onUy3.jpg" alt="Avatar" class="avatar-image">
+                        <div src="https://as2.ftcdn.net/v2/jpg/02/68/84/77/500_F_268847710_PDEAr42m97aVQZFDv5yFPPBtdQ7onUy3.jpg" alt="Avatar" class="avatar-image">
                         <div class="avatar-overlay">
                             <i class="avatar-text fa-solid fa-pencil"></i>
                         </div>
                       </div>
-                    <!-- <img class="profile-pic" src="https://as2.ftcdn.net/v2/jpg/02/68/84/77/500_F_268847710_PDEAr42m97aVQZFDv5yFPPBtdQ7onUy3.jpg" class="img-thumbnail" alt="Profile Image"> -->
+                    <!-- <img class="col-sm-12 center">
+                        <img src="https://placekitten.com/200/200" class="img-thumbnail" alt="Profile Image"> -->
+                        <h4>{{username}}</h4>
+                    </div>
                 </div>
 
                 <div class="ipsum-form">
@@ -51,7 +55,7 @@
                                 <input class="ipsum-input text" type="text" name="email" value="{{email}}"/>                            
                             </div>
                             <div class="ipsum-input-container">
-                                <input class="ipsum-input text" type="text" name="phone" value="{{phone}}"/>                            
+                                <input disabled class="ipsum-input text" type="text" class="username" name="username" placeholder="mustermaxs"/>                            
                             </div>
                             <div class="ipsum-input-container">
                                 <input type="password" class="ipsum-input text" name="current-password" placeholder="Current Password">

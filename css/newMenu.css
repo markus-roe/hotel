@@ -9,7 +9,7 @@
 .headsection {
     display: block;
     width: 100vw;
-    height: 50vh;
+    height: 30vh;
     position: relative;
     top: 0;
     left: 0;
@@ -61,7 +61,7 @@
 .carousel-image {
     /* background-image: url(../images/bg_2.jpeg) !important; */
     background-size: cover !important;
-    background-position: center bottom;
+    background-position: center;
     background-repeat: no-repeat !important;
     width: inherit;
     height: 100%;
@@ -101,14 +101,22 @@
     /* align-self: flex-end; */
 }
 
-#account-logo-container {
+.account-logo-container {
     top: -10px;
     position: relative;
+    /* display: flex;
+    flex-direction: column;
+    color: white;
+    align-items: center; */
 }
 
-#account-logo-container a {
+.account-logo-container a {
     text-shadow: 1px 1px 2px #00000033;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
 }
 
 #link-wrapper {
@@ -138,7 +146,7 @@
     height: inherit;
 }
 
-#link-wrapper ul li a::after {
+/* #link-wrapper ul li a::after {
     content: "";
     display: block;
     width: 0%;
@@ -153,4 +161,25 @@
     width: 100%;
     background-color: white;
     z-index: 100;
+} */
+
+.hoverLine::after {
+    content: "";
+    display: block;
+    width: 0%;
+    height: 2px;
+    transition: all 200ms;
+}
+
+.hoverLine:hover::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
+}
+
+.hoverGrow:hover {
+    transform: scale(1.5);
 }
