@@ -63,7 +63,7 @@ class View
         return 1;
     }
 
-    public function display()
+    public function display() 
     {
         if ($this->view == "")
         {

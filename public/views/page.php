@@ -12,7 +12,7 @@ class Page extends Component
         [
             "header" => new View("header", ["documentTitle"=>"IPSUM-HOTEL"]),
             "menu" => new MenuSmall(),
-            "content" => new Content(["content-body", "content-headline"]),
+            "content" => new Content(),
             "footer" => new View("footer")
         ];
     }

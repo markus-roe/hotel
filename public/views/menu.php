@@ -33,7 +33,9 @@ abstract class Menu extends Component
             ]
         ];
 
+        $this->menuLinksTemplate = View::readFromFile(getcwd()."/public/templates/"."menuLinks");
         $menuLinksHtml = $this->createLinks();
+
 
         $this->views = 
         [
@@ -46,29 +48,13 @@ abstract class Menu extends Component
         //TEMPORARY
         $class = "";
         $htmlString = "";
+        $params = [];
         foreach($this->menuLinksConfig as $link)
         {
-            $htmlString .= '<li><a class="'.$class.'" href="'.$link["href"].'">'.$link["textContent"].'</a></li>';
+            $params = ["menu-link-href"=>$link["href"], "menu-link-textContent"=>$link["textContent"]];
+            $htmlString .= View::parseTemplate($this->menuLinksTemplate, $params);
         }
 
         return $htmlString;
-    }
-}
-
-class MenuLarge extends Menu
-{
-    function __construct()
-    {
-        parent::__construct("large");
-
-    }
-}
-
-class MenuSmall extends Menu
-{
-    function __construct()
-    {
-        parent::__construct("small");
-        
     }
 }

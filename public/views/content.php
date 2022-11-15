@@ -6,9 +6,9 @@ class Content extends Component
 {
     function __construct()
     {
-        $this->view =
+        $this->views =
         [
-            "content" => new View("content", ["content-body", "content-headline"])
+            "content" => new View("content", ["content-body"=>"<h1>TEST</h1>", "content-headline"])
         ];
     }
 }
