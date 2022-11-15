@@ -4,6 +4,7 @@
     position: absolute;
     height: inherit;
     width: inherit;
+    filter: brightness(0.8);
 }
 
 .headsection {
@@ -140,6 +141,7 @@
     color: white;
     text-decoration: none;
     cursor: pointer;
+    text-shadow: 0px 0px 2px darkslategray;
 }
 
 #navbar-carousel {
