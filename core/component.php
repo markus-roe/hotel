@@ -78,9 +78,9 @@ class Component extends View
         return 0;
     }
 
-    public function insertComponent($componentName, $newComponent)
+    public function insert($componentName, $newComponent)
     {
-        if (in_array($componentName, $this->views))
+        if (array_key_exists($componentName, $this->views))
         {
             $this->views[$componentName] = $newComponent;
             return 1;

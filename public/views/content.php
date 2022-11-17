@@ -8,7 +8,9 @@ class Content extends Component
     {
         $this->views =
         [
-            "content" => new View("content", ["content-body"=>"<h1>TEST</h1>", "content-headline"])
+            "contentWrapperStart" => new View("contentWrapperStart"),
+            "content" => null,
+            "contentWrapperEnd" => new View("contentWrapperEnd")
         ];
     }
 }

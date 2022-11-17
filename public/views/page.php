@@ -1,8 +1,8 @@
 <?php
 
 require_once getcwd()."/core/component.php";
-require_once getcwd()."/public/views/menu.php";
-require_once getcwd()."/public/views/content.php";
+require_once getcwd()."/public/views/menuSmall.php";
+// require_once getcwd()."/public/views/content.php";
 
 class Page extends Component
 {
@@ -12,7 +12,7 @@ class Page extends Component
         [
             "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
             "menu" => new MenuSmall(),
-            "content" => new Content(),
+            "content" => null,
             "footer" => new View("footer")
         ];
     }
