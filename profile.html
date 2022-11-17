@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, maximum-scale=1.0, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./css/fonts.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <link rel="stylesheet" type="text/css" href="./css/style_mobile.css">
@@ -28,24 +29,33 @@
         <div class="row">
             <div class="col-sm-4 center">
                 <div class="row">
-                    <div class="col-sm-12 center">
-                        <img src="https://placekitten.com/200/200" class="img-thumbnail" alt="Profile Image">
+                    <div class="avatar-container">
+                        <div src="https://as2.ftcdn.net/v2/jpg/02/68/84/77/500_F_268847710_PDEAr42m97aVQZFDv5yFPPBtdQ7onUy3.jpg" alt="Avatar" class="avatar-image">
+                        <div class="avatar-overlay">
+                            <i class="avatar-text fa-solid fa-pencil"></i>
+                        </div>
+                      </div>
+                    <!-- <img class="col-sm-12 center">
+                        <img src="https://placekitten.com/200/200" class="img-thumbnail" alt="Profile Image"> -->
                         <h4>{{username}}</h4>
                     </div>
                 </div>
 
                 <div class="ipsum-form">
-                    <div class="center">
-                        <h3>Update Profile</h3>
-                    </div>
                     <form action="" method="POST">
                         <div class="ipsum-fieldset">
                             <div class="ipsum-input-container">
-                                <input class="ipsum-input text" type="text" name="fname" placeholder="Firstname" value=""/>                            
-                                <input class="ipsum-input text" type="text" name="lname" placeholder="Surname" value=""/>                            
+                                <input class="ipsum-input text" type="text" name="fname" value="{{firstname}}"/>                            
+                                <input class="ipsum-input text" type="text" name="lname" value="{{lastname}}"/>                            
                             </div>
                             <div class="ipsum-input-container">
-                                <input disabled class="ipsum-input text" type="text" name="username" placeholder="Username"/>                            
+                                <input disabled class="ipsum-input text" type="text" class="username" name="username" placeholder="{{username}}"/>                            
+                            </div>
+                            <div class="ipsum-input-container">
+                                <input class="ipsum-input text" type="text" name="email" value="{{email}}"/>                            
+                            </div>
+                            <div class="ipsum-input-container">
+                                <input class="ipsum-input text" type="text" name="phone" placeholder="{{phone}}"/>                            
                             </div>
                             <div class="ipsum-input-container">
                                 <input type="password" class="ipsum-input text" name="current-password" placeholder="Current Password">

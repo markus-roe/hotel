@@ -7,3 +7,46 @@
 .username {
     cursor: not-allowed
 }
+
+.avatar-container {
+    position: relative;
+    margin: 1em auto;
+    width: 12em;
+  }
+  
+  .avatar-image {
+    border-radius: 5px;
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .avatar-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #00000050;
+  }
+  
+  .avatar-container:hover .avatar-overlay {
+    cursor: pointer;
+    opacity: 1;
+  }
+  
+  .avatar-text {
+    color: white;
+    font-size: 2em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
