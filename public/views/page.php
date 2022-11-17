@@ -10,7 +10,7 @@ class Page extends Component
     {
         $this->views =
         [
-            "header" => new View("header", ["documentTitle"=>"IPSUM-HOTEL"]),
+            "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
             "menu" => new MenuSmall(),
             "content" => new Content(),
             "footer" => new View("footer")

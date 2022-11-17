@@ -14,5 +14,5 @@
     <link rel="stylesheet" type="text/css" href="./public/css/newMenuMobile.css">
     <!-- <link rel="stylesheet" type="text/css" href="./css/ipsum_form.css"> -->
     <script src="./public/js/menu.js" defer ></script>
-    <title>{{documentTitle}}</title>
+    <title>{{document-title}}</title>
 </head>

@@ -1,17 +1,18 @@
 <?php
 
 require_once getcwd()."/core/component.php";
-require_once getcwd()."/public/views/menuLarge.php";
-require_once getcwd()."/public/views/content.php";
 
-class HomePage extends Component
+class Imprint extends Component
 {
     function __construct()
     {
+        $this->requireView("menuSmall");
+        $this->requireView("content");
+
         $this->views =
         [
             "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
-            "menu" => new MenuLarge(),
+            "menu" => new MenuSmall(),
             "content" => new Content(),
             "footer" => new View("footer")
         ];
