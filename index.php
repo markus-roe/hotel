@@ -16,13 +16,12 @@ Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lo
 Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer
     ";
 
-
-
+// echo "TEST";
 $app = new App();
 
 $app->router->get("/{controller}");
 
-$app->run();
+//$app->run();
 
 // $page = new Page();
 // $page->parse($mock_params);

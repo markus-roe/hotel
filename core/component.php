@@ -1,7 +1,7 @@
 <?php
 
 require_once getcwd()."/core/view.php";
-
+require_once getcwd()."/core/view.php";
 class Component extends View
 {
     protected $params = [];

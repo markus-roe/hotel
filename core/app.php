@@ -41,13 +41,17 @@ class App
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $requestURI = $_SERVER["REQUEST_URI"];
         $requestURI = str_replace("/hotel", "", $requestURI);
+        echo "TEST 1";
 
         $request = $this->router->dispatch($requestURI, $requestMethod);
+
         $controllerFileName = $request["controller"]."Controller";
         $controllerName = ucfirst($request["controller"])."Controller";
+        echo getcwd();
 
         if ($this->getController($controllerFileName))
         {
+
             $controller = new $controllerName($request);
             $controller->execute();
         }

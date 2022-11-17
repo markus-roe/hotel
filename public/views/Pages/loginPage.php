@@ -7,8 +7,7 @@ class LoginPage extends Page
     function __construct()
     {
         parent::__construct();
-
-        $this->requireView("loginForm");
+        $this->requireView("Content/loginForm");
         $loginForm = new LoginForm();
         $this->insert("content", $loginForm);
     }

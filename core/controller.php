@@ -9,9 +9,14 @@ abstract class Controller
         $this->request = $request;
     }
 
+    public function index()
+    {
+        
+    }
+
     public function init()
     {
-
+        
     }
 
     protected function redirect($url)

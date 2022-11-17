@@ -3,7 +3,6 @@
 require_once getcwd()."/core/component.php";
 require_once getcwd()."/public/views/menuSmall.php";
 // require_once getcwd()."/public/views/content.php";
-
 class Page extends Component
 {
     function __construct()
