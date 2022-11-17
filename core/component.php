@@ -9,6 +9,7 @@ class Component extends View
     protected $views = [];
     protected $view = "";
     protected $viewsAlreadyExtracted = false;
+    protected $viewRootPath = "./public/views/";
 
     function __construct()
     {
@@ -61,6 +62,20 @@ class Component extends View
         // parent::display();
         $this->after();
 
+    }
+
+    protected function requireView($viewName)
+    {
+        $viewPath = $this->viewRootPath;
+        $viewPath .= $viewName.".php";
+        
+        if (file_exists($viewPath))
+        {
+            require_once $viewPath;
+            return 1;
+        }
+
+        return 0;
     }
 
     public function insertComponent($componentName, $newComponent)
