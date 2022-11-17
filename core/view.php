@@ -32,17 +32,19 @@ class View
 
      public static function parseTemplate($template, $params=null)
     {
-        if ($params == null || count($params) <= 0) 
-        {
-            return $template;
-        }
+        // if ($params == null || count($params) <= 0) 
+        // {
+        //     return $template;
+        // }
         $renderedTemplate = $template;
 
         foreach($params as $key=>$value)
             {
                 $renderedTemplate = preg_replace("/(\{\{". $key ."\}\})/", $value, $renderedTemplate);
-
             }
+        
+        // ! ersetzt leere Slots (die in $params nicht definiert wurden) durch leeren String
+        $renderedTemplate = preg_replace("/(\{\{[a-zA-Z0-9-]+\}\})/", "", $renderedTemplate);
         
         return $renderedTemplate;
     }
