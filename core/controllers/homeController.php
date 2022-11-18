@@ -7,7 +7,7 @@ class HomeController extends Controller
     public function init()
     {
 
-        $this->getView("loginPage");
+        $this->getView("Pages/loginPage");
         $homePage = new LoginPage();
         $homePage->parse();
         $homePage->render();

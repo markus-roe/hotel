@@ -1,6 +1,6 @@
 <?php
 
-// require_once getcwd()."/public/views/content.php";
+require_once getcwd()."/public/views/Components/content.php";
 
 class LoginForm extends Content
 {

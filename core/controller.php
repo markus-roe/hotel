@@ -2,10 +2,11 @@
 
 abstract class Controller
 {
-    protected $viewRootPath = "./public/views/";
 
     function __construct($request)
     {
+        $this->viewRootPath = getcwd()."/public/views/";
+
         $this->request = $request;
     }
 

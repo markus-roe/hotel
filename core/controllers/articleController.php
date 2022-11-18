@@ -2,7 +2,7 @@
 
 require_once  getcwd()."/core/controller.php";
 
-class articleController extends Controller
+class ArticleController extends Controller
 {
     public function init()
     {
@@ -10,5 +10,10 @@ class articleController extends Controller
         $articlePage = new articlePage();
         $articlePage->parse();
         $articlePage->render();
+    }
+
+    public function index()
+    {
+        $this->
     }
 }
