@@ -2,7 +2,7 @@
 
 require_once  getcwd()."/core/controller.php";
 
-class HomeController extends Controller
+class LoginController extends Controller
 {
     public function init()
     {
@@ -28,10 +28,10 @@ class HomeController extends Controller
 
     public function index()
     {
-        $this->getView("/Pages/homePage");
-        $homePage = new HomePage();
-        $homePage->parse();
-        $homePage->render();
+        $this->getView("/Pages/loginPage");
+        $loginPage = new LoginPage();
+        $loginPage->parse();
+        $loginPage->render();
     }
 }
 

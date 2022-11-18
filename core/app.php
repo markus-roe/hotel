@@ -43,19 +43,19 @@ class App
         $requestURI = str_replace("/hotel", "", $requestURI);
 
         $request = $this->router->dispatch($requestURI, $requestMethod);
+        $requestAction = $request["action"];
 
         $controllerFileName = $request["controller"]."Controller";
         $controllerName = ucfirst($request["controller"])."Controller";
 
         if ($this->getController($controllerFileName))
         {
-
             $controller = new $controllerName($request);
             $controller->execute();
 
-            if (array_key_exists("action", $request))
+            if (array_key_exists("action", $request) && method_exists($controller, $request["action"]))
             {
-                $controller->$request["action"]();
+                $controller->$requestAction();
             }
         }
          else

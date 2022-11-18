@@ -2,7 +2,7 @@
 
 require_once getcwd()."/public/views/Components/content.php";
 
-class ArticleForm extends Content
+class HomePageContent extends Content
 {
     function __construct()
     {
@@ -10,8 +10,8 @@ class ArticleForm extends Content
         
         parent::__construct();
 
-        $articleTemplate = new View("article");
-        $this->insert("content", $articleTemplate);
+        $homePageContent = new View("homePageBody");
+        $this->insert("content", $homePageContent);
         
     }
 }

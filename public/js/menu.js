@@ -26,5 +26,3 @@ Menu.prototype.close = close;
 Menu.prototype.toggle = toggle;
 const menu = new Menu();
 document.querySelector("#hamburger").addEventListener("click", () => {menu.toggle()})
-
-//TODO: wenn man neben das Menu klickt, sollte es sich schließen

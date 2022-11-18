@@ -1,21 +1,19 @@
 <?php
 
-require_once getcwd()."/core/component.php";
-require_once getcwd()."/public/views/menuLarge.php";
+require_once getcwd()."/public/views/Components/page.php";
 
-class HomePage extends Component
+class HomePage extends Page
 {
     function __construct()
     {
-        $this->requireView("Components/homePage");
-        $this->requireView("Components/content");
+        parent::__construct();
 
-        $this->views =
-        [
-            "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
-            "menu" => new MenuLarge(),
-            "content" => new Content(),
-            "footer" => new View("footer")
-        ];
+        $this->requireView("Menus/menuLarge");
+        $this->requireView("Content/homePageContent");
+        
+        $menuLarge = new MenuLarge();
+        $content = new HomePageContent();
+        $this->insert("menu", $menuLarge);
+        $this->insert("content", $content);
     }
 }

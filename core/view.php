@@ -92,7 +92,6 @@ class View
         return 1;
     }
 
-    // IMPROVE Conditions könnten hübscher sein
     protected function extractRequiredParams($externalParams)
     {
         // if (count($this->requiredParams) == 0)
