@@ -1,12 +1,19 @@
 .ipsum-form {
     background-color: hsl(0, 0%, 96%);
-    /* max-width: 40rem; */
+    max-width: 40rem;
     min-width: 20rem;
     padding: 4rem 4rem;
     border: 1px solid rgb(225, 225, 225);
     /* margin: 0 auto; */
+    width: 100%;
     border-radius: 3px;
 }
+
+.ipsum-centered {
+    justify-content: center;
+    display: flex;
+}
+
 
 
 .ipsum-fieldset {
