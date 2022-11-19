@@ -7,7 +7,7 @@ class Router
         "GET" => [],
         "POST" => []
     ];
-    // OBSOLETE?
+// nicht in Verwendung
     private $regexSubstitutes = [
         ":str" => "([a-zA-Z]+?)",
         ":int" => "([0-9]+?)",
@@ -17,14 +17,14 @@ class Router
     function __construct()
     {
     }
-    // ? $callback notwendig
+    // ! bislang keine Methode die $callback aufruft vorhanden
     public function get($path, $callback=null)
     {
         $regexPath = $this->createRegexPattern(($path));
         array_push($this->routes["GET"], $regexPath);
     }
 
-    public function post($path, $callback)
+    public function post($path, $callback=null)
     {
         $regexPath = $this->createRegexPattern(($path));
         array_push($this->routes["POST"], $regexPath);
@@ -42,12 +42,13 @@ class Router
 
     public function matchRoute($route, $method)
     {
-        
         $this->setRequest("routeExists", false);
         /* CHANGE: "mvc_test" muss, wenn implementiert in Hotel-Seite wsl
         ** durch "Präfix" der Hotel URL ersetzt werden (zB "ipsumhotel")
         **/
         $route = str_replace("/mvc_test", "", $route);
+        $this->setRequest("method", strtoupper($method));
+        $this->setRequest("view", "");
         
         foreach($this->routes[$method] as $pattern)
         {

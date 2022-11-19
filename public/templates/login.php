@@ -1,5 +1,5 @@
 <div class="ipsum-form">
-            <form action="" method="POST">
+            <form action="./login/authenticate" method="POST">
                 <div class="ipsum-fieldset">
                     <div class="ipsum-input-wrapper">
                         <div class="ipsum-input-container">

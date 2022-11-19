@@ -1,12 +1,13 @@
 <?php
 
+//! Controller sollte selbst checken ob URL-Parameter valide sind,
+//! soll selbst URL-Parameter Action-Methoden aufrufen
 abstract class Controller
 {
 
     function __construct($request)
     {
         $this->viewRootPath = getcwd()."/public/views/";
-
         $this->request = $request;
     }
 
@@ -22,12 +23,35 @@ abstract class Controller
 
     public function init()
     {
-        
+        if ($this->request["method"] == "GET")
+        {
+            $this->handleGetRequest();
+        }
+        if ($this->request["method"] == "POST")
+        {
+            $this->handlePostRequest();
+        }
     }
+
+    protected function handleGetRequest()
+    {
+
+    }
+    
+    protected function handlePostRequest()
+    {
+
+    }
+
+    protected function renderErrorView()
+    {
+
+    }
+
 
     protected function redirect($url)
     {
-        header("Location: ".$url);
+        header("Location: ..".$url);
         die();
     }
 
