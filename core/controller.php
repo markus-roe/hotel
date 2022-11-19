@@ -10,6 +10,11 @@ abstract class Controller
         $this->request = $request;
     }
 
+    public function authenticate()
+    {
+        
+    }
+
     public function index()
     {
         
@@ -49,6 +54,7 @@ abstract class Controller
     public function before()
     {
         // user authentifizieren / validieren etc
+        $this->authenticate();
         // userdaten laden aus DB
     }
 
