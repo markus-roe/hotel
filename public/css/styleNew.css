@@ -4,3 +4,22 @@ body {
     overflow-x: hidden;
 }
 
+.ipsum-textblock
+{
+    display: block;
+    margin-top: 1.5rem;
+}
+
+#ipsum-imprint-image-wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+#ipsum-imprint-image-wrapper figcaption {
+    font-size: 0.7rem;
+}
+
+#ipsum-content-wrapper {
+    padding-bottom: 3rem;
+}
