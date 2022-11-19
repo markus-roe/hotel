@@ -9,7 +9,7 @@ class Content extends Component
         $this->views =
         [
             "contentWrapperStart" => new View("contentWrapperStart"),
-            "content" => null,
+            "contentBody" => new View("contentBasic", ["content-title", "content-body"]),
             "contentWrapperEnd" => new View("contentWrapperEnd")
         ];
     }
