@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd()."/public/views/Components/menu.php";
+require_once getcwd()."/public/views/Components/Menu.php";
 
 class MenuLarge extends Menu
 {

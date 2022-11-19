@@ -60,8 +60,8 @@ class App
         }
          else
         {
-            // Fehlerseite rendern -> Seite nicht gefunden/existiert nicht
-            echo "Seite existiert nicht...";
+            // render Error Page, parameter angeben (content-title, content-body)
+            // "Sorry...", "Seite nicht gefunden"
         }
 
     }

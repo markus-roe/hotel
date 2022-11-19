@@ -15,6 +15,7 @@ Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming 
 $app = new App();
 
 $app->router->get("/{controller}/{action}");
+$app->router->get("/{controller}/{view}/{action}");
 $app->router->post("/{controller}/{action}");
 
 $app->run();
