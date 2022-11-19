@@ -13,7 +13,7 @@ abstract class Menu extends Component
         [
             [
                 "textContent"=> "Home",
-                "href"=> "./"
+                "href"=> "./home/index"
             ],
             [
                 "textContent"=> "Book",
@@ -25,7 +25,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "Imprint",
-                "href"=> "./imprint"
+                "href"=> "./imprint/index"
             ],
             [
                 "textContent"=> "Contact",

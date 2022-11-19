@@ -7,12 +7,13 @@ class Page extends Component
     function __construct()
     {
         $this->requireView("Menus/menuSmall");
+        $this->requireView("/Components/content");
 
         $this->views =
         [
             "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
             "menu" => new MenuSmall(),
-            "content" => null,
+            "content" => new Content(),
             "footer" => new View("footer")
         ];
     }
