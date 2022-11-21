@@ -19,18 +19,7 @@ class Component extends View
         // gibt Views in extractedViews-Array
         // checkt ob Objekt vom Typ View ist oder Component
         // extrahiert View-Objekt falls es sich um Component handelt
-        $this->extractedViews = [];
-        foreach ($this->views as $viewNameKey => $viewObj) {
-            if (get_class($viewObj) != "View") {
-                foreach ($viewObj->views as $viewComponentEl) {
-                    $view = $this->filterViews($viewComponentEl);
-                    // $view->render();
-                    array_push($this->extractedViews, $view);
-                }
-            } else {
-                array_push($this->extractedViews, $viewObj);
-            }
-        }
+        $this->filterViews($this->views);
         $this->viewsAlreadyExtracted = true;
     }
     
@@ -43,7 +32,6 @@ class Component extends View
         foreach($this->extractedViews as $view)
         {
             $view->parse($params);
-            // $this->view .= $view->getView();
         }
     }
 
@@ -58,7 +46,7 @@ class Component extends View
         {
             $view->render();
         }
-        // parent::display();
+
         $this->after();
 
     }
@@ -91,10 +79,16 @@ class Component extends View
     // extrahiert View-Objekte aus Component-Objekten
     public function filterViews($viewObj)
     {
-        if (get_class($viewObj) != "View") {
-            return $this->filterViews(array_shift($viewObj->views));
+        foreach($viewObj as $view)
+        {
+            if (get_class($view) != "View")
+            {
+                $this->filterViews($view->views);
+            }
+            else
+            {
+                array_push($this->extractedViews, $view);
+            }
         }
-
-        return $viewObj;
     }
 }
