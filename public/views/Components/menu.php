@@ -5,6 +5,7 @@ require_once getcwd()."/core/component.php";
 abstract class Menu extends Component
 {
     private $menuLinksConfig;
+    private $menuLinksHtml;
 
     function __construct($menuSize)
     {
@@ -21,15 +22,15 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "Help",
-                "href"=> "./help"
+                "href"=> "./help/index"
             ],
             [
                 "textContent"=> "Imprint",
                 "href"=> "./imprint/index"
             ],
             [
-                "textContent"=> "Contact",
-                "href"=> "./contact"
+                "textContent"=> "News",
+                "href"=> "./article/overview"
             ]
         ];
 

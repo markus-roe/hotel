@@ -17,4 +17,9 @@ class Page extends Component
             "footer" => new View("footer")
         ];
     }
+
+    protected function changeContent($newContent)
+    {
+        $this->views["content"]->changeContentBody($newContent);
+    }
 }

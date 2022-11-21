@@ -20,6 +20,8 @@ class LoginController extends Controller
         
     }
 
+    
+
     public function authenticate()
     {
         // authentifizieren, model zeugs etc.

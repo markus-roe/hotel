@@ -62,6 +62,7 @@ class App
         {
             // render Error Page, parameter angeben (content-title, content-body)
             // "Sorry...", "Seite nicht gefunden"
+            echo "Sorry, diese Seite existiert leider (noch) nicht...";
         }
 
     }

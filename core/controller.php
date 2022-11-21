@@ -1,12 +1,13 @@
 <?php
 
-//! Controller sollte selbst checken ob URL-Parameter valide sind,
-//! soll selbst URL-Parameter Action-Methoden aufrufen
+//? Controller sollte selbst checken ob URL-Parameter valide sind,
+//? soll selbst URL-Parameter Action-Methoden aufrufen
 abstract class Controller
 {
 
     function __construct($request)
     {
+        //! $clientController = new ClientController();
         $this->viewRootPath = getcwd()."/public/views/";
         $this->request = $request;
     }
@@ -18,14 +19,6 @@ abstract class Controller
 
     public function init()
     {
-        if ($this->request["method"] == "GET")
-        {
-            $this->handleGetRequest();
-        }
-        if ($this->request["method"] == "POST")
-        {
-            $this->handlePostRequest();
-        }
     }
 
     protected function handleGetRequest()
@@ -72,8 +65,9 @@ abstract class Controller
 
     public function before()
     {
-        // user authentifizieren / validieren etc
-        // userdaten laden aus DB
+        //! if ($clientController->isLoggedIn())
+        //!  { $this->userData = $clientController->getUserData(); 
+        //!     $this->index() }
     }
 
     public function after()

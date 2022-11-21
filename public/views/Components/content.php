@@ -13,4 +13,9 @@ class Content extends Component
             "contentWrapperEnd" => new View("contentWrapperEnd")
         ];
     }
+
+    public function changeContentBody($newContentBody)
+    {
+        $this->insert("contentBody", $newContentBody);
+    }
 }

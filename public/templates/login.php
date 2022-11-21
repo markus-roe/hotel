@@ -1,3 +1,4 @@
+<h1 class="text-center">Login</h1>
 <div class="ipsum-form">
             <form action="./login/authenticate" method="POST">
                 <div class="ipsum-fieldset">
@@ -22,7 +23,7 @@
 
                 <div class="center">
                 <button class="ipsum-button affirm" type="submit">Login</button>
-                Don't have an account yet? <a style="display: block" href="./register.html">Register</a>
+                Don't have an account yet? <a style="display: block" href="./registration/index">Register</a>
             </div>
 
             </form>

@@ -34,7 +34,7 @@ class Router
     {
 
         $regexPattern = preg_replace("/\//", "\\/", $path);
-        $regexPattern = preg_replace('/\{([a-z]+)\}/', '(?\'\1\'[a-z-_]+)', $regexPattern);
+        $regexPattern = preg_replace('/\{([a-z0-9-]+)\}/', '(?\'\1\'[a-z-_0-9]+)', $regexPattern);
         $regexPattern = "/^". $regexPattern. "/";
         // echo $regexPattern;
         return $regexPattern;

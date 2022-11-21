@@ -47,8 +47,10 @@ class ArticlePreviewPage extends Page
             
         }
 
-        $newContent->insert("contentBody", $cardCollection);
-        $this->insert("content", $newContent);
+        // $newContent->insert("contentBody", $cardCollection);
+        // $this->insert("content", $newContent);
+
+        $this->changeContent($cardCollection);
     }
 
 }
