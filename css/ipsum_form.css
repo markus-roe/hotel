@@ -15,6 +15,19 @@
     flex-direction: column;
 }
 
+.ipsum-article {
+    padding: 2rem 3rem;
+}
+
+
+.ipsum-article p{
+    margin-bottom: 2rem;
+}
+
+.ipsum-article img {
+    margin: 1rem 0rem 2rem 0rem;
+}
+
 .ipsum-input-container {
     margin-bottom: 1rem;
     display: flex;
