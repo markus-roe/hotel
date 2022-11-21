@@ -37,7 +37,7 @@ class View
         //     return $template;
         // }
         $renderedTemplate = $template;
-
+        
         foreach($params as $key=>$value)
             {
                 $renderedTemplate = preg_replace("/(\{\{". $key ."\}\})/", $value, $renderedTemplate);
@@ -49,7 +49,7 @@ class View
         return $renderedTemplate;
     }
 
-    public function parse($params)
+    public function parse($params=null)
     {
         $this->extractRequiredParams($params);
 
@@ -107,7 +107,6 @@ class View
         {
             // wenn Array nur Namen der Schlüssel aber keine vordefinierten Values enthält,
             // ist $requiredParamKey automatisch Index im Array -> gettype...
-            // echo gettype($requiredParamKey);
             if (gettype($requiredParamKey) == "integer" && array_key_exists($requiredParamValue, $externalParams))
             {
                 $this->params[$requiredParamValue] = $externalParams[$requiredParamValue];
