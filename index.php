@@ -17,6 +17,6 @@ $app = new App();
 $app->router->get("/{controller}/{action}");
 $app->router->get("/{controller}/{view}/{action}");
 $app->router->post("/{controller}/{action}");
-$app->router->get("/{controller}/id/{articleid}/{action}");
+$app->router->get("/{controller}/{action}/id/{articleid}");
 
 $app->run();

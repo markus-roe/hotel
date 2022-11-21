@@ -72,7 +72,7 @@ abstract class Controller
     {
         //! if ($clientController->isLoggedIn())
         //!  { $this->userData = $clientController->getUserData(); 
-        $this->authenticate();
+        // $this->authenticate();
         //!     $this->index() }
     }
 

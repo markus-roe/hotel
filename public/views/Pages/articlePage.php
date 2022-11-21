@@ -2,14 +2,14 @@
 
 require_once getcwd()."/public/views/Components/Page.php";
 
+// TODO requiredParam imagePath
 class ArticlePage extends Page
 {
     function __construct()
     {
         parent::__construct();
 
-        $this->requireView("/Content/articleForm");
-        $articleForm = new ArticleForm();
-        $this->insert("content", $articleForm);
+        $content = new View("articleTemplate", ["headline", "content", "subtitle", "picturepath"]);
+        $this->changeContent($content);
     }
 }

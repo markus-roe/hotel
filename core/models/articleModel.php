@@ -2,6 +2,9 @@
 
 require_once  getcwd()."/core/model.php";
 
+
+//! Pfad f. pictures zB: ./public/uploads/pictures/stockmarket.jpg
+
 class ClientModel extends Model
 {
 

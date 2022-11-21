@@ -11,7 +11,7 @@
                         {{preview}}
                     </p>
                     <p class="card-text">
-                        <small class="text-muted">Last updated on {{updated}}</small><br>
+                        <small class="text-muted">Last updated on: {{updated}}</small><br>
                     </p>
                     <button type="button" class="btn btn-primary btn-sm"><a href="{{article-link}}" style="color:white; text-decoration: none">Read more</a></button>
                 </div>
