@@ -1,18 +1,17 @@
 <!-- CONTENT_START -->
 <article class="ipsum-article horizontalLine">
-            <h2>Hubsi wird neuer Hoteldirektor</h2>
+            <h2>Hotel Ipsum geht an die Börse</h2>
             <p>
-              <h6>Christian Hubsi tritt im nächsten Frühjahr vorraussichtlich Stelle
-                als neuer Hoteldirektor an.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Facere vel assumenda accusamus possimus quas quasi nemo debitis dolorum,
-                totam mollitia iste odit amet nesciunt dolor dignissimos eius ipsa aut ullam?
+              <h6>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nemo, rem laborum.<br>
+                Et amet omnis quisquam assumenda totam, necessitatibus explicabo consequuntur aperiam velit
+                in quod rerum officiis accusantium voluptas error incidunt. Nulla, culpa vero.
+
               </h6>
             </p>
             <div class="text-center container-fluid">
             <img src="https://picsum.photos/1100/500" class="rounded img-fluid" alt="...">
           </div>
-
+          <span class="horizontalLine"></span>
         <p class="text-justify">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure illo ipsa quam id impedit
           nisi eaque praesentium nam eligendi fuga sequi voluptas velit, consequuntur dolorum.</p>
         <p class="text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda minima deleniti iure
