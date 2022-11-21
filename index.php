@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once "./core/app.php";
 
 $mock_params = ["menu-username"=>"Maximilian Sinnl", "document-title"=>"Ipsum-Hotel", "menu-links"=>"TEST LINK", "content-headline" => "CONTENT-HEADLINE"];

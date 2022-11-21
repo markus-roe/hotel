@@ -12,6 +12,11 @@ abstract class Controller
         $this->request = $request;
     }
 
+    public function authenticate()
+    {
+        
+    }
+
     public function index()
     {
         
@@ -67,6 +72,7 @@ abstract class Controller
     {
         //! if ($clientController->isLoggedIn())
         //!  { $this->userData = $clientController->getUserData(); 
+        $this->authenticate();
         //!     $this->index() }
     }
 
