@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="./css/styleNew.css">
     <link rel="stylesheet" type="text/css" href="./css/newMenu.css">
     <link rel="stylesheet" type="text/css" href="./css/newMenuMobile.css">
-    <!-- <link rel="stylesheet" type="text/css" href="./css/ipsum_form.css"> -->
+    <link rel="stylesheet" type="text/css" href="./css/ipsum_form.css">
     <script src="./js/menu.js" defer ></script>
     <title>Hotel Ipsum - {{document-title}}</title>
 </head>
