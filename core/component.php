@@ -37,6 +37,7 @@ class Component extends View
 
     public function render()
     {
+        ob_start();
         $this->before();
         if (!$this->viewsAlreadyExtracted)
         {
@@ -48,7 +49,7 @@ class Component extends View
         }
 
         $this->after();
-
+        ob_flush();
     }
 
     protected function requireView($viewName)

@@ -5,11 +5,11 @@ require_once  getcwd()."/core/controller.php";
 class ImprintController extends Controller
 {
 
-    public function index()
+    public function indexAction()
     {
         $this->getView("/Pages/imprintPage");
         $page = new ImprintPage();
-        $page->parse();
+        $page->parse($this->userData);
         $page->render();
     }
 }

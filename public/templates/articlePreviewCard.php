@@ -6,7 +6,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
-                    <h5 class="card-title"><a class="link" href="{{article-link}}" style="text-decoration: none">{{headline}}</a></h5>
+                    <h5 class="card-title"><a class="link" href="./news/article/index/id/{{article-link}}" style="text-decoration: none">{{headline}}</a></h5>
                     <p class="card-text">
                         {{preview}}
                     </p>

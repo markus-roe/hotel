@@ -10,26 +10,70 @@ class Clearance
 
 class AccessControl
 {
+    private $user;
     private $controllerRoot = "./core/controllers/";
-    private $controllerPath;
+    public $errorMsg;
+    private $clearanceList = 
+    [
+        "HomeController" => ["index" => "all"],
+        "LoginController" => ["index" => "guest", "loginrequest" => "guest"],
+        "RegistrationController" => ["index" => "guest"],
+        "ArticleController" => ["index" => "all", "overview" => "all", "create" => "admin"],
+        "ImprintController" => ["index" => "all"]
+    ];
+
 
 // TODO
-    public function __construct($controllerPrefix, $request)
+    public function __construct($clientModel)
     {
-        $controllerName = $this->controllerExists($controllerPrefix);
-        if (method_exists())
+        $this->clientModel = $clientModel;
+        $this->clientModel->authenticate();
     }
 
-    protected function controllerExists($controllerPrefix)
+    public function isAuthorized($controller, $request)
+    {
+        
+        $controllerName = get_class($controller);
+        
+        $clearanceLevel = $this->clearanceList[$controllerName][$request["action"]];
+        $userRole = $this->clientModel->user->userRole;
+        echo ($userRole);
+        if ($clearanceLevel == "all" || $userRole == $clearanceLevel)
+        {
+            return true;
+        }
+        elseif ($request["action"] == "index" && $userRole == "admin" || $userRole == "user")
+        {
+            $this->errorMsg = ["content-title"=>"It's not us, it's you", "content-body" => "You are already logged in"];
+        }
+
+        elseif ($clearanceLevel == "user")
+        {
+            if ($userRole == "admin")
+            {
+                return true;
+            }
+        }
+        else
+        {
+            $this->errorMsg = ["content-title"=>"It's not us, it's you", "content-body" => "You don't seem to have enough clearance"];
+
+            return false;
+        }
+    }
+
+    protected function getController($controllerName)
     {
         $controllerPath = $this->controllerRoot;
-        $controllerPath .= $controllerPrefix.".php";
+        $controllerPath .= $controllerName.".php";
         
         if (file_exists($controllerPath))
         {
-            return $controllerPath;
+            require_once $controllerPath;
+            return true;
         }
         
         return false;
     }
+    
 }

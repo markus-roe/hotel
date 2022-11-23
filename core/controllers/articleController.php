@@ -23,13 +23,11 @@ function mock()
 
 class ArticleController extends Controller
 {
-    private $articlePathPrefix = "./article/index/id/";
-
     public function init()
     {
     }
 
-    public function index()
+    public function indexAction()
     {
 
         $row = mock();
@@ -41,26 +39,26 @@ class ArticleController extends Controller
                 "headline"=>$row["headline"],
                 "content"=>$row["content"],
                 "subtitle"=>$row["subtitle"],
-                "picturepath"=>$row["picturePath"]
+                "picturepath"=>$row["picturePath"],
             ]);
             $page->render();
         }
     }
 
-    public function overview()
+    public function overviewAction()
     {
         $row = mock();
         $this->getView("/Pages/ArticlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
-            ["article-link"=>$this->articlePathPrefix.$row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"]." ".$row["surname"], "updated"=>$row["updated"]],
+            ["article-link"=>$row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"]." ".$row["surname"], "updated"=>$row["updated"]],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
 
         ];
         $page->addPreviews($mockArticles);
-        $page->parse();
+        $page->parse($this->userData);
         $page->render();
     }
 
@@ -69,7 +67,7 @@ class ArticleController extends Controller
 
         $this->getView("/Pages/articlePageAdmin");
         $page = new ArticlePageAdmin();
-        $page->parse();
+        $page->parse($this->userData);
         $page->render();
     }
 

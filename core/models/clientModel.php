@@ -1,43 +1,95 @@
 <?php 
 
 require_once getcwd()."/core/model.php";
+require_once getcwd()."/core/user.php";
 
 class ClientModel extends Model
 {
-    private int $userId = 0;
-    private string $username = "Guest";
-    private string $firstname = "";
-    private string $surname = "";
-    private int $userRole = 0;
-    private string $email = "";
-    private string $gender = "";
+    public $user;
+    private $isLoggedIn = false;
 
-    public function __construct($userId = 0)
+    public function __construct()
     {
         parent::__construct();
+        $this->user = new User();
     }
 
 
-    public function mapProperties($userId)
+    public function getUserById($userId)
     {
-
-        $user = self::executeQuery("users", ["userId" => "1"]);
-
-        $this->userId = $user["userId"];
-        $this->username = $user["username"];
-        $this->firstname = $user["firstname"];
-        $this->surname = $user["surname"];
-        $this->userRole = $user["userRole"];
-        $this->email = $user["email"];
-        $this->gender = $user["gender"];
-
-    }
-
-    public static function getUserById($userId)
-    {
-        $user = self::executeQuery("users", ["userId" => $userId]);
+        $query1 = "
+        select * from users u
+        join roles r on r.userRoleId=u.userRole
+        where u.userId = ?;";
+        $stm1 = self::$connection->prepare($query1);
+        $stm1->bind_param("d", $userId);
+        $stm1->execute();
+        $result1 = $stm1->get_result();
+        $user = $result1->fetch_array(MYSQLI_ASSOC);
         
         return $user;
+    }
+
+    public function loginUser()
+    {
+        if (!isset($_POST["password"]) || !isset($_POST["username"]))
+        {
+            return false;
+        }
+
+        $pwdInput = $_POST["password"];
+        $userNameInput = $_POST["username"];
+
+        $query1 = "
+        select * from users u
+        join roles r on r.userRoleId=u.userRole
+        where u.userName = ? and
+        u.password = ?;";
+
+        $stm1 = self::$connection->prepare($query1);
+        $stm1->bind_param("ss", $userNameInput, $pwdInput);
+        $stm1->execute();
+        $result1 = $stm1->get_result();
+        $row = $result1->fetch_array(MYSQLI_ASSOC);
+
+        if ($row)
+        {
+            $userId = $row["userId"];
+            $_SESSION["username"] = $row["firstname"]." ". $row["surname"];
+            $_SESSION["userId"] = $userId;
+            $_SESSION["loggedIn"] = true;
+            $this->user->setUserData($row);
+            
+            return true;
+        }
+
+        // session_unset();
+
+        
+        return false;
+    }
+
+    public function authenticate()
+    {
+        
+        if (isset($_SESSION["userId"]) && isset($_SESSION["username"]))
+        {
+            $this->user->setUserData($this->getUserById($_SESSION["userId"]));
+
+            return true;
+        }
+
+        return false;
+    }
+
+    // protected function getUserData()
+    // {
+        
+    // }
+
+    public function getUserName()
+    {
+        return $this->user->firstName." ".$this->user->surName;
     }
 
     // * GETTERS
@@ -46,10 +98,6 @@ class ClientModel extends Model
         return $this->userId;
     }
 
-    public function getUsername()
-    {
-        return $this->username;
-    }
 
     public function getFirstname()
     {

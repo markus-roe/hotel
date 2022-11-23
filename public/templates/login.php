@@ -1,6 +1,6 @@
 <h1 class="text-center">Login</h1>
 <div class="ipsum-form">
-            <form action="./login/authenticate" method="POST">
+            <form action="./login/loginrequest" method="POST">
                 <div class="ipsum-fieldset">
                     <div class="ipsum-input-wrapper">
                         <div class="ipsum-input-container">

@@ -4,18 +4,19 @@ require_once  getcwd()."/core/controller.php";
 
 class ErrorController extends Controller
 {
+    public $errorMsg = "";
 
-    public function authenticate()
+    public function setErrorMsg($msg)
     {
-        // authentifizieren, model zeugs etc.
-        $this->redirect("/home/index");
+        $this->errorMsg = $msg;
     }
 
-    public function index()
+    public function indexAction()
     {
         $this->getView("/Components/page");
         $errorPage = new Page();
-        $errorPage->parse(["content-title"=>"Sorry...", "content-body"=>"Diese Seite existiert leider nicht"]);
+        $data = array_merge($this->userData, $this->errorMsg);
+        $errorPage->parse($data);
         $errorPage->render();
     }
 }

@@ -6,20 +6,35 @@
 
 abstract class Controller
 {
+    protected $userData;
 
-    function __construct($request)
+    function __construct($request, $clientModel)
     {
         //! $clientController = new ClientController();
         $this->viewRootPath = getcwd()."/public/views/";
         $this->request = $request;
+        $this->clientModel = $clientModel;
+        $this->userData = get_object_vars($this->clientModel->user);
+
     }
 
-    public function authenticate()
-    {
-        
-    }
+    // public function authenticate()
+    // {
+    //     var_dump($_SESSION);
+    //     if ($this->clientModel->authenticate())
+    //     {
+    //         $this->userData = get_object_vars($this->clientModel->user);
+    //         var_dump($this->userData);
+    //         return true;
+    //     }
+    //     var_dump($this->userData);
 
-    public function index()
+    //     $this->userData = get_object_vars($this->clientModel->user);
+
+    //     return false;
+    // }
+
+    public function indexAction()
     {
         
     }
@@ -63,10 +78,7 @@ abstract class Controller
 
     public function before()
     {
-        //! if ($clientController->isLoggedIn())
-        //!  { $this->userData = $clientController->getUserData(); 
         // $this->authenticate();
-        //!     $this->index() }
     }
 
     public function after()

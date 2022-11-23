@@ -11,7 +11,7 @@ class RegistrationController extends Controller
         $this->redirect("/home/index");
     }
 
-    public function index()
+    public function indexAction()
     {
         $this->getView("/Pages/registrationPage");
         $page = new RegistrationPage();

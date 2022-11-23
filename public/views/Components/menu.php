@@ -30,7 +30,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "News",
-                "href"=> "./article/overview"
+                "href"=> "./news/article/overview"
             ]
         ];
 
@@ -40,7 +40,7 @@ abstract class Menu extends Component
 
         $this->views = 
         [
-            "menu" => new View("menu", ["menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "menu-username"])
+            "menu" => new View("menu", ["menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
         ];
     }
 

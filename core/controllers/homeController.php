@@ -10,27 +10,13 @@ class HomeController extends Controller
 
     }
 
-    protected function handlePostRequest()
-    {
-        
-    }
 
-    protected function handleGetRequest()
-    {
-        
-    }
 
-    public function authenticate()
-    {
-        // authentifizieren, model zeugs etc.
-        $this->redirect("/home/index");
-    }
-
-    public function index()
+    public function indexAction()
     {
         $this->getView("/Pages/homePage");
         $homePage = new HomePage();
-        $homePage->parse();
+        $homePage->parse($this->userData);
         $homePage->render();
     }
 }

@@ -1,4 +1,4 @@
-<h1>{{content-title}}</h1>
+<h1 class="text-center">{{content-title}}</h1>
 
 <div class="text-center">
     <p>

@@ -22,12 +22,17 @@ class LoginController extends Controller
 
     
 
-    public function authenticate()
+    public function loginrequestAction()
     {
-        if 
+        if ($this->clientModel->loginUser())
+        {
+            header("Location: ../home/index");
+        }
+
+        header("Location: ../home/index");
     }
 
-    public function index()
+    public function indexAction()
     {
         $this->getView("/Pages/loginPage");
         $loginPage = new LoginPage();

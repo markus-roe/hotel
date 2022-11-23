@@ -67,9 +67,9 @@
       $stmt->bind_param($paramstring, ...$params);
       $stmt->execute();
       $result = $stmt->get_result();
-      $user = $result->fetch_array(MYSQLI_ASSOC);
+      $row = $result->fetch_array(MYSQLI_ASSOC);
       
-      return $user;
+      return $row;
   }
 
 }
