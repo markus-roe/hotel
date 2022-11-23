@@ -24,8 +24,7 @@ class LoginController extends Controller
 
     public function authenticate()
     {
-        // authentifizieren, model zeugs etc.
-        $this->redirect("/home/index");
+        if 
     }
 
     public function index()

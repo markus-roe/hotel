@@ -1,37 +1,75 @@
 <?php
-require_once  getcwd()."/config.php";
+ class Model {
+  // Hold the class instance.
+  private static $instance = null;
+  public static $connection;
 
-// TODO
-/*
-    + Singleton-Pattern implementieren
-*/
-class Model
-{
-
-    public $connection;
-
-    public function __construct() 
+   
+  // The db connection is established in the private constructor.
+  public function __construct()
+  {
+    if(!self::$connection)
     {
-        $this->connection = $this->connect();
-    } 
-
-    public function connect()
-    {
-        try{
-            $config = new Config();
-            $mysqli = new mysqli($config->host, $config->user, $config->password, $config->database);
-
-            if ($mysqli -> connect_errno) {
-                echo "Failed to connect to MySQL: " . $mysqli -> connect_error;
-                exit();
-            }
-
-        }
-        catch(Exception $e) 
-        {
-            echo 'Message: ' .$e->getMessage();
-        }
-
-        return $mysqli;
+      self::$connection = new mysqli("localhost", "root", "Wlenfeni1428780", "ipsum");
     }
+
+  }
+  
+  public static function getInstance()
+  {
+    if(!self::$instance)
+    {
+      self::$instance = new Model();
+    }
+   
+    return self::$instance;
+  }
+  
+  public function getConnection()
+  {
+    return $this->connection;
+  }
+
+  protected function executeQuery($table, $arr)
+  {
+      $sql = "SELECT * FROM " . $table . " WHERE";
+
+      // * insert keys in SQL string
+      for ($i = 0; $i < count($arr); $i++) 
+      {
+          $sql = $sql . " " . array_keys($arr)[$i] . " = ?";
+
+          if ($i < count($arr)-1)
+          {
+              $sql = $sql . " AND ";
+          }
+      }
+
+      $params = array();
+
+      // * push params to bind in array
+      foreach ($arr as $key => $value)
+      {
+          array_push($params, $value);
+      }
+
+      //* bind param type string e.g. "ss" for two params strings
+      $paramstring = "";
+      
+      $len = count($arr);
+      while ($len) {
+          $paramstring = $paramstring . "s";
+          $len--;
+      }
+      
+      // * execute sql with parent model connection
+      $stmt = self::$connection->prepare($sql);
+      $stmt->bind_param($paramstring, ...$params);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      $user = $result->fetch_array(MYSQLI_ASSOC);
+      
+      return $user;
+  }
+
 }

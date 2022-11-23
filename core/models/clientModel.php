@@ -1,58 +1,69 @@
 <?php 
 
-require_once  getcwd()."/core/model.php";
-
-// TODO
-// SQL Statements
-// getter stellen nur DB-Anfrage wenn Daten nicht bereits gespeichert
-//? vlt in Session Variablen speichern weil alle Zustände eines Objektes ja verloren gehen sobald Skript beendet ist???
+require_once getcwd()."/core/model.php";
 
 class ClientModel extends Model
 {
-    public int $userId;
-    protected int $userRole;
-    protected string $username;
-    protected string $firstname;
-    protected string $surname;
-    protected string $email;
-    protected string $gender;
-    protected string $password;
+    private int $userId = 0;
+    private string $username = "Guest";
+    private string $firstname = "";
+    private string $surname = "";
+    private int $userRole = 0;
+    private string $email = "";
+    private string $gender = "";
+
+    public function __construct($userId = 0)
+    {
+        parent::__construct();
+    }
 
 
-    public function __construct()
+    public function mapProperties($userId)
     {
 
-        // * get and set Userdata
+        $user = self::executeQuery("users", ["userId" => "1"]);
 
-        $this->connection = parent::connect();
-        // $this->getUsername(1);
+        $this->userId = $user["userId"];
+        $this->username = $user["username"];
+        $this->firstname = $user["firstname"];
+        $this->surname = $user["surname"];
+        $this->userRole = $user["userRole"];
+        $this->email = $user["email"];
+        $this->gender = $user["gender"];
+
+    }
+
+    public static function getUserById($userId)
+    {
+        $user = self::executeQuery("users", ["userId" => $userId]);
+        
+        return $user;
+    }
+
+    // * GETTERS
+    public function getUserId()
+    {
+        return $this->userId;
     }
 
     public function getUsername()
     {
-      return $this->username;   
+        return $this->username;
     }
 
-    // * GETTER
-
-    public function getUserRole()
-    {
-        return $this->userRole;
-    }
-
-    // public function getUsername()
-    // {
-    //     return $this->username;
-    // }
-
-    public function getFirstName()
+    public function getFirstname()
     {
         return $this->firstname;
     }
 
-    public function getLastName()
+    public function getSurname()
     {
-        return $this->lastname;
+        return $this->surname;
+    }
+
+    public function getUserRole()
+    {
+        return $this->userRole;
     }
 
     public function getEmail()
@@ -65,105 +76,18 @@ class ClientModel extends Model
         return $this->gender;
     }
 
-    public function getPassword()
+    public function setFirstname()
     {
-        return $this->password;
+        $userId = 1;
+        $firstname = 'max';
+
+        $sql = "UPDATE users SET firstname = ? WHERE userId = " .  $userId;
+        
+        $stmt = self::$connection->prepare($sql);
+        $stmt->bind_param("s", $firstname);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result;
     }
-
-    // * SETTER
-
-    public function setUserRole($role)
-    {
-        $this->userRole = $role;
-    }
-
-    public function setFirstName($firstname)
-    {
-        $this->firstname = $firstname;
-    }
-
-    public function setLastName($lastname)
-    {
-        $this->lastname = $lastname;
-    }
-
-    public function setEmail($email)
-    {
-        $this->email = $email;
-    }
-
-    public function setGender($gender)
-    {
-        $this->gender = $gender;
-    }
-
-    public function setPassword($password)
-    {
-        $this->password = $password;
-    }
-
-    public function getClientbyUserId($userId)
-    {
-        try
-        {
-
-            $result = $this->connection->query("SELECT username from users where userId = " . $userId);
-
-            $row = $result -> fetch_array(MYSQLI_ASSOC);
-
-            echo $row["username"];
-
-        }
-        catch(Exception $e)
-        {
-            throw $e; 	
-        }
-    }
-/*
-    public function loadAllUsers()
-    {
-        try
-        {	
-            $this->open_db();
-            $query=$this->condb->prepare("SELECT * users from user");
-            $query->execute();
-            $res = $query->get_result();
-            $last_id=$this->condb->insert_id;
-            $query->close();
-            $this->close_db();
-            return $last_id;
-        }
-        catch (Exception $e) 
-        {
-            $this->close_db();	
-            throw $e;
-        }
-    }
-    */
-
-    /*
-    // insert User
-    public function insertUser($user)
-    {
-        try
-        {	
-            $this->open_db();
-            $query=$this->condb->prepare("INSERT INTO user (userId, username) VALUES ($user->userId, $user->username)");
-            $query->bind_param("is",$user->userId,$user->username);
-            $query->execute();
-            $res = $query->get_result();
-            $last_id=$this->condb->insert_id;
-            $query->close();
-            $this->close_db();
-            return $last_id;
-        }
-        catch (Exception $e) 
-        {
-            $this->close_db();	
-            echo $e;
-            throw $e;
-        }
-    }
-    */
-
+    
 }
