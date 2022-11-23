@@ -17,29 +17,28 @@ class Router
     function __construct()
     {
     }
-    // ! bislang keine Methode die $callback aufruft vorhanden
-    public function get($path, $callback=null)
+    // TODO predefined params zB controller etc
+    public function get($path)
     {
         $regexPath = $this->createRegexPattern(($path));
         array_push($this->routes["GET"], $regexPath);
     }
 
-    public function post($path, $callback=null)
+    public function post($path)
     {
         $regexPath = $this->createRegexPattern(($path));
         array_push($this->routes["POST"], $regexPath);
     }
 
-    private function createRegexPattern($path)
+    public function createRegexPattern($path)
     {
-
         $regexPattern = preg_replace("/\//", "\\/", $path);
-        $regexPattern = preg_replace('/\{([a-z0-9-]+)\}/', '(?\'\1\'[a-z-_0-9]+)', $regexPattern);
-        $regexPattern = "/^". $regexPattern. "/";
+        $regexPattern = preg_replace('/\:([a-z0-9-]+)/', '(?\'\1\'[a-z-_0-9]+)', $regexPattern);
+        $regexPattern = "/^". $regexPattern. "$/";
         // echo $regexPattern;
         return $regexPattern;
     }
-
+    //BUG Routing nicht eindeutig
     public function matchRoute($route, $method)
     {
         $this->setRequest("routeExists", false);
@@ -49,9 +48,10 @@ class Router
         $route = str_replace("/mvc_test", "", $route);
         $this->setRequest("method", strtoupper($method));
         $this->setRequest("view", "");
-        
+        $counter = -1;
         foreach($this->routes[$method] as $pattern)
         {
+            ++$counter;
             if (preg_match($pattern, $route, $matches))
             {
                 $this->request["routeExists"] = true;
@@ -63,9 +63,11 @@ class Router
                     // echo "\n". $matches["view"];
                     $this->setRequest($key, $value);
                 }
+                return $this->request;
+                break;
+
             }
         }
-        return $this->request;
     }
     protected function setRequest($key, $value)
     {

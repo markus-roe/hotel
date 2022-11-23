@@ -38,13 +38,19 @@ class App
 
     public function run()
     {
+        // IMPROVE I'm ugly
         $requestMethod = $_SERVER["REQUEST_METHOD"];
         $requestURI = $_SERVER["REQUEST_URI"];
         $requestURI = str_replace("/hotel", "", $requestURI);
 
         $request = $this->router->dispatch($requestURI, $requestMethod);
-        $requestAction = $request["action"];
+        if (!isset($request["action"]) || !isset($request["controller"]))
+        {
+            return false;
+        }
 
+        $requestAction = $request["action"];
+        $controller = $request["controller"];
         $controllerFileName = $request["controller"]."Controller";
         $controllerName = ucfirst($request["controller"])."Controller";
 
@@ -60,8 +66,6 @@ class App
         }
          else
         {
-            // render Error Page, parameter angeben (content-title, content-body)
-            // "Sorry...", "Seite nicht gefunden"
             echo "Sorry, diese Seite existiert leider (noch) nicht...";
         }
 

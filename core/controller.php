@@ -2,6 +2,8 @@
 
 //? Controller sollte selbst checken ob URL-Parameter valide sind,
 //? soll selbst URL-Parameter Action-Methoden aufrufen
+
+
 abstract class Controller
 {
 
@@ -26,15 +28,6 @@ abstract class Controller
     {
     }
 
-    protected function handleGetRequest()
-    {
-
-    }
-    
-    protected function handlePostRequest()
-    {
-
-    }
 
     protected function renderErrorView()
     {
