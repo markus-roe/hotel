@@ -13,18 +13,20 @@ class AccessControl
     private $user;
     private $controllerRoot = "./core/controllers/";
     public $errorMsg;
+    
+    // [view] : action => clearance level
+
     private $clearanceList = 
     [
         "HomeController" => ["index" => "all"],
         "LoginController" => ["index" => "guest", "loginrequest" => "guest"],
-        "RegistrationController" => ["index" => "guest"],
-        "ArticleController" => ["index" => "all", "overview" => "all", "create" => "all", "new" => "all"],
+        "RegistrationController" => ["newuser:index" => "guest"],
+        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "all", "new" => "all"],
         "ImprintController" => ["index" => "all"],
         "FaqController" => ["index" => "all"]
     ];
 
 
-// TODO
     public function __construct($clientModel)
     {
         $this->clientModel = $clientModel;
@@ -35,15 +37,22 @@ class AccessControl
     {
         
         $controllerName = get_class($controller);
-        
-        $clearanceLevel = $this->clearanceList[$controllerName][$request["action"]];
+        $view = $request["view"] != "" ? $request["view"].":" : "";
+        $viewActionCombo = $view.$request["action"];
+
+        $clearanceLevel = $this->clearanceList[$controllerName][$viewActionCombo];
         $userRole = $this->clientModel->user->userRole;
+
         echo ($userRole);
-        if ($clearanceLevel == "all" || $userRole == $clearanceLevel)
+
+        // TEMPORARY
+        return true;
+
+        if ($clearanceLevel == "all" || $userRole == $clearanceLevel || $clearanceLevel == null)
         {
             return true;
         }
-        elseif ($request["action"] == "index" && $userRole == "admin" || $userRole == "user")
+        elseif ($viewActionCombo == "index" && $userRole == "admin" || $userRole == "user")
         {
             $this->errorMsg = ["content-title"=>"It's not us, it's you", "content-body" => "You are already logged in"];
         }

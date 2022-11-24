@@ -19,6 +19,8 @@ class ErrorController extends Controller
         $errorPage->parse($data);
         $errorPage->render();
     }
+
+
 }
 
 /*

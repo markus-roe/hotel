@@ -23,7 +23,7 @@
 
                 <div class="center">
                 <button class="ipsum-button affirm" type="submit">Login</button>
-                Don't have an account yet? <a style="display: block" href="./registration/index">Register</a>
+                Don't have an account yet? <a style="display: block" href="./registration/newuser/index">Register</a>
             </div>
 
             </form>

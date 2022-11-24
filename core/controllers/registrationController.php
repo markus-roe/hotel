@@ -5,13 +5,22 @@ require_once  getcwd()."/core/controller.php";
 class RegistrationController extends Controller
 {
 
-    public function authenticate()
-    {
-        // authentifizieren, model zeugs etc.
-        $this->redirect("/home/index");
-    }
 
     public function indexAction()
+    {
+        switch ($this->requestedView)
+        {
+            case "newuser":
+                $this->renderRegistrationPage();
+                break;
+            default:
+                $this->renderErrorPage();
+                break;
+        }
+
+    }
+
+    private function renderRegistrationPage()
     {
         $this->getView("/Pages/registrationPage");
         $page = new RegistrationPage();
@@ -19,8 +28,11 @@ class RegistrationController extends Controller
         $page->render();
     }
 
-    public function new()
+    public function register()
     {
+        $result = $this->clientMode->registerNewUser();
+
+        // if ($result == ErrorCode::)
 
     }
 }

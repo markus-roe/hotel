@@ -54,11 +54,17 @@ class ClientModel extends Model
 
         if ($row)
         {
-            $userId = $row["userId"];
+            $_SESSION["userId"] = $row["userId"];
             $_SESSION["username"] = $row["firstname"]." ". $row["surname"];
-            $_SESSION["userId"] = $userId;
             $_SESSION["loggedIn"] = true;
-            $this->user->setUserData($row);
+            $_SESSION["firstname"] = $row["firstname"];
+            $_SESSION["surname"] = $row["surname"];
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["gender"] = $row["gender"];
+            $_SESSION["rolename"] = $row["roleName"];
+            $_SESSION["telephone"] = $row["telephone"];
+
+            // TODO alle daten für user in session vars speichern
             
             return true;
         }
@@ -69,13 +75,50 @@ class ClientModel extends Model
         return false;
     }
 
+    public function registerNewUser()
+    {
+        if (
+        !isset($_POST["gender"]) ||
+        !isset($_POST["firstname"]) ||
+        !isset($_POST["surname"]) ||
+        !isset($_POST["username"]) ||
+        !isset($_POST["password"]) ||
+        !isset($_POST["password2"]))
+        {
+            return ErrorCode::MISSING_INPUT;
+        }
+
+        if ($_POST["password"] != $_POST["password2"])
+        {
+            return ErrorCode::PASSWORDS_NOT_MATCHING;
+        }
+
+        if (strlen($_POST["password"]) > 50)
+        {
+            return ErrorCode::PASSWORD_TOO_LONG;
+        }
+        // TODO sanitize Input
+        // TODO hash password
+        $query = "
+        insert into users
+        (firstname, surname, username, email, password, gender, telephone)
+        values
+        (?,?,?,?,?,?,?);";
+
+        $stm1 = self::$connection->prepare($query);
+        $stm1->bind_param("sssssss", $_POST["firstname"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["password"], $_POST["gender"], $_POST["telephone"]);
+        $stm1->execute();
+        $result1 = $stm1->get_result();
+        $row = $result1->fetch_array(MYSQLI_ASSOC);
+        var_dump($row);
+    }
+
     public function authenticate()
     {
         
         if (isset($_SESSION["userId"]) && isset($_SESSION["username"]))
         {
-            $this->user->setUserData($this->getUserById($_SESSION["userId"]));
-
+            $this->user = new User();
             return true;
         }
 

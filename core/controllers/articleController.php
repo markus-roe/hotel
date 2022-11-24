@@ -1,21 +1,22 @@
 <?php
 
 require_once  getcwd() . "/core/controller.php";
+// require_once  getcwd() . "/core/config.php";
 require_once  getcwd() . "/core/config.php";
 require_once  getcwd()."/core/user.php";
 require_once  getcwd()."/core/models/articleModel.php";
 
 function mock()
 {
-    $config = new Config();
-    $mysqli = new mysqli($config->host, $config->user, $config->password, $config->database);
+    // $config = new Config();
+    $mysqli = new mysqli("localhost", "root", "Wlenfeni1428780", "ipsum");
 
     $query =
-    "select * from posts po
+        "select * from posts po
     join pictures pi on po.pictureid=pi.pictureid
     join users u on u.userid=po.authorid
     where po.postid=1;";
-    
+
 
     $res = $mysqli->query($query);
     $row = $res->fetch_array(MYSQLI_ASSOC);
@@ -31,30 +32,54 @@ class ArticleController extends Controller
 
     public function indexAction()
     {
-
-        $row = mock();
-
+        switch ($this->requestedView)
+        {
+            case "preview":
+                $this->renderPreviewPage();
+                break;
+            case "post":
+                $this->renderArticlePage($this->request["articleid"]);
+                break;
+            case "newpost":
+                $this->renderNewPostPage();
+                break;
+            default:
+                $this->renderErrorPage(["content-title" => "markus duftet"]);
+                break;
+        }
+    }
+    // FIXME
+    private function renderArticlePage($articleId)
+    {
         if (isset($this->request["articleid"])) {
             $this->getView("/Pages/articlePage");
             $page = new ArticlePage();
             $page->parse([
-                "headline"=>$row["headline"],
-                "content"=>$row["content"],
-                "subtitle"=>$row["subtitle"],
-                "picturepath"=>$row["picturePath"],
+                "headline" => $row["headline"],
+                "content" => $row["content"],
+                "subtitle" => $row["subtitle"],
+                "picturepath" => $row["picturePath"],
             ]);
             $page->render();
         }
     }
 
-    public function overviewAction()
+    private function renderNewPostPage()
+    {
+        $this->getView("/Pages/articlePageAdmin");
+        $page = new ArticlePageAdmin();
+        $page->parse();
+        $page->render();
+    }
+
+    private function renderPreviewPage()
     {
         $row = mock();
         $this->getView("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
-            ["article-link"=>$row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"]." ".$row["surname"], "updated"=>$row["updated"]],
+            ["article-link" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
 
