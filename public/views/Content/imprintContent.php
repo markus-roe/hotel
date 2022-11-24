@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd()."/public/views/Components/Content.php";
+require_once getcwd()."/public/views/Components/content.php";
 
 class ImprintContent extends Content
 {
