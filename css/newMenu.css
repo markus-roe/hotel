@@ -166,6 +166,7 @@
 .hoverLine::after {
     content: "";
     display: block;
+    background-color: white;
     width: 0%;
     height: 2px;
     transition: all 200ms;
@@ -176,8 +177,25 @@
     display: block;
     height: 2px;
     width: 100%;
-    background-color: white;
     z-index: 100;
+}
+.hoverLine::after {
+    content: "";
+    display: block;
+    background-color: white;
+    width: 0%;
+    height: 2px;
+    transition: all 200ms;
+}
+
+.hoverLine:hover::after {
+    content: "";
+    display: block;
+    height: 2px;
+    width: 100%;
+    z-index: 100;
+    background-color: black;
+
 }
 
 .hoverGrow:hover {
