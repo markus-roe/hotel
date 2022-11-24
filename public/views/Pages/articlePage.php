@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd()."/public/views/Components/Page.php";
+require_once getcwd()."/public/views/Components/page.php";
 
 // TODO requiredParam imagePath
 class ArticlePage extends Page

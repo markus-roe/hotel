@@ -1,6 +1,6 @@
 <?php
 
-require_once getcwd()."/public/views/Components/Page.php";
+require_once getcwd()."/public/views/Components/page.php";
 
 class ArticlePreviewPage extends Page
 {
