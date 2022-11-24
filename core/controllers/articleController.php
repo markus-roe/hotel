@@ -2,6 +2,8 @@
 
 require_once  getcwd() . "/core/controller.php";
 require_once  getcwd() . "/core/config.php";
+require_once  getcwd()."/core/user.php";
+require_once  getcwd()."/core/models/articleModel.php";
 
 function mock()
 {
@@ -62,7 +64,7 @@ class ArticleController extends Controller
         $page->render();
     }
 
-    public function new()
+    public function newAction()
     {
 
         $this->getView("/Pages/articlePageAdmin");
@@ -71,7 +73,39 @@ class ArticleController extends Controller
         $page->render();
     }
 
-    public function postarticle()
+    public function createAction()
     {
+
+        $this->getView("/Pages/articlePageAdmin");
+        $page = new Page();
+        $page->parse($this->userData);
+        $page->render();
+
+        $article = new ArticleModel();
+
+    
+
+        // * --------
+        //* new mock user
+        $userObj = ["userId" => 999];
+        $user->setUserData($userObj);
+        // * set UserId
+        
+        // * upload Image
+        $image = "image";
+        $uploadedPictureId = $article->uploadImage($image);
+    
+        $authorId = $user->userId;
+        $post_headline = "head";
+        $post_content = "content";
+        $post_subtitle = "sub";
+        $post_pictureId = $uploadedPictureId;
+        // * -----------
+
+
+        // $art->createArticle($authorId, $headline, $content, $subtitle, $pictureId));
+
+        
+        // * redirect to article
     }
 }

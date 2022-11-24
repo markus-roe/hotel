@@ -18,7 +18,7 @@ class AccessControl
         "HomeController" => ["index" => "all"],
         "LoginController" => ["index" => "guest", "loginrequest" => "guest"],
         "RegistrationController" => ["index" => "guest"],
-        "ArticleController" => ["index" => "all", "overview" => "all", "create" => "admin"],
+        "ArticleController" => ["index" => "all", "overview" => "all", "create" => "all", "new" => "all"],
         "ImprintController" => ["index" => "all"],
         "FaqController" => ["index" => "all"]
     ];

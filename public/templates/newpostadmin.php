@@ -1,7 +1,7 @@
 <h1 class="text-center">Add New Article</h1>
 
 <div class="ipsum-form">
-    <form action="/post/new" method="POST">
+    <form action="/hotel/news/article/create" method="POST">
         <div class="ipsum-fieldset">
             <div class="ipsum-input-wrapper">
                 <div class="ipsum-input-container labelOnTop horizontalLine">
