@@ -8,19 +8,7 @@ class LoginController extends Controller
     {
         parent::init();
 
-    }
-
-    protected function handlePostRequest()
-    {
-        
-    }
-
-    protected function handleGetRequest()
-    {
-        
-    }
-
-    
+    }    
 
     public function loginrequestAction()
     {

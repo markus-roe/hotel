@@ -2,7 +2,8 @@
 
 //? Controller sollte selbst checken ob URL-Parameter valide sind,
 //? soll selbst URL-Parameter Action-Methoden aufrufen
-
+require_once "./core/utils.php";
+require_once "./core/controllers/errorController.php";
 
 abstract class Controller
 {
@@ -15,7 +16,6 @@ abstract class Controller
         $this->request = $request;
         $this->clientModel = $clientModel;
         $this->userData = get_object_vars($this->clientModel->user);
-
     }
 
     // public function authenticate()
@@ -33,6 +33,16 @@ abstract class Controller
 
     //     return false;
     // }
+
+    protected function renderErrorPage($errorMsg=null)
+    {
+        $errorMsg = $errorMsg ?? ["content-title" => "Sorry", "content-body" => "This page doesn't seem to exist yet!"];
+        $this->getView("/Components/page");
+        $errorPage = new Page();
+        $data = array_merge($this->userData, $errorMsg);
+        $errorPage->parse($data);
+        $errorPage->render();
+    }
 
     public function indexAction()
     {
@@ -78,13 +88,15 @@ abstract class Controller
 
     public function before()
     {
-        // $this->authenticate();
+        $this->requestedView = $this->request["view"] ?? "";
     }
 
     public function after()
     {
 
     }
+
+
 
     public function execute()
     {

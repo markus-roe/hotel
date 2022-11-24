@@ -17,8 +17,11 @@ try {
     $app->router->get("/:controller/:action");
     $app->router->get("/:controller");
     $app->router->post("/:controller/:action");
-    $app->router->get("/news/:controller/:action/id/:articleid");
-    $app->router->get("/news/:controller/:action");
+    $app->router->get("/news/:controller/:view/:action/id/:articleid");
+    // $app->router->get("/news/:controller/:action/id/:articleid/:action");
+    $app->router->get("/news/:controller/:view/:action");
+
+
 
     $app->run();
 

@@ -1,4 +1,8 @@
 <?php
+
+require_once getcwd()."/core/utils.php";
+
+
  class Model {
   // Hold the class instance.
   private static $instance = null;

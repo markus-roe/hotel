@@ -30,7 +30,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "News",
-                "href"=> "./news/article/overview"
+                "href"=> "./news/article/preview/index"
             ]
         ];
 

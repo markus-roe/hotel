@@ -9,11 +9,11 @@ function mock()
     $mysqli = new mysqli($config->host, $config->user, $config->password, $config->database);
 
     $query =
-    "select * from posts po
+        "select * from posts po
     join pictures pi on po.pictureid=pi.pictureid
     join users u on u.userid=po.authorid
     where po.postid=1;";
-    
+
 
     $res = $mysqli->query($query);
     $row = $res->fetch_array(MYSQLI_ASSOC);
@@ -29,30 +29,54 @@ class ArticleController extends Controller
 
     public function indexAction()
     {
+        switch ($this->requestedView)
+        {
+            case "preview":
+                $this->renderPreviewPage();
+                break;
+            case "post":
+                $this->renderArticlePage($this->reqest["articleid"]);
+                break;
+            case "newpost":
+                $this->renderNewPostPage();
+                break;
+            default:
+                $this->renderErrorPage(["content-title" => "markus duftet"]);
+                break;
+        }
+    }
 
-        $row = mock();
-
+    private function renderArticlePage()
+    {
         if (isset($this->request["articleid"])) {
             $this->getView("/Pages/articlePage");
             $page = new ArticlePage();
             $page->parse([
-                "headline"=>$row["headline"],
-                "content"=>$row["content"],
-                "subtitle"=>$row["subtitle"],
-                "picturepath"=>$row["picturePath"],
+                "headline" => $row["headline"],
+                "content" => $row["content"],
+                "subtitle" => $row["subtitle"],
+                "picturepath" => $row["picturePath"],
             ]);
             $page->render();
         }
     }
 
-    public function overviewAction()
+    private function renderNewPostPage()
+    {
+        $this->getView("/Pages/articlePageAdmin");
+        $page = new ArticlePageAdmin();
+        $page->parse();
+        $page->render();
+    }
+
+    private function renderPreviewPage()
     {
         $row = mock();
         $this->getView("/Pages/ArticlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
-            ["article-link"=>$row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"]." ".$row["surname"], "updated"=>$row["updated"]],
+            ["article-link" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
 
@@ -60,6 +84,11 @@ class ArticleController extends Controller
         $page->addPreviews($mockArticles);
         $page->parse($this->userData);
         $page->render();
+    }
+
+    public function overviewAction()
+    {
+
     }
 
     public function new()
