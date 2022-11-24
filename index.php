@@ -10,12 +10,19 @@ require_once "./core/router.php";
 
 // $r->createRegexPattern()
 
-$app = new App();
+try {
+    
+    $app = new App();
 
-$app->router->get("/:controller/:action");
-$app->router->get("/:controller");
-$app->router->post("/:controller/:action");
-$app->router->get("/news/:controller/:action/id/:articleid");
-$app->router->get("/news/:controller/:action");
+    $app->router->get("/:controller/:action");
+    $app->router->get("/:controller");
+    $app->router->post("/:controller/:action");
+    $app->router->get("/news/:controller/:action/id/:articleid");
+    $app->router->get("/news/:controller/:action");
 
-$app->run();
+    $app->run();
+
+} catch (\Throwable $th) {
+    echo $th;
+}
+
