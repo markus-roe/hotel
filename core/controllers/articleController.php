@@ -48,7 +48,7 @@ class ArticleController extends Controller
     public function overviewAction()
     {
         $row = mock();
-        $this->getView("/Pages/ArticlePreviewPage");
+        $this->getView("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
