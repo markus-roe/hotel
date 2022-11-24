@@ -10,7 +10,7 @@
   {
     if(!self::$connection)
     {
-      self::$connection = new mysqli("localhost", "root", "Wlenfeni1428780", "ipsum");
+      self::$connection = new mysqli("localhost", "root", "", "ipsum");
     }
 
   }
