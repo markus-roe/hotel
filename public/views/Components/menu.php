@@ -22,7 +22,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "Help",
-                "href"=> "./help/index"
+                "href"=> "./faq/index"
             ],
             [
                 "textContent"=> "Imprint",
