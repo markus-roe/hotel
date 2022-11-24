@@ -18,7 +18,6 @@ class App
         $this->clientModel = new ClientModel();
         $this->router = new Router();
         $this->acl = new AccessControl($this->clientModel);
-        var_dump($this->clientModel->user->userRole);
     }
 
     protected function getController($controllerName)

@@ -1,12 +1,12 @@
 <?php
 
 require_once  getcwd() . "/core/controller.php";
-require_once  getcwd() . "/core/config.php";
+// require_once  getcwd() . "/core/config.php";
 
 function mock()
 {
-    $config = new Config();
-    $mysqli = new mysqli($config->host, $config->user, $config->password, $config->database);
+    // $config = new Config();
+    $mysqli = new mysqli("localhost", "root", "Wlenfeni1428780", "ipsum");
 
     $query =
         "select * from posts po
@@ -35,7 +35,7 @@ class ArticleController extends Controller
                 $this->renderPreviewPage();
                 break;
             case "post":
-                $this->renderArticlePage($this->reqest["articleid"]);
+                $this->renderArticlePage($this->request["articleid"]);
                 break;
             case "newpost":
                 $this->renderNewPostPage();
@@ -45,8 +45,8 @@ class ArticleController extends Controller
                 break;
         }
     }
-
-    private function renderArticlePage()
+    // FIXME
+    private function renderArticlePage($articleId)
     {
         if (isset($this->request["articleid"])) {
             $this->getView("/Pages/articlePage");
@@ -84,11 +84,6 @@ class ArticleController extends Controller
         $page->addPreviews($mockArticles);
         $page->parse($this->userData);
         $page->render();
-    }
-
-    public function overviewAction()
-    {
-
     }
 
     public function new()

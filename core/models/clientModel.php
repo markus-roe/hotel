@@ -54,11 +54,17 @@ class ClientModel extends Model
 
         if ($row)
         {
-            $userId = $row["userId"];
+            $_SESSION["userId"] = $row["userId"];
             $_SESSION["username"] = $row["firstname"]." ". $row["surname"];
-            $_SESSION["userId"] = $userId;
             $_SESSION["loggedIn"] = true;
-            $this->user->setUserData($row);
+            $_SESSION["firstname"] = $row["firstname"];
+            $_SESSION["surname"] = $row["surname"];
+            $_SESSION["email"] = $row["email"];
+            $_SESSION["gender"] = $row["gender"];
+            $_SESSION["rolename"] = $row["roleName"];
+            $_SESSION["telephone"] = $row["telephone"];
+
+            // TODO alle daten für user in session vars speichern
             
             return true;
         }
@@ -112,8 +118,7 @@ class ClientModel extends Model
         
         if (isset($_SESSION["userId"]) && isset($_SESSION["username"]))
         {
-            $this->user->setUserData($this->getUserById($_SESSION["userId"]));
-
+            $this->user = new User();
             return true;
         }
 

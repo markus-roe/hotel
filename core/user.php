@@ -12,20 +12,14 @@ class User
 
     public function __construct()
     {
-
-    }
-
-    public function setUserData($userData)
-    {
-        $user = $userData;
-
-        $this->userId = $user["userId"] ?? "";
-        $this->username = $user["username"] ?? "";
-        $this->firstname = $user["firstname"] ?? "";
-        $this->surname = $user["surname"] ?? "";
-        $this->userRole = $user["roleName"] ?? "";
-        $this->email = $user["email"] ?? "";
-        $this->gender = $user["gender"] ?? "";
+        $this->userId = @$_SESSION["userId"] ?? "";
+        $this->username = @$_SESSION["username"] ?? "";
+        $this->firstname = @$_SESSION["firstname"] ?? "";
+        $this->surname = @$_SESSION["surname"] ?? "";
+        $this->userRole = @$_SESSION["rolename"] ?? "guest";
+        $this->email = @$_SESSION["email"] ?? "";
+        $this->gender = @$_SESSION["gender"] ?? "";
+        $this->phone = @$_SESSION["telephone"] ?? "";
     }
     
 }

@@ -8,12 +8,20 @@ class RegistrationController extends Controller
 
     public function indexAction()
     {
-        switch ($this->request["view"])
+        switch ($this->requestedView)
         {
-            case "alreadyexists":
+            case "newuser":
+                $this->renderRegistrationPage();
                 break;
-            case "pwdsnotmatching":
+            default:
+                $this->renderErrorPage();
+                break;
         }
+
+    }
+
+    private function renderRegistrationPage()
+    {
         $this->getView("/Pages/registrationPage");
         $page = new RegistrationPage();
         $page->parse();
@@ -24,7 +32,7 @@ class RegistrationController extends Controller
     {
         $result = $this->clientMode->registerNewUser();
 
-        if ($result == ErrorCode::)
+        // if ($result == ErrorCode::)
 
     }
 }
