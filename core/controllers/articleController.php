@@ -72,7 +72,7 @@ class ArticleController extends Controller
     private function renderPreviewPage()
     {
         $row = mock();
-        $this->getView("/Pages/ArticlePreviewPage");
+        $this->getView("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
