@@ -16,7 +16,7 @@
 }
 
 .ipsum-article {
-    padding: 2rem 3rem;
+    padding: 1rem 1rem;
 }
 
 
@@ -42,6 +42,10 @@
 .labelOnTop label {
     margin-bottom: 1rem !important;
     margin-top: 0.5rem !important;
+}
+
+.inputError {
+    border: 2px solid red;
 }
 
 .horizontalLine::after {
