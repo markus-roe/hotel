@@ -2,7 +2,7 @@
 
 require_once  getcwd()."/core/controller.php";
 
-class HomeController extends Controller
+class ProfileController extends Controller
 {
     public function init()
     {

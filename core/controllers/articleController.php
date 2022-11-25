@@ -2,7 +2,7 @@
 
 require_once  getcwd() . "/core/controller.php";
 // require_once  getcwd() . "/core/config.php";
-require_once  getcwd() . "/core/config.php";
+// require_once  getcwd() . "/core/config.php";
 require_once  getcwd()."/core/user.php";
 require_once  getcwd()."/core/models/articleModel.php";
 
@@ -28,6 +28,7 @@ class ArticleController extends Controller
 {
     public function init()
     {
+        $this->articleModel = new ArticleModel();
     }
 
     public function indexAction()
@@ -51,15 +52,20 @@ class ArticleController extends Controller
     // FIXME
     private function renderArticlePage($articleId)
     {
+
+        $article = $this->articleModel->getArticleById($articleId);
+
         if (isset($this->request["articleid"])) {
             $this->getView("/Pages/articlePage");
             $page = new ArticlePage();
-            $page->parse([
-                "headline" => $row["headline"],
-                "content" => $row["content"],
-                "subtitle" => $row["subtitle"],
-                "picturepath" => $row["picturePath"],
-            ]);
+            // $articleData = [
+            //     "headline" => $article["headline"],
+            //     "content" => $article["content"],
+            //     "subtitle" => $article["subtitle"],
+            //     "picturepath" => $article["picturePath"],
+            // ]
+            $data = array_merge($article, $this->userData);
+            $page->parse($data);
             $page->render();
         }
     }
@@ -68,7 +74,7 @@ class ArticleController extends Controller
     {
         $this->getView("/Pages/articlePageAdmin");
         $page = new ArticlePageAdmin();
-        $page->parse();
+        $page->parse($this->userData);
         $page->render();
     }
 
@@ -79,9 +85,7 @@ class ArticleController extends Controller
 
         $page = new ArticlePreviewPage();
         $mockArticles = [
-            ["article-link" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
-            ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
-            ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
+            ["article-id" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
 
         ];
         $page->addPreviews($mockArticles);
@@ -89,48 +93,8 @@ class ArticleController extends Controller
         $page->render();
     }
 
-    public function newAction()
-    {
-
-        $this->getView("/Pages/articlePageAdmin");
-        $page = new ArticlePageAdmin();
-        $page->parse($this->userData);
-        $page->render();
-    }
 
     public function createAction()
     {
-
-        $this->getView("/Pages/articlePageAdmin");
-        $page = new Page();
-        $page->parse($this->userData);
-        $page->render();
-
-        $article = new ArticleModel();
-
-    
-
-        // * --------
-        //* new mock user
-        $userObj = ["userId" => 999];
-        $user->setUserData($userObj);
-        // * set UserId
-        
-        // * upload Image
-        $image = "image";
-        $uploadedPictureId = $article->uploadImage($image);
-    
-        $authorId = $user->userId;
-        $post_headline = "head";
-        $post_content = "content";
-        $post_subtitle = "sub";
-        $post_pictureId = $uploadedPictureId;
-        // * -----------
-
-
-        // $art->createArticle($authorId, $headline, $content, $subtitle, $pictureId));
-
-        
-        // * redirect to article
     }
 }

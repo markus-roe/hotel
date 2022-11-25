@@ -38,9 +38,10 @@ abstract class Menu extends Component
         $menuLinksHtml = $this->createLinks();
 
 
+
         $this->views = 
         [
-            "menu" => new View("menu", ["menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
+            "menu" => new View("menu", ["profilepath", "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
         ];
     }
 

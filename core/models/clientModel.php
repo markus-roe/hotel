@@ -63,6 +63,8 @@ class ClientModel extends Model
             $_SESSION["gender"] = $row["gender"];
             $_SESSION["rolename"] = $row["roleName"];
             $_SESSION["telephone"] = $row["telephone"];
+            $_SESSION["profilepath"] = "./profile/user/index";
+            $this->user = new User();
 
             // TODO alle daten für user in session vars speichern
             
@@ -73,6 +75,12 @@ class ClientModel extends Model
 
         
         return false;
+    }
+
+    public function logoutUser()
+    {
+        session_destroy();
+        header("Location: ../home/index");
     }
 
     public function registerNewUser()
@@ -122,6 +130,7 @@ class ClientModel extends Model
             return true;
         }
 
+        // $this->user->profilepath = "./hotel/login/attempt/index";
         return false;
     }
 

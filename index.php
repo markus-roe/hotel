@@ -13,8 +13,8 @@ try {
     $app->router->get("/:controller/:view/:action");
     $app->router->get("/:controller");
     $app->router->post("/:controller/:action");
-    $app->router->get("/news/:controller/:action/id/:articleid");
-    $app->router->get("/news/:controller/:action");
+    $app->router->get("/news/:controller/:view/id/:articleid/:action");
+    $app->router->get("/news/:controller/:view/:action");
     $app->router->post("/news/:controller/:action");
 
     $app->run();

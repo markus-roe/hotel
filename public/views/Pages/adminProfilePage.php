@@ -21,11 +21,16 @@ class AdminProfilePage extends Page
                 "profile-link-href" => "./news/article/newpost/index",
                 "profile-link-text" => "Neuer Artikel",
             ],
+            [
+                "profile-link-href" => "./login/logout",
+                "profile-link-text" => "Logout",
+            ],
 
         ];
 
         $profileLinksHtml = $this->createProfileLinks($profileLinks);
-        $content = new View("profileContentTemplate", ["profile-links"]);
+        $content = new View("profileContentTemplate", ["profile-links" => $profileLinksHtml]);
+        $this->changeContent($content);
         
     }
 

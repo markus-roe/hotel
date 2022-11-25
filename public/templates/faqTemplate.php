@@ -1,3 +1,4 @@
+<h1 class="text-center">{{page-title}}</h1>
 
             <div class="accordion" id="howtobookroom">
                 <div class="accordion-item">
