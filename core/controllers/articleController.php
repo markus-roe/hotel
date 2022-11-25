@@ -54,7 +54,7 @@ class ArticleController extends Controller
     private function renderArticlePage($articleId)
     {
 
-        $article = $this->articleModel->getArticleById($articleId);
+        $article = $this->articleModel->getArticleById($articleId)[0];
 
         if (isset($this->request["articleid"])) {
             $this->getView("/Pages/articlePage");
@@ -81,19 +81,12 @@ class ArticleController extends Controller
 
     private function renderPreviewPage()
     {
-        $row = mock();
         $this->getView("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
-        $article = new ArticleModel;
-        $articles = $article->getArticles();
+        $articleModel = new ArticleModel();
+        $articles = $articleModel->getArticles();
 
-        $mockArticles = [
-            ["article-link" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
-            ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
-            ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
-
-        ];
         
         $page->addPreviews($articles);
 
