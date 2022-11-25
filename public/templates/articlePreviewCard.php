@@ -1,7 +1,7 @@
 <div class="col-sm-6">
     <div class="card mb-3">
         <div class="row g-0">
-            <div class="col-md-4">
+            <div class="col-md-4" style="width:100%">
                 <img src="./public/{{picturePath}}" class="img-fluid rounded" alt="..." />
             </div>
             <div class="col-md-8">

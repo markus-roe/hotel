@@ -54,9 +54,14 @@ class ArticleController extends Controller
     private function renderArticlePage($articleId)
     {
 
-        $article = $this->articleModel->getArticleById($articleId)[0];
+        $article = $this->articleModel->getArticleById($articleId);
+        if (!isset($this->request["articleid"]) || !$article) {
+            $this->renderErrorPage(["content-title"=>"Sorry...", "content-body" => "Dieser Artikel existiert leider nicht!"]);
 
-        if (isset($this->request["articleid"])) {
+            return false;
+        }
+            
+            $article = $article[0];
             $this->getTemplate("/Pages/articlePage");
             $page = new ArticlePage();
             // $articleData = [
@@ -68,7 +73,9 @@ class ArticleController extends Controller
             $data = array_merge($article, $this->userData);
             $page->parse($data);
             $page->render();
-        }
+
+            return true;
+
     }
 
     private function renderNewPostPage()
