@@ -8,8 +8,8 @@ class ArticlePage extends Page
     function __construct()
     {
         parent::__construct();
-
-        $content = new View("articleTemplate", ["postId", "headline", "content", "subtitle", "picturePath"]);
+        // username == author name
+        $content = new View("articleTemplate", ["username", "postId", "headline", "content", "subtitle", "picturePath"]);
         $this->changeContent($content);
     }
 }
