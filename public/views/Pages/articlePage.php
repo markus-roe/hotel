@@ -9,7 +9,7 @@ class ArticlePage extends Page
     {
         parent::__construct();
 
-        $content = new View("articleTemplate", ["headline", "content", "subtitle", "picturePath"]);
+        $content = new View("articleTemplate", ["postId", "headline", "content", "subtitle", "picturePath"]);
         $this->changeContent($content);
     }
 }
