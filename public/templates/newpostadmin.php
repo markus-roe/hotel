@@ -11,7 +11,7 @@
                 </div>
                 <div class="ipsum-input-container labelOnTop horizontalLine">
                     <label for="content">Content</label>
-                    <textarea class="ipsum-input textarea" id="content" name="articleContent"
+                    <textarea class="ipsum-input textarea text" id="content" name="articleContent"
                         placeholder="Content..." rows="20"></textarea>
                 </div>
                 <div class="ipsum-input-container labelOnTop horizontalLine">
