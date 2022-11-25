@@ -7,7 +7,7 @@ class LoginPage extends Page
     {
         parent::__construct();
         $this->requireView("Content/loginContent");
-        $loginContent = new LoginContent();
-        $this->insert("content", $loginContent);
+        $loginContent = new View("login", ["inputerror", "inputerrormsg"]);
+        $this->changeContent($loginContent);
     }
 }

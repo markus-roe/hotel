@@ -7,7 +7,7 @@
               </h6>
             </p>
             <div class="text-center container-fluid">
-            <img src="{{picturepath}}" class="rounded img-fluid" alt="Image not found...">
+            <img src="{{picturePath}}" class="rounded img-fluid" alt="Image not found...">
             <!-- <img src="https://picsum.photos/1100/500" class="rounded img-fluid" alt="..."> -->
           </div>
           <span class="horizontalLine"></span>

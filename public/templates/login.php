@@ -4,10 +4,10 @@
                 <div class="ipsum-fieldset">
                     <div class="ipsum-input-wrapper">
                         <div class="ipsum-input-container">
-                            <input class="ipsum-input text" type="text" name="username" placeholder="Username"/>                            
+                            <input class="ipsum-input text {{inputerror}}" type="text" name="username" placeholder="Username"/>                            
                         </div>
                         <div class="ipsum-input-container">
-                            <input class="ipsum-input text" type="password" name="password" placeholder="Password"/>
+                            <input class="ipsum-input text {{inputerror}}" type="password" name="password" placeholder="Password"/>
                         </div>
                     </div>
                 </div>
@@ -20,11 +20,12 @@
                     <!-- <a style="display: block;" href="">Forgot password</a> -->
 
                 </div>
+                <span class="text-center" style="color: red">{{inputerrormsg}}</span>
 
                 <div class="center">
                 <button class="ipsum-button affirm" type="submit">Login</button>
                 Don't have an account yet? <a style="display: block" href="./registration/newuser/index">Register</a>
             </div>
-
+    <!-- display optional error -->
             </form>
 </div>

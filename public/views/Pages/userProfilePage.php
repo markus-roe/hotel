@@ -16,11 +16,16 @@ class UserProfilePage extends Page
             [
                 "profile-link-href" => "./profile/personaldata/index",
                 "profile-link-text" => "Stammdaten",
-            ]
+            ],
+            [
+                "profile-link-href" => "./login/logout",
+                "profile-link-text" => "Logout",
+            ],
+
         ];
         $profileLinksHtml = $this->createProfileLinks($profileLinks);
-        $content = new View("profileContentTemplate", ["profile-links"]);
-        
+        $content = new View("profileContentTemplate", ["profile-links"=>$profileLinksHtml]);
+        $this->changeContent($content);
     }
 
     protected function createProfileLinks($profileLinks)

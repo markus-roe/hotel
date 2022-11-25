@@ -25,7 +25,7 @@ class ArticlePreviewPage extends Page
 
         $cardCollection = new Component();
         $newContent = new Content();
-        // BUG cards überschreiben sich?
+
         while ($index < $nbrOfCards)
         {
             $tempCardView_2 = "";
