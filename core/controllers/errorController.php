@@ -13,7 +13,7 @@ class ErrorController extends Controller
 
     public function indexAction()
     {
-        $this->getView("/Components/page");
+        $this->getTemplate("/Components/page");
         $errorPage = new Page();
         $data = array_merge($this->userData, $this->errorMsg);
         $errorPage->parse($data);

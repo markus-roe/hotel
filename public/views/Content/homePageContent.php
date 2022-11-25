@@ -8,7 +8,7 @@ class HomePageContent extends Content
     {        
         parent::__construct();
 
-        $homePageContent = new View("contentBasic");
+        $homePageContent = new Template("contentBasic");
         $this->insert("contentBody", $homePageContent);
         
     }

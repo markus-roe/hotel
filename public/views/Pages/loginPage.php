@@ -6,8 +6,8 @@ class LoginPage extends Page
     function __construct()
     {
         parent::__construct();
-        $this->requireView("Content/loginContent");
-        $loginContent = new View("login", ["inputerror", "inputerrormsg"]);
+        $this->requireTemplate("Content/loginContent");
+        $loginContent = new Template("login", ["inputerror", "inputerrormsg"]);
         $this->changeContent($loginContent);
     }
 }

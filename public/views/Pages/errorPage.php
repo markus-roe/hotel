@@ -6,7 +6,7 @@ class ErrorPage extends Page
     function __construct()
     {
         parent::__construct();
-        $content = new View("contentBasic", ["content-title", "content-body"]);
+        $content = new Template("contentBasic", ["content-title", "content-body"]);
         $this->changeContent($content);
     }
 }

@@ -8,7 +8,7 @@ class ImprintContent extends Content
     {        
         parent::__construct();
 
-        $template = new View("imprint");
+        $template = new Template("imprint");
         $this->insert("contentBody", $template);        
     }
 }

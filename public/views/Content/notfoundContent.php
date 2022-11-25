@@ -8,7 +8,7 @@ class NotFoundPage extends Content
     {
         parent::__construct();
 
-        $homePageContent = new View("contentBasicBody",
+        $homePageContent = new Template("contentBasicBody",
         ["content-title" => "Sorry...",
         "content-body" =>
         "Diese Seite existiert leider nicht oder ist zur Zeit nicht erreichbar"]);

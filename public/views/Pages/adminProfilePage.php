@@ -29,7 +29,7 @@ class AdminProfilePage extends Page
         ];
 
         $profileLinksHtml = $this->createProfileLinks($profileLinks);
-        $content = new View("profileContentTemplate", ["profile-links" => $profileLinksHtml]);
+        $content = new Template("profileContentTemplate", ["profile-links" => $profileLinksHtml]);
         $this->changeContent($content);
         
     }
@@ -37,11 +37,11 @@ class AdminProfilePage extends Page
     protected function createProfileLinks($profileLinks)
     {
         $htmlString = "";
-        $linkTemplate = View::readFromFile(getcwd()."/public/templates/"."profileLinkTemplate");
+        $linkTemplate = Template::readFromFile(getcwd()."/public/templates/"."profileLinkTemplate");
 
         foreach($profileLinks as $link)
         {
-            $htmlString .= View::parseTemplate($linkTemplate, ["profile-link-href" => $link["profile-link-href"], "profile-link-text" => $link["profile-link-text"]]);
+            $htmlString .= Template::parseTemplate($linkTemplate, ["profile-link-href" => $link["profile-link-href"], "profile-link-text" => $link["profile-link-text"]]);
         }
 
         return $htmlString;

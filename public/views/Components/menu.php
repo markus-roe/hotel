@@ -34,14 +34,14 @@ abstract class Menu extends Component
             ]
         ];
 
-        $this->menuLinksTemplate = View::readFromFile(getcwd()."/public/templates/"."menuLinks");
+        $this->menuLinksTemplate = Template::readFromFile(getcwd()."/public/templates/"."menuLinks");
         $menuLinksHtml = $this->createLinks();
 
 
 
-        $this->views = 
+        $this->templates = 
         [
-            "menu" => new View("menu", ["profilepath", "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
+            "menu" => new Template("menu", ["profilepath", "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
         ];
     }
 
@@ -54,7 +54,7 @@ abstract class Menu extends Component
         foreach($this->menuLinksConfig as $link)
         {
             $params = ["menu-link-href"=>$link["href"], "menu-link-textContent"=>$link["textContent"]];
-            $htmlString .= View::parseTemplate($this->menuLinksTemplate, $params);
+            $htmlString .= Template::parseTemplate($this->menuLinksTemplate, $params);
         }
 
         return $htmlString;

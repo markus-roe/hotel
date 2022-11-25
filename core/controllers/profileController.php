@@ -33,7 +33,7 @@ class ProfileController extends Controller
 
     private function renderAdminProfilePage()
     {
-        $this->getView("/Pages/adminProfilePage");
+        $this->getTemplate("/Pages/adminProfilePage");
         $page = new AdminProfilePage();
         $page->parse($this->userData);
         $page->render();
@@ -41,7 +41,7 @@ class ProfileController extends Controller
 
     private function renderUserProfilePage()
     {
-        $this->getView("/Pages/userProfilePage");
+        $this->getTemplate("/Pages/userProfilePage");
         $page = new UserProfilePage();
         $page->parse($this->userData);
         $page->render();

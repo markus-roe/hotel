@@ -37,7 +37,7 @@ abstract class Controller
     protected function renderErrorPage($errorMsg=null)
     {
         $errorMsg = $errorMsg ?? ["content-title" => "Sorry", "content-body" => "This page doesn't seem to exist yet!"];
-        $this->getView("/Components/page");
+        $this->getTemplate("/Components/page");
         $errorPage = new Page();
         $data = array_merge($this->userData, $errorMsg);
         $errorPage->parse($data);
@@ -72,7 +72,7 @@ abstract class Controller
         $viewPath .= $this->request["view"];
     }
 
-    protected function getView($viewName)
+    protected function getTemplate($viewName)
     {
         $viewPath = $this->viewRootPath;
         $viewPath .= $viewName.".php";

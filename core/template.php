@@ -1,13 +1,13 @@
 <?php
 
-class View
+class Template
 {
-    public $templates = [];
+    // public $templates = [];
     protected $params = [];
     protected $externalParams = [];
     protected $requiredParams = [];
     public $name;
-    protected $view = '';
+    protected $template = '';
 
     function __construct($fileName=null, $requiredParams = null)
     {
@@ -16,7 +16,7 @@ class View
         if ($fileName != null)
         {
             $templatePathPrefix = getcwd()."/public/templates/";
-            $this->view = View::readFromFile($templatePathPrefix.$fileName);
+            $this->template= Template::readFromFile($templatePathPrefix.$fileName);
         }
     }
 
@@ -53,13 +53,13 @@ class View
     {
         $this->extractRequiredParams($params);
 
-        $this->view = View::parseTemplate($this->view, $this->params);
+        $this->template= Template::parseTemplate($this->template, $this->params);
     }
 
     public function render() 
     {
         $this->before();
-        echo html_entity_decode($this->view);
+        echo html_entity_decode($this->template);
         $this->after();
 
         return 1;
@@ -67,11 +67,11 @@ class View
 
     public function display() 
     {
-        if ($this->view == "")
+        if ($this->template== "")
         {
             return 0;
         }
-        echo html_entity_decode($this->view);
+        echo html_entity_decode($this->template);
         
         
         return 1;
@@ -79,12 +79,12 @@ class View
     // OBSOLETE
     public function displayAll()
     {
-        if (count($this->views) == 0)
+        if (count($this->templates) == 0)
         {
             return 0;
         }
 
-        foreach ($this->views as $name=>$viewObj)
+        foreach ($this->templates as $name=>$viewObj)
         {
             $viewObj->display();
         }
@@ -128,9 +128,9 @@ class View
     {
     }
 
-    public function getView()
+    public function getTemplate()
     {
-        return $this->view;
+        return $this->template;
     }
 
     public function setName($newName)

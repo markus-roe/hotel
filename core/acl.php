@@ -19,9 +19,9 @@ class AccessControl
     private $clearanceList = 
     [
         "HomeController" => ["index" => "all"],
-        "LoginController" => ["attempt:index" => "guest", "loginrequest" => "guest"],
-        "RegistrationController" => ["newuser:index" => "guest"],
-        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "admin"],
+        "LoginController" => ["attempt:index" => "guest", "attemptfailed:index"=>"guest", "loginrequest" => "guest"],
+        "RegistrationController" => ["missing:index"=>"guest", "passwordnotmatching:index"=>"guest", "newuser:index"=>"guest"],
+        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "all", "new" => "all"],
         "ImprintController" => ["index" => "all"],
         "FaqController" => ["index" => "all"],
         "ProfileController" => ["admin:index" => "admin", "user:index" => "user"]
@@ -49,7 +49,6 @@ class AccessControl
         }
 
         $userRole = $this->clientModel->user->userRole;
-
 
         // TEMPORARY
 

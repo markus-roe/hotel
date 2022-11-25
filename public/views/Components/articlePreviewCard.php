@@ -9,7 +9,7 @@ class ArticlePreviewCard extends Component
         parent::__construct();
 
         // article-preview, article-updated, article-headline, article-author
-        $newPreview = new View("articlePreviewCard", 
+        $newPreview = new Template("articlePreviewCard", 
         [
             "article-preview"=>$previewConfig["preview"],
             "article-updated"=>$previewConfig["updated"],
@@ -17,7 +17,7 @@ class ArticlePreviewCard extends Component
             "article-author"=>$previewConfig["author"]
         ]);
         
-        $this->views = ["card"=>$newPreview];
+        $this->templates = ["card"=>$newPreview];
     }
 
 }

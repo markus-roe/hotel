@@ -8,9 +8,9 @@ class ArticlePreviewPage extends Page
     {
         parent::__construct();
 
-        // $this->previewTemplate = View::readFromFile(getcwd()."/public/templates/articlePreviewCard");
+        // $this->previewTemplate = Template::readFromFile(getcwd()."/public/templates/articlePreviewCard");
         // array der geparsten Preview-Cards (type == Views)
-        $this->requireView("/Components/content");
+        $this->requireTemplate("/Components/content");
         $this->previewCards = [];
     }
 
@@ -29,20 +29,20 @@ class ArticlePreviewPage extends Page
         while ($index < $nbrOfCards)
         {
             $tempCardView_2 = "";
-            $card1 = new View("articlePreviewCard", $cardsConfig[$index]);
+            $card1 = new Template("articlePreviewCard", $cardsConfig[$index]);
             $card1->parse();
-            $tempCardView_1 = $card1->view;
+            $tempCardView_1 = $card1->template;
 
             if ($nbrOfCards - $index  >= 2)
             {
-                $card2 = new View("articlePreviewCard", $cardsConfig[$index + 1]);
+                $card2 = new Template("articlePreviewCard", $cardsConfig[$index + 1]);
                 $card2->parse();
-                $tempCardView_2 = $card2->view;
+                $tempCardView_2 = $card2->template;
                 $index++;
             }
-            $row = new View("articleRow", ["prev-card-1", "prev-card-2"]);
+            $row = new Template("articleRow", ["prev-card-1", "prev-card-2"]);
             $row->parse(["prev-card-1"=>$tempCardView_1, "prev-card-2"=>$tempCardView_2]);
-            array_push($cardCollection->views, $row);
+            array_push($cardCollection->templates, $row);
             $index++;
             
         }
