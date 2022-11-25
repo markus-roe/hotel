@@ -53,14 +53,21 @@ class LoginController extends Controller
 
     public function loginrequestAction()
     {
-        if ($this->clientModel->loginUser())
+
+        if (!isset($_POST["password"]) || !isset($_POST["username"])) {
+            header("Location: ../login/attemptfailed/index");
+            
+            return false;
+        }
+
+        if ($this->clientModel->loginUser($_POST["username"], $_POST["password"]))
         {
             // PATCH
             header("Location: ../profile/".$_SESSION["rolename"]."/index");
             
             return 1;
         }
-        header("Location: ../login/attemptfailed/index");
+        
     }
 
 
