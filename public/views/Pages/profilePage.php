@@ -9,7 +9,7 @@ class ProfilePage extends Page
     {
         parent::__construct();
         
-        $content = new Template("personalDataTemplate", ["page-title" => "Stammdaten", "profile-update-link" => "test", "firstname", "surname", "username", "email", "phone"]);
+        $content = new Template("personalDataTemplate", ["page-title" => "Profile", "profile-update-link" => "profile/update", "firstname", "surname", "username", "email", "phone"]);
         $this->changeContent($content);
         
     }

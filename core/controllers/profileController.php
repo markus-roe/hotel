@@ -1,6 +1,8 @@
 <?php
 
 require_once  getcwd()."/core/controller.php";
+require_once  getcwd()."/core/user.php";
+require_once  getcwd()."/core/models/clientModel.php";
 
 class ProfileController extends Controller
 {
@@ -55,10 +57,28 @@ class ProfileController extends Controller
         $page->render();
     }
 
-    private function updateAction()
+    public function updateAction()
     {
-        
+
+        $user = new User();
+        $client = new ClientModel();
+        echo $userId;
+
+
+        $userId = $user->userId;
+        $post_firstname = $_POST['firstname'] ? $_POST['firstname'] : "";
+        $post_surname = $_POST['surname'] ? $_POST['surname'] : "";
+        $post_email = $_POST['email'] ? $_POST['email'] : "";
+
+
+
+        $client->changeUserData($post_firstname, $post_surname, $post_email, $userId);
+
+
+    
+        header("Location: /hotel/profile/personaldata/index");
     }
+
 }
 
 /*
