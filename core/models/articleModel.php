@@ -16,7 +16,14 @@ class ArticleModel extends Model
 
     public function getArticles()
     {
-        return "all Articles in Array";
+        $query = "SELECT content, updated, headline, authorId, picturePath FROM posts p
+        JOIN pictures pic ON p.pictureid = pic.pictureId;";
+
+        $articles = $this->executeQuery($query, "", []);
+
+        console_log($articles);
+        
+        return $articles;
     }
 
     public function getArticleById($articleId)
@@ -30,29 +37,27 @@ class ArticleModel extends Model
         return $article;
     }
 
-    public function uploadImage($image)
+    public function uploadImage($imagePath)
     {
 
-        // move_uploaded_file($image, $destinationPath);
-        
+        $query = "INSERT INTO pictures (picturePath) VALUES (?)";
+
+        $article = $this->executeQuery($query, "s", [$imagePath]);
+
         // * returns pictureID
-        return 1;
+        return $article;
+        
     }
 
     // public function createArticle($authorId, $headline, $content)
     public function createArticle($authorId, $headline, $content, $subtitle, $pictureId)
     {
         $query = "INSERT INTO posts (authorId, headline, content, subtitle, pictureid) VALUES (?, ?, ?, ?, ?)";
-        
-        $authorId = 2;
-        $headline = "title";
-        $content = "content";
-        $subtitle = "sub";
-        $pictureId = 1;
+    
 
         $article = $this->executeQuery($query, "dsssd", [$authorId, $headline, $content, $subtitle, $pictureId]);
 
-        // var_dump($article);
+    // * returns pictureID
         return $article;
     }
 
@@ -76,15 +81,24 @@ class ArticleModel extends Model
             
             // * execute sql with parent model connection
             $stmt = self::$connection->prepare($query);
-            $stmt->bind_param($paramString, ...$params);
+
+            if(count($paramsArray))
+            {
+                $stmt->bind_param($paramString, ...$params);
+            }
+
             $stmt->execute();
             $result = $stmt->get_result();
+
             if(str_contains($query, "SELECT"))
             {
-                $row = $result->fetch_array(MYSQLI_ASSOC);
-                return $row;
+                while($row = $result->fetch_assoc())
+            {
+                $rows[] = $row;
             }
-            return $result;
+            return $rows;
+            }
+            return self::$connection->insert_id;
 
         } 
         catch (\Throwable $th) {

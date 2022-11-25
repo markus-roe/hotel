@@ -5,11 +5,12 @@ require_once  getcwd() . "/core/controller.php";
 require_once  getcwd() . "/core/config.php";
 require_once  getcwd()."/core/user.php";
 require_once  getcwd()."/core/models/articleModel.php";
+require_once  getcwd()."/core/models/clientModel.php";
 
 function mock()
 {
     // $config = new Config();
-    $mysqli = new mysqli("localhost", "root", "Wlenfeni1428780", "ipsum");
+    $mysqli = new mysqli("localhost", "root", "", "ipsum");
 
     $query =
         "select * from posts po
@@ -78,13 +79,17 @@ class ArticleController extends Controller
         $this->getView("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
+        $article = new ArticleModel;
+        $articles = $article->getArticles();
+
         $mockArticles = [
             ["article-link" => $row["postId"], "headline" => $row["headline"], "preview" => "Lorem Ipsum dolor blablabla", "author" => $row["firstname"] . " " . $row["surname"], "updated" => $row["updated"]],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
             ["headline" => "Familien SM-Workshop", "preview" => "Lorem Ipsum dolor blablabla", "author" => "Markus Rösner"],
-
         ];
-        $page->addPreviews($mockArticles);
+        
+        $page->addPreviews($articles);
+
         $page->parse($this->userData);
         $page->render();
     }
@@ -98,39 +103,39 @@ class ArticleController extends Controller
         $page->render();
     }
 
-    public function createAction()
+    public function uploadAction()
     {
 
-        $this->getView("/Pages/articlePageAdmin");
-        $page = new Page();
-        $page->parse($this->userData);
-        $page->render();
+    $user = new User();
 
-        $article = new ArticleModel();
+    $article = new ArticleModel();
 
-    
+    // * prepare image for upload
+    $ImageName = str_replace(' ','-',strtolower($_FILES['articleImage']['name']));
+    $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
+    $ImageExt = str_replace('.','',$ImageExt);
+    $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
+    $NewImageName = $ImageName.'.'.$ImageExt;
 
-        // * --------
-        //* new mock user
-        $userObj = ["userId" => 999];
-        $user->setUserData($userObj);
-        // * set UserId
-        
-        // * upload Image
-        $image = "image";
-        $uploadedPictureId = $article->uploadImage($image);
-    
-        $authorId = $user->userId;
-        $post_headline = "head";
-        $post_content = "content";
-        $post_subtitle = "sub";
-        $post_pictureId = $uploadedPictureId;
-        // * -----------
+    $destinationPath = getcwd() . "/public/uploads/pictures/" . $_FILES["articleImage"]["name"];
+
+    $picturePath = "/uploads/pictures/" . $_FILES["articleImage"]["name"];
+
+    move_uploaded_file($_FILES["articleImage"]["tmp_name"], $destinationPath);
 
 
-        // $art->createArticle($authorId, $headline, $content, $subtitle, $pictureId));
+    // * upload Image path to database
+    $post_pictureId = $article->uploadImage($picturePath);
 
-        
-        // * redirect to article
+    $authorId = $user->userId;
+    $post_headline = $_POST['articleTitle'] ? $_POST['articleTitle'] : "";
+    $post_content = $_POST['articleContent'] ? $_POST['articleContent'] : "";
+    $post_subtitle = $_POST['subtitle'] ? $_POST['subtitle'] : "";
+    $post_pictureId = $post_pictureId;
+
+    $newArticleId = $article->createArticle($authorId, $post_headline, $post_content, $post_subtitle, $post_pictureId);
+
+    header("Location: post/id/" . $newArticleId . "/index");
+
     }
 }

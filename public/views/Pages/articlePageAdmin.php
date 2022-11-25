@@ -10,7 +10,7 @@ class ArticlePageAdmin extends Page
 
         // $this->previewTemplate = View::readFromFile(getcwd()."/public/templates/articlePreviewCard");
         // array der geparsten Preview-Cards (type == Views)
-        $content = new View("newpostadmin");
+        $content = new View("newpostadmin", ["post-link" => "./news/article/upload"]);
         $this->changeContent($content);
     }
 }
