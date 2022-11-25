@@ -41,8 +41,8 @@
 }
 
 .labelOnTop label {
-    margin-bottom: 1rem !important;
-    margin-top: 0.5rem !important;
+    margin-bottom: 0.2rem !important;
+    margin-top: 0.7rem !important;
 }
 
 .inputError {

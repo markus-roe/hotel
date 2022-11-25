@@ -22,6 +22,9 @@ class ProfileController extends Controller
             case "user":
                 $this->renderUserProfilePage();
                 break;
+            case "personaldata":
+                $this->renderProfilePage();
+                break;
             default:
                 $this->renderErrorPage();
                 break;
@@ -42,6 +45,19 @@ class ProfileController extends Controller
         $page = new UserProfilePage();
         $page->parse($this->userData);
         $page->render();
+    }
+
+    private function renderProfilePage()
+    {
+        $this->getView("/Pages/profilePage");
+        $page = new ProfilePage();
+        $page->parse($this->userData);
+        $page->render();
+    }
+
+    private function updateAction()
+    {
+        
     }
 }
 

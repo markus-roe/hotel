@@ -1,6 +1,7 @@
 <?php
 
 require_once getcwd()."/public/views/Components/page.php";
+require_once getcwd()."/core/user.php";
 
 class ProfilePage extends Page
 {
@@ -11,21 +12,15 @@ class ProfilePage extends Page
         $profileLinks = [];
         $profileLinksHtml = $this->createProfileLinks($profileLinks);
         $content = new Template("profileContentTemplate", ["profile-links"]);
+
+
+        $content = new View("personalDataTemplate", ["page-title" => "Stammdaten", "profile-update-link" => "test", "firstname", "surname", "username", "email", "phone"]);
+        // $content->parse();
+        $this->changeContent($content);
         
     }
 
-    protected function createProfileLinks($profileLinks)
-    {
-        $htmlString = "";
-        $linkTemplate = Template::readFromFile(getcwd()."/public/templates/"."profileLinkTemplate");
 
-        foreach($profileLinks as $link)
-        {
-            $htmlString .= Template::parseTemplate($linkTemplate, ["profile-link-href" => $link["profile-link-href"], "profile-link-text" => $link["profile-link-text"]]);
-        }
-
-        return $htmlString;
-    }
 }
 //  /profile/menu/
 //  /profile/stammdaten
