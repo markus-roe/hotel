@@ -19,7 +19,7 @@ class ArticleModel extends Model
         $query = "SELECT content, updated, headline, authorId, picturePath, postId FROM posts p
         JOIN pictures pic ON p.pictureid = pic.pictureId;";
 
-        $articles = $this->executeQuery($query, "", []);
+        $articles = $this->executeQuery($query);
 
         console_log($articles);
         
@@ -66,7 +66,7 @@ class ArticleModel extends Model
         
     }
 
-    public function executeQuery($query, $paramString, $paramsArray)
+    public function executeQuery($query, $paramString = "", $paramsArray = [])
     {        
         try
         {
