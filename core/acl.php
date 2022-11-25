@@ -21,7 +21,7 @@ class AccessControl
         "HomeController" => ["index" => "all"],
         "LoginController" => ["index" => "guest", "loginrequest" => "guest"],
         "RegistrationController" => ["newuser:index" => "guest"],
-        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "all", "new" => "all"],
+        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "admin"],
         "ImprintController" => ["index" => "all"],
         "FaqController" => ["index" => "all"]
     ];
@@ -43,7 +43,6 @@ class AccessControl
         $clearanceLevel = $this->clearanceList[$controllerName][$viewActionCombo];
         $userRole = $this->clientModel->user->userRole;
 
-        echo ($userRole);
 
         // TEMPORARY
         return true;

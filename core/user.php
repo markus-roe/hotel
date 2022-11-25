@@ -2,8 +2,9 @@
 
 class User
 {
-    public $firstName;
-    public $surName;
+    public $username;
+    public $firstname;
+    public $surname;
     public $phone;
     public $email;
     public $gender;
