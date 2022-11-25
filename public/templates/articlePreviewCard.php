@@ -2,7 +2,7 @@
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{picturePath}}" class="img-fluid rounded" alt="..." />
+                <img src="./public/{{picturePath}}" class="img-fluid rounded" alt="..." />
             </div>
             <div class="col-md-8">
                 <div class="card-body">
