@@ -6,11 +6,11 @@ class Content extends Component
 {
     function __construct()
     {
-        $this->views =
+        $this->templates =
         [
-            "contentWrapperStart" => new View("contentWrapperStart"),
-            "contentBody" => new View("contentBasic", ["content-title", "content-body"]),
-            "contentWrapperEnd" => new View("contentWrapperEnd")
+            "contentWrapperStart" => new Template("contentWrapperStart"),
+            "contentBody" => new Template("contentBasic", ["content-title", "content-body"]),
+            "contentWrapperEnd" => new Template("contentWrapperEnd")
         ];
     }
 

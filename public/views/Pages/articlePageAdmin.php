@@ -8,9 +8,9 @@ class ArticlePageAdmin extends Page
     {
         parent::__construct();
 
-        // $this->previewTemplate = View::readFromFile(getcwd()."/public/templates/articlePreviewCard");
+        // $this->previewTemplate = Template::readFromFile(getcwd()."/public/templates/articlePreviewCard");
         // array der geparsten Preview-Cards (type == Views)
-        $content = new View("newpostadmin", ["post-link" => "./news/article/upload"]);
+        $content = new Template("newpostadmin", ["post-link" => "./news/article/upload"]);
         $this->changeContent($content);
     }
 }

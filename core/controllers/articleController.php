@@ -57,7 +57,7 @@ class ArticleController extends Controller
         $article = $this->articleModel->getArticleById($articleId)[0];
 
         if (isset($this->request["articleid"])) {
-            $this->getView("/Pages/articlePage");
+            $this->getTemplate("/Pages/articlePage");
             $page = new ArticlePage();
             // $articleData = [
             //     "headline" => $article["headline"],
@@ -73,7 +73,7 @@ class ArticleController extends Controller
 
     private function renderNewPostPage()
     {
-        $this->getView("/Pages/articlePageAdmin");
+        $this->getTemplate("/Pages/articlePageAdmin");
         $page = new ArticlePageAdmin();
         $page->parse($this->userData);
         $page->render();
@@ -81,7 +81,7 @@ class ArticleController extends Controller
 
     private function renderPreviewPage()
     {
-        $this->getView("/Pages/articlePreviewPage");
+        $this->getTemplate("/Pages/articlePreviewPage");
 
         $page = new ArticlePreviewPage();
         $articleModel = new ArticleModel();

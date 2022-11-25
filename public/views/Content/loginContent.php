@@ -6,11 +6,11 @@ class LoginContent extends Content
 {
     function __construct()
     {
-        // $this->requireView("Components/content");
+        // $this->requireTemplate("Components/content");
 
         parent::__construct();
 
-        $loginTemplate = new View("login");
+        $loginTemplate = new Template("login");
         $this->insert("contentBody", $loginTemplate);
         
     }

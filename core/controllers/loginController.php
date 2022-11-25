@@ -1,19 +1,17 @@
 <?php
 
-require_once  getcwd()."/core/controller.php";
+require_once  getcwd() . "/core/controller.php";
 
 class LoginController extends Controller
 {
     public function init()
     {
         parent::init();
-
     }
 
     public function indexAction()
     {
-        switch($this->requestedView)
-        {
+        switch ($this->requestedView) {
             case "attempt":
                 $this->renderLoginPage();
                 break;
@@ -23,7 +21,6 @@ class LoginController extends Controller
             default:
                 $this->renderErrorPage();
                 break;
-            
         }
     }
 
@@ -35,7 +32,7 @@ class LoginController extends Controller
 
     private function renderLoginFailurePage()
     {
-        $this->getView("/Pages/loginPage");
+        $this->getTemplate("/Pages/loginPage");
         $loginPage = new LoginPage();
         $errorData = ["inputerror" => "inputError", "inputerrormsg" => "Benutzername oder Passwort falsch!"];
         $data = array_merge($errorData, $this->userData);
@@ -45,7 +42,7 @@ class LoginController extends Controller
 
     private function renderLoginPage()
     {
-        $this->getView("/Pages/loginPage");
+        $this->getTemplate("/Pages/loginPage");
         $loginPage = new LoginPage();
         $loginPage->parse($this->userData);
         $loginPage->render();
@@ -54,23 +51,20 @@ class LoginController extends Controller
     public function loginrequestAction()
     {
 
-        if (!isset($_POST["password"]) || !isset($_POST["username"])) {
+        if (
+            !isset($_POST["password"]) || !isset($_POST["username"]) ||
+            !$this->clientModel->loginUser($_POST["username"], $_POST["password"])
+        ) {
             header("Location: ../login/attemptfailed/index");
-            
+
             return false;
         }
 
-        if ($this->clientModel->loginUser($_POST["username"], $_POST["password"]))
-        {
-            // PATCH
-            header("Location: ../profile/".$_SESSION["rolename"]."/index");
-            
-            return 1;
-        }
-        
+        // PATCH
+        header("Location: ../profile/" . $_SESSION["rolename"] . "/index");
+
+        return 1;
     }
-
-
 }
 
 /*

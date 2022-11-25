@@ -7,7 +7,7 @@ class ImprintController extends Controller
 
     public function indexAction()
     {
-        $this->getView("/Pages/imprintPage");
+        $this->getTemplate("/Pages/imprintPage");
         $page = new ImprintPage();
         $page->parse($this->userData);
         $page->render();

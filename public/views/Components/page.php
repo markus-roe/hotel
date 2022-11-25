@@ -6,20 +6,20 @@ class Page extends Component
 {
     function __construct()
     {
-        $this->requireView("Menus/menuSmall");
-        $this->requireView("/Components/content");
+        $this->requireTemplate("Menus/menuSmall");
+        $this->requireTemplate("/Components/content");
 
-        $this->views =
+        $this->templates =
         [
-            "header" => new View("header", ["document-title"=>"IPSUM-HOTEL"]),
+            "header" => new Template("header", ["document-title"=>"IPSUM-HOTEL"]),
             "menu" => new MenuSmall(),
             "content" => new Content(),
-            "footer" => new View("footer")
+            "footer" => new Template("footer")
         ];
     }
 
     protected function changeContent($newContent)
     {
-        $this->views["content"]->changeContentBody($newContent);
+        $this->templates["content"]->changeContentBody($newContent);
     }
 }

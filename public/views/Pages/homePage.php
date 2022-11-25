@@ -8,8 +8,8 @@ class HomePage extends Page
     {
         parent::__construct();
 
-        $this->requireView("Menus/menuLarge");
-        $this->requireView("Content/homePageContent");
+        $this->requireTemplate("Menus/menuLarge");
+        $this->requireTemplate("Content/homePageContent");
         
         $menuLarge = new MenuLarge();
         $content = new HomePageContent();

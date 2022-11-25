@@ -1,37 +1,37 @@
 <?php
 
-require_once getcwd()."/core/view.php";
-class Component extends View
+require_once getcwd()."/core/template.php";
+class Component extends Template
 {
     protected $params = [];
-    protected $extractedViews = [];
-    protected $views = [];
-    protected $view = "";
-    protected $viewsAlreadyExtracted = false;
-    protected $viewRootPath = "./public/views/";
+    protected $extractedTemplates = [];
+    protected $templates = [];
+    protected $template = "";
+    protected $templatesAlreadyExtracted = false;
+    protected $templateRootPath = "./public/views/";
 
     function __construct()
     {
     }
 
-    public function extractViewsFromComponents()
+    public function extractTemplatesFromComponents()
     {
         // gibt Views in extractedViews-Array
         // checkt ob Objekt vom Typ View ist oder Component
         // extrahiert View-Objekt falls es sich um Component handelt
-        $this->filterViews($this->views);
-        $this->viewsAlreadyExtracted = true;
+        $this->filterTemplates($this->templates);
+        $this->templatesAlreadyExtracted = true;
     }
     
 
     public function parse($params=[])
     {
         $this->params = $params;
-        $this->extractViewsFromComponents();
+        $this->extractTemplatesFromComponents();
 
-        foreach($this->extractedViews as $view)
+        foreach($this->extractedTemplates as $template)
         {
-            $view->parse($params);
+            $template->parse($params);
         }
     }
 
@@ -39,27 +39,27 @@ class Component extends View
     {
         ob_start();
         $this->before();
-        if (!$this->viewsAlreadyExtracted)
+        if (!$this->templatesAlreadyExtracted)
         {
-            $this->extractViewsFromComponents();
+            $this->extractTemplatesFromComponents();
         }
-        foreach($this->extractedViews as $view)
+        foreach($this->extractedTemplates as $template)
         {
-            $view->render();
+            $template->render();
         }
 
         $this->after();
         ob_flush();
     }
 
-    protected function requireView($viewName)
+    protected function requireTemplate($templateName)
     {
-        $viewPath = $this->viewRootPath;
-        $viewPath .= $viewName.".php";
+        $templatePath = $this->templateRootPath;
+        $templatePath .= $templateName.".php";
         
-        if (file_exists($viewPath))
+        if (file_exists($templatePath))
         {
-            require_once $viewPath;
+            require_once $templatePath;
             return 1;
         }
 
@@ -68,9 +68,9 @@ class Component extends View
 
     public function insert($componentName, $newComponent)
     {
-        if (array_key_exists($componentName, $this->views))
+        if (array_key_exists($componentName, $this->templates))
         {
-            $this->views[$componentName] = $newComponent;
+            $this->templates[$componentName] = $newComponent;
             return 1;
         }
         return 0;
@@ -78,17 +78,17 @@ class Component extends View
 
 
     // extrahiert View-Objekte aus Component-Objekten
-    public function filterViews($viewObj)
+    public function filterTemplates($templateObj)
     {
-        foreach($viewObj as $view)
+        foreach($templateObj as $template)
         {
-            if (get_class($view) != "View")
+            if (get_class($template) != "Template")
             {
-                $this->filterViews($view->views);
+                $this->filterTemplates($template->templates);
             }
             else
             {
-                array_push($this->extractedViews, $view);
+                array_push($this->extractedTemplates, $template);
             }
         }
     }

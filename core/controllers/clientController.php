@@ -10,7 +10,7 @@ class ClientController extends Controller
         // $client = new ClientModel();
         // echo $client->getUsername(1);
 
-        $this->getView("Pages/loginPage");
+        $this->getTemplate("Pages/loginPage");
         $homePage = new LoginPage();
         $homePage->parse();
         $homePage->render();

@@ -14,7 +14,7 @@ class FaqController extends Controller
 
     public function indexAction()
     {
-        $this->getView("/Pages/faqPage");
+        $this->getTemplate("/Pages/faqPage");
         $page = new FaqPage();
         $page->parse($this->userData);
         $page->render();

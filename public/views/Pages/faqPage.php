@@ -8,7 +8,7 @@ class FaqPage extends Page
     {
         parent::__construct();
 
-        $content = new View("faqTemplate", ["page-title" => "FAQ"]);
+        $content = new Template("faqTemplate", ["page-title" => "FAQ"]);
         $this->changeContent($content);
     }
 }

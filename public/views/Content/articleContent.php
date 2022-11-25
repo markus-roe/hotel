@@ -6,11 +6,11 @@ class ArticleContent extends Content
 {
     function __construct()
     {
-        $this->requireView("Components/content");
+        $this->requireTemplate("Components/content");
         
         parent::__construct();
 
-        $articleTemplate = new View("article");
+        $articleTemplate = new Template("article");
         $this->insert("contentBody", $articleTemplate);
         
     }

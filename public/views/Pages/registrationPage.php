@@ -7,7 +7,7 @@ class RegistrationPage extends Page
     {
         parent::__construct();
         
-        $content = new View("registration", ["cssinputclass", "errormsg"]);
+        $content = new Template("registration", ["cssinputclass", "errormsg"]);
         $this->changeContent($content);
     }
 }

@@ -28,7 +28,7 @@ class RegistrationController extends Controller
 
     private function renderPasswordNotMatchingPage()
     {
-        $this->getView("/Pages/registrationPage");
+        $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
         $page->parse(["cssinputclass"=>"inputError", "errormsg"=>"Passwords not matching!"]);
         $page->render();
@@ -36,7 +36,7 @@ class RegistrationController extends Controller
 
     private function renderRegistrationPage()
     {
-        $this->getView("/Pages/registrationPage");
+        $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
         $page->parse();
         $page->render();
@@ -44,7 +44,7 @@ class RegistrationController extends Controller
 
     private function renderMissingInputPage()
     {
-        $this->getView("/Pages/registrationPage");
+        $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
         $page->parse(["cssinputclass"=>"inputError", "errormsg"=>"Inputs missing!"]);
         $page->render();

@@ -8,7 +8,7 @@ class ImprintPage extends Page
     {
         parent::__construct();
 
-        $this->requireView("/Content/imprintContent");
+        $this->requireTemplate("/Content/imprintContent");
         $imprintContent = new ImprintContent();
         $this->insert("content", $imprintContent);
     }

@@ -14,7 +14,7 @@ class HomeController extends Controller
 
     public function indexAction()
     {
-        $this->getView("/Pages/homePage");
+        $this->getTemplate("/Pages/homePage");
         $homePage = new HomePage();
         $homePage->parse($this->userData);
         $homePage->render();
