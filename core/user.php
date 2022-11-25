@@ -7,8 +7,10 @@ class User
     public $phone;
     public $email;
     public $gender;
-    public $userRole = "guest";
+    public $userRole;
     public $userId;
+    public $profilepath;
+
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class User
         $this->email = @$_SESSION["email"] ?? "";
         $this->gender = @$_SESSION["gender"] ?? "";
         $this->phone = @$_SESSION["telephone"] ?? "";
+        $this->profilepath = @$_SESSION["profilepath"] ?? "./login/attempt/index";
     }
     
 }
