@@ -16,7 +16,7 @@ class ArticleModel extends Model
 
     public function getArticles()
     {
-        $query = "SELECT content, updated, headline, authorId, picturePath FROM posts p
+        $query = "SELECT content, updated, headline, authorId, picturePath, postId FROM posts p
         JOIN pictures pic ON p.pictureid = pic.pictureId;";
 
         $articles = $this->executeQuery($query, "", []);
@@ -32,7 +32,7 @@ class ArticleModel extends Model
         JOIN pictures pic ON p.pictureid = pic.pictureId
         WHERE p.postId = ?;";
 
-        $article = $this->executeQuery($query, "d", [1]);
+        $article = $this->executeQuery($query, "d", [$articleId]);
         
         return $article;
     }
@@ -67,10 +67,10 @@ class ArticleModel extends Model
     }
 
     public function executeQuery($query, $paramString, $paramsArray)
-    {
+    {        
         try
         {
-
+            $rows = [];
             $params = array();
   
             // * push params to bind in array
