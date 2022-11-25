@@ -41,7 +41,7 @@ abstract class Menu extends Component
 
         $this->templates = 
         [
-            "menu" => new Template("menu", ["profilepath", "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "firstname", "surname"])
+            "menu" => new Template("menu", ["profilepath", "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "username"])
         ];
     }
 
