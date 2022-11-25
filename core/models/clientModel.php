@@ -48,7 +48,7 @@ class ClientModel extends Model
 
         if ($row) {
             $_SESSION["userId"] = $row["userId"];
-            $_SESSION["username"] = $row["firstname"] . " " . $row["surname"];
+            $_SESSION["username"] = $row["username"];;
             $_SESSION["loggedIn"] = true;
             $_SESSION["firstname"] = $row["firstname"];
             $_SESSION["surname"] = $row["surname"];
