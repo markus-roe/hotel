@@ -1,7 +1,7 @@
-<?php 
+<?php
 
-require_once getcwd()."/core/model.php";
-require_once getcwd()."/core/user.php";
+require_once getcwd() . "/core/model.php";
+require_once getcwd() . "/core/user.php";
 
 class ClientModel extends Model
 {
@@ -26,19 +26,13 @@ class ClientModel extends Model
         $stm1->execute();
         $result1 = $stm1->get_result();
         $user = $result1->fetch_array(MYSQLI_ASSOC);
-        
+
         return $user;
     }
 
-    public function loginUser()
+    public function loginUser($username, $password)
     {
-        if (!isset($_POST["password"]) || !isset($_POST["username"]))
-        {
-            return false;
-        }
 
-        $pwdInput = $_POST["password"];
-        $userNameInput = $_POST["username"];
 
         $query1 = "
         select * from users u
@@ -47,15 +41,14 @@ class ClientModel extends Model
         u.password = ?;";
 
         $stm1 = self::$connection->prepare($query1);
-        $stm1->bind_param("ss", $userNameInput, $pwdInput);
+        $stm1->bind_param("ss", $username, $password);
         $stm1->execute();
         $result1 = $stm1->get_result();
         $row = $result1->fetch_array(MYSQLI_ASSOC);
 
-        if ($row)
-        {
+        if ($row) {
             $_SESSION["userId"] = $row["userId"];
-            $_SESSION["username"] = $row["firstname"]." ". $row["surname"];
+            $_SESSION["username"] = $row["firstname"] . " " . $row["surname"];
             $_SESSION["loggedIn"] = true;
             $_SESSION["firstname"] = $row["firstname"];
             $_SESSION["surname"] = $row["surname"];
@@ -63,17 +56,15 @@ class ClientModel extends Model
             $_SESSION["gender"] = $row["gender"];
             $_SESSION["rolename"] = $row["roleName"];
             $_SESSION["telephone"] = $row["telephone"];
-            $_SESSION["profilepath"] = "./profile/".$_SESSION["rolename"]."/index";
+            $_SESSION["profilepath"] = "./profile/" . $_SESSION["rolename"] . "/index";
             $this->user = new User();
 
             // TODO alle daten für user in session vars speichern
-            
+
             return true;
         }
+        session_unset();
 
-        // session_unset();
-
-        
         return false;
     }
 
@@ -83,49 +74,31 @@ class ClientModel extends Model
         header("Location: ../home/index");
     }
 
-    public function registerNewUser()
+    public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email)
     {
-        if (
-        !isset($_POST["gender"]) ||
-        !isset($_POST["firstname"]) ||
-        !isset($_POST["surname"]) ||
-        !isset($_POST["username"]) ||
-        !isset($_POST["password"]) ||
-        !isset($_POST["password2"]))
-        {
-            return ErrorCode::MISSING_INPUT;
-        }
-
-        if ($_POST["password"] != $_POST["password2"])
-        {
-            return ErrorCode::PASSWORDS_NOT_MATCHING;
-        }
-
-        if (strlen($_POST["password"]) > 50)
-        {
-            return ErrorCode::PASSWORD_TOO_LONG;
-        }
-        // TODO sanitize Input
-        // TODO hash password
-        $query = "
+        try {
+            // TODO sanitize Input
+            // TODO hash password
+            $query = "
         insert into users
-        (firstname, surname, username, email, password, gender, telephone)
+        (firstname, surname, username, password, gender, email)
         values
-        (?,?,?,?,?,?,?);";
+        (?,?,?,?,?,?);";
 
-        $stm1 = self::$connection->prepare($query);
-        $stm1->bind_param("sssssss", $_POST["firstname"], $_POST["surname"], $_POST["username"], $_POST["email"], $_POST["password"], $_POST["gender"], $_POST["telephone"]);
-        $stm1->execute();
-        $result1 = $stm1->get_result();
-        $row = $result1->fetch_array(MYSQLI_ASSOC);
-        var_dump($row);
+            $stm1 = self::$connection->prepare($query);
+            $stm1->bind_param("ssssss", $firstname,$surname, $username, $password1, $gender, $email);
+            $stm1->execute();
+            $result1 = $stm1->get_result();
+            return true;
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 
     public function authenticate()
     {
-        
-        if (isset($_SESSION["userId"]) && isset($_SESSION["username"]))
-        {
+
+        if (isset($_SESSION["userId"]) && isset($_SESSION["username"])) {
             $this->user = new User();
             return true;
         }
@@ -136,12 +109,12 @@ class ClientModel extends Model
 
     // protected function getUserData()
     // {
-        
+
     // }
 
     public function getUserName()
     {
-        return $this->user->firstName." ".$this->user->surName;
+        return $this->user->firstName . " " . $this->user->surName;
     }
 
     // * GETTERS
@@ -182,12 +155,11 @@ class ClientModel extends Model
         $firstname = 'max';
 
         $sql = "UPDATE users SET firstname = ? WHERE userId = " .  $userId;
-        
+
         $stmt = self::$connection->prepare($sql);
         $stmt->bind_param("s", $firstname);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result;
     }
-    
 }
