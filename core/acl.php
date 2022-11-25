@@ -19,11 +19,12 @@ class AccessControl
     private $clearanceList = 
     [
         "HomeController" => ["index" => "all"],
-        "LoginController" => ["index" => "guest", "loginrequest" => "guest"],
+        "LoginController" => ["attempt:index" => "guest", "loginrequest" => "guest"],
         "RegistrationController" => ["newuser:index" => "guest"],
         "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "all", "new" => "all"],
         "ImprintController" => ["index" => "all"],
-        "FaqController" => ["index" => "all"]
+        "FaqController" => ["index" => "all"],
+        "ProfileController" => ["admin:index" => "admin", "user:index" => "user"]
     ];
 
 
@@ -40,13 +41,16 @@ class AccessControl
         $view = $request["view"] != "" ? $request["view"].":" : "";
         $viewActionCombo = $view.$request["action"];
 
-        $clearanceLevel = $this->clearanceList[$controllerName][$viewActionCombo];
+        $clearanceLevel = $this->clearanceList[$controllerName][$viewActionCombo] ?? false;
+        
+        if (!$clearanceLevel)
+        {
+            return true;
+        }
+
         $userRole = $this->clientModel->user->userRole;
 
-        echo ($userRole);
-
         // TEMPORARY
-        return true;
 
         if ($clearanceLevel == "all" || $userRole == $clearanceLevel || $clearanceLevel == null)
         {
