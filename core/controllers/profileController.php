@@ -49,7 +49,7 @@ class ProfileController extends Controller
 
     private function renderProfilePage()
     {
-        $this->getView("/Pages/profilePage");
+        $this->getTemplate("/Pages/profilePage");
         $page = new ProfilePage();
         $page->parse($this->userData);
         $page->render();

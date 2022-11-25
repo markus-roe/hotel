@@ -9,13 +9,7 @@ class ProfilePage extends Page
     {
         parent::__construct();
         
-        $profileLinks = [];
-        $profileLinksHtml = $this->createProfileLinks($profileLinks);
-        $content = new Template("profileContentTemplate", ["profile-links"]);
-
-
-        $content = new View("personalDataTemplate", ["page-title" => "Stammdaten", "profile-update-link" => "test", "firstname", "surname", "username", "email", "phone"]);
-        // $content->parse();
+        $content = new Template("personalDataTemplate", ["page-title" => "Stammdaten", "profile-update-link" => "test", "firstname", "surname", "username", "email", "phone"]);
         $this->changeContent($content);
         
     }
