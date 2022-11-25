@@ -4,6 +4,7 @@
     position: absolute;
     height: inherit;
     width: inherit;
+    filter: brightness(0.98);
 }
 
 .headsection {
