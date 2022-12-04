@@ -79,15 +79,15 @@
 .navbar-logo img {
     width: 100%;
 }
-
-.row ul {
+/* FIXME Klasse für ul / li damit nicht alle überschrieben werden */
+/* .row ul {
     float: left;
 }
 
 .row ul li {
     float: left;
     display: inline;
-}
+} */
 
 .carousel-item {
     height: inherit;

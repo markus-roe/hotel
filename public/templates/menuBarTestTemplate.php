@@ -1,6 +1,5 @@
 <?php
-require_once "./templates_new/header.php";
-require_once "./templates_new/menu.php"; ?>
+require_once "./templates_new/header.php"; ?>
 
 <div id="ipsum-menubar-container">
     <div id="ipsum-menubar-content-wrapper">
@@ -113,3 +112,4 @@ require_once "./templates_new/menu.php"; ?>
 
     </div>
 </div>
+<?php require_once "./templates_new/menu.php";

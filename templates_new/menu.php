@@ -83,3 +83,4 @@
         </div>
 
     </div>
+    <?php include "./public/templates/menuBarTestTemplate.php"; ?>
