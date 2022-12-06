@@ -58,14 +58,14 @@ class RegistrationController extends Controller
             return false;
         }
     
-            if ($_POST["password"] != $_POST["password2"])
-            {
-                header("Location: ../registration/passworderr/index");
-                return false;
-            }
+        if ($_POST["password"] != $_POST["password2"])
+        {
+            header("Location: ../registration/passworderr/index");
+            return false;
+        }
     
-            
-            $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+        $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         $registrationSuccessfull = $this->clientModel->registerNewUser(
             $_POST["firstname"],
