@@ -7,24 +7,6 @@ require_once  getcwd()."/core/user.php";
 require_once  getcwd()."/core/models/articleModel.php";
 require_once  getcwd()."/core/models/clientModel.php";
 
-function mock()
-{
-    // $config = new Config();
-    $mysqli = new mysqli("localhost", "root", "", "ipsum");
-
-    $query =
-        "select * from posts po
-    join pictures pi on po.pictureid=pi.pictureid
-    join users u on u.userid=po.authorid
-    where po.postid=1;";
-
-
-    $res = $mysqli->query($query);
-    $row = $res->fetch_array(MYSQLI_ASSOC);
-
-    return $row;
-}
-
 class ArticleController extends Controller
 {
     public function init()
