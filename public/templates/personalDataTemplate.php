@@ -15,6 +15,8 @@
                 <input disabled class="ipsum-input text" id="username" type="text" class="username" name="username" placeholder="{{username}}" />
                 <label for="email">Email</label>
                 <input class="ipsum-input text" id="email" type="text" name="email" value="{{email}}" />
+                <label for="phone">Phone</label>
+                <input class="ipsum-input text" id="phone" type="text" name="phone" value="{{phone}}" />
             </div>
             <div class="ipsum-input-container labelOnTop horizontalLine">
                 <div class="text-center"><h4>Change Password</h5></div>
