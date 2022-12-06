@@ -14,7 +14,7 @@ require_once getcwd()."/core/utils.php";
   {
     if(!self::$connection)
     {
-      self::$connection = new mysqli("localhost", "root", "", "ipsum");
+      self::$connection = new mysqli("207.hosttech.eu:3306", "ipsum_admin", "ipsum123", "ipsum");
     }
 
   }
