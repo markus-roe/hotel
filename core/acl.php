@@ -19,7 +19,7 @@ class AccessControl
     private array $clearanceList =
     [
         "MainController" => [":index" => "all"],
-        "LoginController" => ["attempt::index" => "guest_only", "attemptfailed::index" => "guest_only", ":loginrequest" => "guest_only"],
+        "LoginController" => [":logout"=>"user&admin", "attempt::index" => "guest_only", "failure::index" => "guest", ":loginrequest" => "guest_only"],
         "RegistrationController" => [":index" => "guest_only", ":register"=>"guest_only"],
         "ArticleController" => ["post::index" => "all", "preview::index" => "all", "newpost::index" => "all", "new" => "all", ":post"=>"admin"],
         // "ImprintController" => [":index" => "all"],
