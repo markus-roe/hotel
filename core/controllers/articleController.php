@@ -96,7 +96,7 @@ class ArticleController extends Controller
     }
 
 
-    public function uploadAction()
+    public function postAction()
     {
 
     $user = new User();
