@@ -33,6 +33,7 @@ class ClientModel extends Model
     public function loginUser($username, $password)
     {
 
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         $query1 = "
         select * from users u
@@ -41,7 +42,7 @@ class ClientModel extends Model
         u.password = ?;";
 
         $stm1 = self::$connection->prepare($query1);
-        $stm1->bind_param("ss", $username, $password);
+        $stm1->bind_param("ss", $username, $hashedPassword);
         $stm1->execute();
         $result1 = $stm1->get_result();
         $row = $result1->fetch_array(MYSQLI_ASSOC);
@@ -55,7 +56,7 @@ class ClientModel extends Model
             $_SESSION["email"] = $row["email"];
             $_SESSION["gender"] = $row["gender"];
             $_SESSION["rolename"] = $row["roleName"];
-            $_SESSION["telephone"] = $row["telephone"];
+            $_SESSION["phone"] = $row["phone"];
             $_SESSION["profilepath"] = "./".$_SESSION["rolename"]. "/profile/index";
             $this->user = new User();
 
@@ -74,19 +75,19 @@ class ClientModel extends Model
         header("Location: ../home/index");
     }
 
-    public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email)
+    public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email, $phone)
     {
         try {
             // TODO sanitize Input
             // TODO hash password
             $query = "
         insert into users
-        (firstname, surname, username, password, gender, email)
+        (firstname, surname, username, password, gender, email, phone)
         values
-        (?,?,?,?,?,?);";
+        (?,?,?,?,?,?,?);";
 
             $stm1 = self::$connection->prepare($query);
-            $stm1->bind_param("ssssss", $firstname,$surname, $username, $password1, $gender, $email);
+            $stm1->bind_param("sssssss", $firstname, $surname, $username, $password1, $gender, $email, $phone);
             $stm1->execute();
             $result1 = $stm1->get_result();
             return true;
@@ -95,17 +96,18 @@ class ClientModel extends Model
         }
     }
 
-    public function changeUserData($firstname, $surname, $email, $userId)
+    public function changeUserData($firstname, $surname, $email, $phone, $userId)
     {
         try 
         {
-            $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ? WHERE userid = ?";
+            $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ?, phone = ? WHERE userid = ?";
 
-            $user = $this->executeQuery($query, "sssd", [$firstname, $surname, $email, $userId]);
+            $user = $this->executeQuery($query, "ssssd", [$firstname, $surname, $email, $phone, $userId]);
 
             $_SESSION["firstname"] = $firstname;
             $_SESSION["surname"] = $surname;
             $_SESSION["email"] = $email;
+            $_SESSION["phone"] = $phone;
 
     
             // * returns pictureID

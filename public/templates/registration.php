@@ -43,6 +43,10 @@
                 <input class="ipsum-input {{cssinputclass}} text" type="text" id="email" name="email" placeholder="Email"/>                            
             </div>
             <div class="ipsum-input {{cssinputclass}}-container labelOnTop">
+                <label for="phone">Phone</label>
+                <input class="ipsum-input {{cssinputclass}} text" type="text" id="phone" name="phone" placeholder="Phone"/>                            
+            </div>
+            <div class="ipsum-input {{cssinputclass}}-container labelOnTop">
                 <label for="password">Password</label>
                 <input type="password" id="password" class="ipsum-input {{cssinputclass}} text" name="password" placeholder="Password">
             </div>
