@@ -84,13 +84,10 @@ class ArticleController extends Controller
     {
         $this->getTemplate("/Pages/articlePreviewPage");
 
-        $page = new ArticlePreviewPage();
         $articleModel = new ArticleModel();
         $articles = $articleModel->getArticles();
-
         
-        $page->addPreviews($articles);
-
+        $page = new ArticlePreviewPage($articles);
         $page->parse($this->userData);
         $page->render();
     }

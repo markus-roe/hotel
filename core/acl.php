@@ -26,7 +26,8 @@ class AccessControl
         // "FaqController" => [":index" => "all"],
         "ProfileController" => ["admin::index" => "admin", "user::index" => "user"],
         "AdminController" => [":index" => "admin"],
-        "ClientController" => [":updateprofile"=>"user&admin" ]
+        "ClientController" => [":updateprofile"=>"user&admin"],
+        "BookingController" => [":index" => "all"]
     ];
 
 

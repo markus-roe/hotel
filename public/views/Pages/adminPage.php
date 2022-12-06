@@ -8,7 +8,6 @@ class AdminPage extends Page
     {
         parent::__construct();
         
-
         $this->requireTemplate("/Menus/menuBarAdmin");
         $menuBar = new AdminMenuBar();
         $this->insert("menuBar", $menuBar);
