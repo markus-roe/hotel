@@ -18,47 +18,27 @@ abstract class Controller
         $this->userData = get_object_vars($this->clientModel->user);
     }
 
-    // public function authenticate()
-    // {
-    //     var_dump($_SESSION);
-    //     if ($this->clientModel->authenticate())
-    //     {
-    //         $this->userData = get_object_vars($this->clientModel->user);
-    //         var_dump($this->userData);
-    //         return true;
-    //     }
-    //     var_dump($this->userData);
-
-    //     $this->userData = get_object_vars($this->clientModel->user);
-
-    //     return false;
-    // }
-
     protected function renderErrorPage($errorMsg=null)
     {
         $errorMsg = $errorMsg ?? ["content-title" => "Sorry", "content-body" => "This page doesn't seem to exist yet!"];
         $this->getTemplate("/Components/page");
         $errorPage = new Page();
-        $data = array_merge($this->userData, $errorMsg);
-        $errorPage->parse($data);
+        $errorPage->parse($errorMsg);
         $errorPage->render();
     }
 
     public function indexAction()
     {
-        
+        $requestedMethod = "render".ucfirst($this->requestedView)."Page";
+        if (method_exists($this, $requestedMethod))
+        {
+            $this->$requestedMethod();
+        }
     }
 
     public function init()
     {
     }
-
-
-    protected function renderErrorView()
-    {
-
-    }
-
 
     protected function redirect($url)
     {
