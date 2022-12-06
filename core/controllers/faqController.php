@@ -1,7 +1,7 @@
 <?php
 
 require_once  getcwd()."/core/controller.php";
-
+//DEPRECATED
 class FaqController extends Controller
 {
     public function init()

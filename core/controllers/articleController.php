@@ -50,7 +50,7 @@ class ArticleController extends Controller
                 break;
         }
     }
-    // FIXME
+    
     private function renderArticlePage($articleId)
     {
 
@@ -64,12 +64,6 @@ class ArticleController extends Controller
             $article = $article[0];
             $this->getTemplate("/Pages/articlePage");
             $page = new ArticlePage();
-            // $articleData = [
-            //     "headline" => $article["headline"],
-            //     "content" => $article["content"],
-            //     "subtitle" => $article["subtitle"],
-            //     "picturepath" => $article["picturePath"],
-            // ]
             $data = array_merge($article, $this->userData);
             $page->parse($data);
             $page->render();

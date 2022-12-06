@@ -7,7 +7,7 @@ class LoginPage extends Page
     {
         parent::__construct();
         $this->requireTemplate("Content/loginContent");
-        $loginContent = new Template("login", ["inputerror", "inputerrormsg"]);
+        $loginContent = new Template("login", ["inputerror", "inputerrormsg", "registrationpath"=>"./registration/newuser/index"]);
         $this->changeContent($loginContent);
     }
 }

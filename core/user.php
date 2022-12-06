@@ -25,5 +25,4 @@ class User
         $this->phone = @$_SESSION["telephone"] ?? "";
         $this->profilepath = @$_SESSION["profilepath"] ?? "./login/attempt/index";
     }
-    
 }

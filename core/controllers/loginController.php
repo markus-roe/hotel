@@ -11,26 +11,16 @@ class LoginController extends Controller
 
     public function indexAction()
     {
-        switch ($this->requestedView) {
-            case "attempt":
-                $this->renderLoginPage();
-                break;
-            case "attemptfailed":
-                $this->renderLoginFailurePage();
-                break;
-            default:
-                $this->renderErrorPage();
-                break;
-        }
+        parent::indexAction();
     }
 
     public function logoutAction()
     {
         $this->clientModel->logoutUser();
-        header("Location: ../home/index");
+        header("Location: ../".$this->userData["profilepath"]);
     }
 
-    private function renderLoginFailurePage()
+    protected function renderLoginFailurePage()
     {
         $this->getTemplate("/Pages/loginPage");
         $loginPage = new LoginPage();
@@ -40,7 +30,7 @@ class LoginController extends Controller
         $loginPage->render();
     }
 
-    private function renderLoginPage()
+    protected function renderAttemptPage()
     {
         $this->getTemplate("/Pages/loginPage");
         $loginPage = new LoginPage();
@@ -61,7 +51,7 @@ class LoginController extends Controller
         }
 
         // PATCH
-        header("Location: ../profile/" . $_SESSION["rolename"] . "/index");
+        header("Location: ../".$_SESSION["rolename"]."/profile/index");
 
         return 1;
     }

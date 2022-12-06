@@ -5,7 +5,7 @@ require_once "./core/console_log.php";
 require_once "./core/app.php";
 require_once "./core/router.php";
 
-
+// var_dump($_SERVER);
 try {
     
     $app = new App();

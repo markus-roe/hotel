@@ -2,7 +2,7 @@
     <div class="headsection {{menu-size}}">
         <div id="navbar-mobile">
             <div class="logo-div mobile" title="Homepage">
-                <a class="navbar-logo" href="./home/index">
+                <a class="navbar-logo" href="{{homepath}}">
                     <img class="logo-mobile" src="./images/Logo.png" />
                 </a>
             </div>
@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="logo-div">
-                        <a class="navbar-logo" href="./home/index">
+                        <a class="navbar-logo" href="{{homepath}}">
                             <img class="logo" src="./images/Logo.png" />
                         </a>
                     </div>

@@ -14,7 +14,7 @@ class Component extends Template
     {
     }
 
-    public function extractTemplatesFromComponents()
+    public function extractTemplatesFromComponents(): void
     {
         // gibt Views in extractedViews-Array
         // checkt ob Objekt vom Typ View ist oder Component
@@ -24,7 +24,7 @@ class Component extends Template
     }
     
 
-    public function parse($params=[])
+    public function parse($params=[]): void
     {
         $this->params = $params;
         $this->extractTemplatesFromComponents();
@@ -35,7 +35,7 @@ class Component extends Template
         }
     }
 
-    public function render()
+    public function render(): void
     {
         ob_start();
         $this->before();
@@ -52,21 +52,23 @@ class Component extends Template
         ob_flush();
     }
 
-    protected function requireTemplate($templateName)
+    protected function requireTemplate($templateName): bool
     {
         $templatePath = $this->templateRootPath;
         $templatePath .= $templateName.".php";
-        
-        if (file_exists($templatePath))
-        {
+        try{
             require_once $templatePath;
             return 1;
         }
+        catch (\Throwable $th) {
+            echo $th;
+        }
+        
 
         return 0;
     }
 
-    public function insert($componentName, $newComponent)
+    public function insert($componentName, $newComponent): bool
     {
         if (array_key_exists($componentName, $this->templates))
         {
@@ -78,7 +80,7 @@ class Component extends Template
 
 
     // extrahiert View-Objekte aus Component-Objekten
-    public function filterTemplates($templateObj)
+    public function filterTemplates($templateObj): void
     {
         foreach($templateObj as $template)
         {

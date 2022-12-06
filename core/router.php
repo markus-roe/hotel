@@ -17,7 +17,6 @@ class Router
     function __construct()
     {
     }
-    // TODO predefined params zB controller etc
     public function get($path)
     {
         $regexPath = $this->createRegexPattern(($path));
@@ -74,9 +73,15 @@ class Router
         $this->request[$key] = $value;
     }
 
+    private function getUri(): string
+    {
+        return str_replace("/hotel", "." , $_SERVER["REQUEST_URI"]);
+    }
+
     public function dispatch($route, $method)
     {
         // get query-params here?
+        $this->setRequest("current_uri", $this->getUri());
         $this->request = $this->matchRoute($route, $method);
 
         return $this->request;

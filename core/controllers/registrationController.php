@@ -8,25 +8,11 @@ class RegistrationController extends Controller
 
     public function indexAction()
     {
-        switch ($this->requestedView)
-        {
-            case "newuser":
-                $this->renderRegistrationPage();
-                break;
-            case "missing":
-                $this->renderMissingInputPage();
-                break;
-            case "passwordnotmatching":
-                $this->renderPasswordNotMatchingPage();
-                break;
-            default:
-                $this->renderErrorPage();
-                break;
-        }
+        parent::indexAction();
 
     }
 
-    private function renderPasswordNotMatchingPage()
+    protected function renderPassworderrPage()
     {
         $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
@@ -34,7 +20,7 @@ class RegistrationController extends Controller
         $page->render();
     }
 
-    private function renderRegistrationPage()
+    protected function renderNewuserPage()
     {
         $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
@@ -42,7 +28,7 @@ class RegistrationController extends Controller
         $page->render();
     }
 
-    private function renderMissingInputPage()
+    protected function renderEmptyfieldPage()
     {
         $this->getTemplate("/Pages/registrationPage");
         $page = new RegistrationPage();
@@ -66,13 +52,13 @@ class RegistrationController extends Controller
             !isset($_POST["email"]) ||
             !isset($_POST["password2"]))
             {
-                header("Location: ../registration/missing/index");
+                header("Location: ../registration/emptyfield/index");
                 return false;
             }
     
             if ($_POST["password"] != $_POST["password2"])
             {
-                header("Location: ../registration/passwordnotmatching/index");
+                header("Location: ../registration/passworderr/index");
                 return false;
             }
     

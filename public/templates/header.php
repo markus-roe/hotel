@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="./public/css/newMenu.css">
     <link rel="stylesheet" type="text/css" href="./public/css/newMenuMobile.css">
     <link rel="stylesheet" type="text/css" href="./public/css/ipsum_form.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/menubar.css">
+    <link rel="stylesheet" type="text/css" href="./public/css/card.css">
     <script src="./public/js/menu.js" defer ></script>
     <title>{{document-title}}</title>
 </head>

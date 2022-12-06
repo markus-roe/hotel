@@ -53,7 +53,7 @@
             </div>
             <div class="center">
                 <button class="ipsum-button affirm" type="submit">Register</button>
-                Already have an account? <a style="display: block" href="./login/index">Login</a>
+                Already have an account? <a style="display: block" href="{{loginpath}}">Login</a>
             </div>
         </div>
 

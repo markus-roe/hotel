@@ -11,8 +11,9 @@ class Page extends Component
 
         $this->templates =
         [
-            "header" => new Template("header", ["document-title"=>"IPSUM-HOTEL"]),
+            "header" => new Template("header", ["document-title"=>"IPSUM-HOTEL", "username"]),
             "menu" => new MenuSmall(),
+            "menuBar" => new Template("empty"),
             "content" => new Content(),
             "footer" => new Template("footer")
         ];

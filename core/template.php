@@ -20,7 +20,7 @@ class Template
         }
     }
 
-    public static function readFromFile($templateName)
+    public static function readFromFile($templateName): string
     {
         $fileName = $templateName.".php";
         if (file_exists($fileName))
@@ -30,7 +30,7 @@ class Template
         throw new Exception("File ". $fileName. " not found...");
     }
 
-     public static function parseTemplate($template, $params=null)
+     public static function parseTemplate($template, $params=null): string
     {
         // if ($params == null || count($params) <= 0) 
         // {
@@ -38,10 +38,13 @@ class Template
         // }
         $renderedTemplate = $template;
         
-        foreach($params as $key=>$value)
+        if ($params != null)
+        {
+            foreach($params as $key=>$value)
             {
                 $renderedTemplate = preg_replace("/(\{\{". $key ."\}\})/", $value, $renderedTemplate);
             }
+        }
         
         // ! ersetzt leere Slots (die in $params nicht definiert wurden) durch leeren String
         $renderedTemplate = preg_replace("/(\{\{[a-zA-Z0-9-]+\}\})/", "", $renderedTemplate);
@@ -49,20 +52,19 @@ class Template
         return $renderedTemplate;
     }
 
-    public function parse($params=null)
+    public function parse($params=null): void
     {
         $this->extractRequiredParams($params);
 
         $this->template= Template::parseTemplate($this->template, $this->params);
     }
 
-    public function render() 
+    public function render(): void
     {
         $this->before();
         echo html_entity_decode($this->template);
         $this->after();
 
-        return 1;
     }
 
     public function display() 

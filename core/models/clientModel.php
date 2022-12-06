@@ -56,7 +56,7 @@ class ClientModel extends Model
             $_SESSION["gender"] = $row["gender"];
             $_SESSION["rolename"] = $row["roleName"];
             $_SESSION["telephone"] = $row["telephone"];
-            $_SESSION["profilepath"] = "./profile/" . $_SESSION["rolename"] . "/index";
+            $_SESSION["profilepath"] = "./".$_SESSION["rolename"]. "/profile/index";
             $this->user = new User();
 
             // TODO alle daten für user in session vars speichern
