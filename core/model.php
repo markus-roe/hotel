@@ -34,4 +34,44 @@ require_once getcwd()."/core/utils.php";
     return $this->connection;
   }
 
+  public function executeQuery($query, $paramString = "", $paramsArray = [])
+  {        
+      try
+      {
+          $rows = [];
+          $params = array();
+
+          // * push params to bind in array
+          foreach ($paramsArray as $key => $value)
+          {
+              array_push($params, $value);
+          }
+          
+          // * execute sql with parent model connection
+          $stmt = self::$connection->prepare($query);
+
+          if(count($paramsArray))
+          {
+              $stmt->bind_param($paramString, ...$params);
+          }
+
+          $stmt->execute();
+          $result = $stmt->get_result();
+
+          if(str_contains($query, "SELECT"))
+          {
+              while($row = $result->fetch_assoc())
+          {
+              $rows[] = $row;
+          }
+          return $rows;
+          }
+          return self::$connection->insert_id;
+
+      } 
+      catch (\Throwable $th) {
+          throw $th;
+      }
+  }
+
 }

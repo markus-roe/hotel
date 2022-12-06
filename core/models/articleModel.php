@@ -19,7 +19,7 @@ class ArticleModel extends Model
         $query = "SELECT content, updated, headline, authorId, picturePath, postId FROM posts p
         JOIN pictures pic ON p.pictureid = pic.pictureId;";
 
-        $articles = $this->executeQuery($query);
+        $articles = parent::executeQuery($query);
 
         console_log($articles);
         
@@ -42,7 +42,7 @@ class ArticleModel extends Model
 
         $query = "INSERT INTO pictures (picturePath) VALUES (?)";
 
-        $article = $this->executeQuery($query, "s", [$imagePath]);
+        $article = parent::executeQuery($query, "s", [$imagePath]);
 
         // * returns pictureID
         return $article;
@@ -55,7 +55,7 @@ class ArticleModel extends Model
         $query = "INSERT INTO posts (authorId, headline, content, subtitle, pictureid) VALUES (?, ?, ?, ?, ?)";
     
 
-        $article = $this->executeQuery($query, "dsssd", [$authorId, $headline, $content, $subtitle, $pictureId]);
+        $article = parent::executeQuery($query, "dsssd", [$authorId, $headline, $content, $subtitle, $pictureId]);
 
     // * returns pictureID
         return $article;
@@ -64,46 +64,6 @@ class ArticleModel extends Model
     public function getArticle()
     {
         
-    }
-
-    public function executeQuery($query, $paramString = "", $paramsArray = [])
-    {        
-        try
-        {
-            $rows = [];
-            $params = array();
-  
-            // * push params to bind in array
-            foreach ($paramsArray as $key => $value)
-            {
-                array_push($params, $value);
-            }
-            
-            // * execute sql with parent model connection
-            $stmt = self::$connection->prepare($query);
-
-            if(count($paramsArray))
-            {
-                $stmt->bind_param($paramString, ...$params);
-            }
-
-            $stmt->execute();
-            $result = $stmt->get_result();
-
-            if(str_contains($query, "SELECT"))
-            {
-                while($row = $result->fetch_assoc())
-            {
-                $rows[] = $row;
-            }
-            return $rows;
-            }
-            return self::$connection->insert_id;
-
-        } 
-        catch (\Throwable $th) {
-            throw $th;
-        }
     }
 
 }

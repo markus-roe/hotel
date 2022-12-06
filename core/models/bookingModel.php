@@ -1,9 +1,9 @@
 <?php 
 
 require_once  getcwd()."/core/model.php";
-require_once  getcwd()."/config.php";
+// require_once  getcwd()."/config.php";
 
-class Booking extends Model
+class BookingModel extends Model
 {
     public int $bookingId;
 
@@ -16,7 +16,14 @@ class Booking extends Model
 
     public function getBookings()
     {
-    
+        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+        JOIN booking_status bs ON b.statusId = bs.statusId;";
+
+        $bookings = parent::executeQuery($query);
+
+        console_log($bookings);
+
+        return $bookings;
     }
 
     public function getBookingByUserId()

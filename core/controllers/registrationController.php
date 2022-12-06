@@ -44,33 +44,37 @@ class RegistrationController extends Controller
 
         */
         if (
-            !isset($_POST["gender"]) ||
-            !isset($_POST["firstname"]) ||
-            !isset($_POST["surname"]) ||
-            !isset($_POST["username"]) ||
-            !isset($_POST["password"]) ||
-            !isset($_POST["email"]) ||
-            !isset($_POST["password2"]))
-            {
-                header("Location: ../registration/emptyfield/index");
-                return false;
-            }
+        !isset($_POST["gender"]) ||
+        !isset($_POST["firstname"]) ||
+        !isset($_POST["surname"]) ||
+        !isset($_POST["username"]) ||
+        !isset($_POST["password"]) ||
+        !isset($_POST["email"]) ||
+        !isset($_POST["phone"]) ||
+        !isset($_POST["password2"])
+        )
+        {
+            header("Location: ../registration/emptyfield/index");
+            return false;
+        }
     
-            if ($_POST["password"] != $_POST["password2"])
-            {
-                header("Location: ../registration/passworderr/index");
-                return false;
-            }
+        if ($_POST["password"] != $_POST["password2"])
+        {
+            header("Location: ../registration/passworderr/index");
+            return false;
+        }
     
-            
+
+        $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         $registrationSuccessfull = $this->clientModel->registerNewUser(
             $_POST["firstname"],
             $_POST["surname"],
             $_POST["username"],
-            $_POST["password"],
+            $hashedPassword,
             $_POST["gender"],
-            $_POST["email"]
+            $_POST["email"],
+            $_POST["phone"]
         );
 
         if ($registrationSuccessfull)

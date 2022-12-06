@@ -17,15 +17,15 @@ class ClientModel extends Model
 
     public function getUserById($userId)
     {
-        $query1 = "
+        $query = "
         select * from users u
         join roles r on r.userRoleId=u.userRole
         where u.userId = ?;";
-        $stm1 = self::$connection->prepare($query1);
-        $stm1->bind_param("d", $userId);
-        $stm1->execute();
-        $result1 = $stm1->get_result();
-        $user = $result1->fetch_array(MYSQLI_ASSOC);
+        $stmt = self::$connection->prepare($query1);
+        $stmt->bind_param("d", $userId);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_array(MYSQLI_ASSOC);
 
         return $user;
     }
@@ -34,34 +34,35 @@ class ClientModel extends Model
     {
 
 
-        $query1 = "
-        select * from users u
-        join roles r on r.userRoleId=u.userRole
-        where u.userName = ? and
-        u.password = ?;";
+        $query = "SELECT * FROM users u
+        JOIN roles r ON r.userRoleId=u.userRole
+        WHERE u.userName = ?;";
 
-        $stm1 = self::$connection->prepare($query1);
-        $stm1->bind_param("ss", $username, $password);
-        $stm1->execute();
-        $result1 = $stm1->get_result();
-        $row = $result1->fetch_array(MYSQLI_ASSOC);
+        $stmt = self::$connection->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_array(MYSQLI_ASSOC);
 
-        if ($row) {
-            $_SESSION["userId"] = $row["userId"];
-            $_SESSION["username"] = $row["username"];;
-            $_SESSION["loggedIn"] = true;
-            $_SESSION["firstname"] = $row["firstname"];
-            $_SESSION["surname"] = $row["surname"];
-            $_SESSION["email"] = $row["email"];
-            $_SESSION["gender"] = $row["gender"];
-            $_SESSION["rolename"] = $row["roleName"];
-            $_SESSION["telephone"] = $row["telephone"];
-            $_SESSION["profilepath"] = "./".$_SESSION["rolename"]. "/profile/index";
-            $this->user = new User();
+        if($row)
+        {
+            if(password_verify($password, $row["password"])) 
+            {
 
-            // TODO alle daten für user in session vars speichern
-
-            return true;
+                $_SESSION["userId"] = $row["userId"];
+                $_SESSION["username"] = $row["username"];;
+                $_SESSION["loggedIn"] = true;
+                $_SESSION["firstname"] = $row["firstname"];
+                $_SESSION["surname"] = $row["surname"];
+                $_SESSION["email"] = $row["email"];
+                $_SESSION["gender"] = $row["gender"];
+                $_SESSION["rolename"] = $row["roleName"];
+                $_SESSION["phone"] = $row["phone"];
+                $_SESSION["profilepath"] = "./".$_SESSION["rolename"]. "/profile/index";
+                $this->user = new User();
+    
+                return true;
+            }
         }
         session_unset();
 
@@ -74,38 +75,38 @@ class ClientModel extends Model
         header("Location: ../home/index");
     }
 
-    public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email)
+    public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email, $phone)
     {
         try {
-            // TODO sanitize Input
-            // TODO hash password
-            $query = "
-        insert into users
-        (firstname, surname, username, password, gender, email)
-        values
-        (?,?,?,?,?,?);";
+         
+        $query = "INSERT INTO users
+        (firstname, surname, username, password, gender, email, phone)
+        VALUES (?,?,?,?,?,?,?);";
 
-            $stm1 = self::$connection->prepare($query);
-            $stm1->bind_param("ssssss", $firstname,$surname, $username, $password1, $gender, $email);
-            $stm1->execute();
-            $result1 = $stm1->get_result();
+            $stmt = self::$connection->prepare($query);
+            $stmt->bind_param("sssssss", $firstname, $surname, $username, $password1, $gender, $email, $phone);
+            $stmt->execute();
+            $result1 = $stmt->get_result();
+            
             return true;
+
         } catch (\Throwable $th) {
             echo $th;
         }
     }
 
-    public function changeUserData($firstname, $surname, $email, $userId)
+    public function changeUserData($firstname, $surname, $email, $phone, $userId)
     {
         try 
         {
-            $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ? WHERE userid = ?";
+            $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ?, phone = ? WHERE userid = ?";
 
-            $user = $this->executeQuery($query, "sssd", [$firstname, $surname, $email, $userId]);
+            $user = $this->executeQuery($query, "ssssd", [$firstname, $surname, $email, $phone, $userId]);
 
             $_SESSION["firstname"] = $firstname;
             $_SESSION["surname"] = $surname;
             $_SESSION["email"] = $email;
+            $_SESSION["phone"] = $phone;
 
     
             // * returns pictureID
