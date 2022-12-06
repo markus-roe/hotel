@@ -4,7 +4,6 @@ class Clearance
 {
     public static function Admin()
     {
-
     }
 }
 
@@ -12,19 +11,22 @@ class AccessControl
 {
     private $user;
     private $controllerRoot = "./core/controllers/";
-    public $errorMsg;
-    
-    // [view] : action => clearance level
+    public $errorMsg = ["content-title", "content-body"];
 
-    private $clearanceList = 
+    // [view] :: action => clearance level
+    // 
+
+    private array $clearanceList =
     [
-        "HomeController" => ["index" => "all"],
-        "LoginController" => ["attempt:index" => "guest", "attemptfailed:index"=>"guest", "loginrequest" => "guest"],
-        "RegistrationController" => ["missing:index"=>"guest", "passwordnotmatching:index"=>"guest", "newuser:index"=>"guest"],
-        "ArticleController" => ["post:index" => "all", "preview:index" => "all", "newpost:index" => "all", "new" => "all"],
-        "ImprintController" => ["index" => "all"],
-        "FaqController" => ["index" => "all"],
-        "ProfileController" => ["admin:index" => "admin", "user:index" => "user"]
+        "MainController" => [":index" => "all"],
+        "LoginController" => ["attempt::index" => "guest_only", "attemptfailed::index" => "guest_only", ":loginrequest" => "guest_only"],
+        "RegistrationController" => [":index" => "guest_only", ":register"=>"guest_only"],
+        "ArticleController" => ["post::index" => "all", "preview::index" => "all", "newpost::index" => "all", "new" => "all"],
+        // "ImprintController" => [":index" => "all"],
+        // "FaqController" => [":index" => "all"],
+        "ProfileController" => ["admin::index" => "admin", "user::index" => "user"],
+        "AdminController" => [":index" => "admin"],
+        "ClientController" => [":updateprofile"=>"user&admin" ]
     ];
 
 
@@ -34,60 +36,75 @@ class AccessControl
         $this->clientModel->authenticate();
     }
 
+    private function keyToClearanceLevel($controllerName, $request)
+    {
+
+        $view = $request["view"] != "" ? $request["view"] . ":" : "";
+        $action = $request["action"] != "" ? ":" . $request["action"] : "";
+        $viewActionCombo = $view . $action;
+
+        if (key_exists($action, $this->clearanceList[$controllerName])) {
+            $keyToClearanceLevel = $action;
+        } else if (key_exists($viewActionCombo, $this->clearanceList[$controllerName])) {
+            $keyToClearanceLevel = $viewActionCombo;
+        } else {
+            $keyToClearanceLevel = "";
+        }
+
+        return $keyToClearanceLevel;
+    }
+
     public function isAuthorized($controller, $request)
     {
-        
         $controllerName = get_class($controller);
-        $view = $request["view"] != "" ? $request["view"].":" : "";
-        $viewActionCombo = $view.$request["action"];
+        $key = $this->keyToClearanceLevel($controllerName, $request);
+        $necessaryClearanceLevel = $this->clearanceList[$controllerName][$key];
 
-        $clearanceLevel = $this->clearanceList[$controllerName][$viewActionCombo] ?? false;
-        
-        if (!$clearanceLevel)
-        {
-            return true;
+        if ($necessaryClearanceLevel == "") {
+            $this->errorMsg["content-title"] = "Sorry...";
+            $this->errorMsg["content-body"] = "This page doesn't seem to exists...";
+
+            return false;
         }
 
         $userRole = $this->clientModel->user->userRole;
 
         // TEMPORARY
 
-        if ($clearanceLevel == "all" || $userRole == $clearanceLevel || $clearanceLevel == null)
-        {
+        if ($necessaryClearanceLevel == "all") {
             return true;
         }
-        elseif ($viewActionCombo == "index" && $userRole == "admin" || $userRole == "user")
+        elseif ($necessaryClearanceLevel == "admin" && $userRole != "admin")
         {
-            $this->errorMsg = ["content-title"=>"It's not us, it's you", "content-body" => "You are already logged in"];
-        }
-
-        elseif ($clearanceLevel == "user")
-        {
-            if ($userRole == "admin")
-            {
-                return true;
-            }
-        }
-        else
-        {
-            $this->errorMsg = ["content-title"=>"It's not us, it's you", "content-body" => "You don't seem to have enough clearance"];
-
             return false;
         }
+        elseif ($necessaryClearanceLevel == "guest_only" && $userRole != "guest")
+        {
+            return false;
+        } 
+        elseif ($necessaryClearanceLevel == "user_only" && $userRole != "user")
+        {
+            return false;
+        }
+        elseif ($necessaryClearanceLevel == "user&admin"
+                && !($userRole == "admin" || $userRole == "user"))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     protected function getController($controllerName)
     {
         $controllerPath = $this->controllerRoot;
-        $controllerPath .= $controllerName.".php";
-        
-        if (file_exists($controllerPath))
-        {
+        $controllerPath .= $controllerName . ".php";
+
+        if (file_exists($controllerPath)) {
             require_once $controllerPath;
             return true;
         }
-        
+
         return false;
     }
-    
 }
