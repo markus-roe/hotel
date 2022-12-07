@@ -140,3 +140,24 @@
 .font-small {
     /* font-size: 1.1rem; */
 }
+
+.tiny {
+    padding: 0.5rem 1rem !important;
+}
+
+.tiny input {
+    height: 100%;
+    outline: none;
+    border: transparent;
+    box-shadow: inset 0px 0px 2px grey;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: 1rem;
+}
+
+.float {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: row;
+}
