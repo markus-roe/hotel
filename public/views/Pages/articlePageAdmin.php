@@ -8,7 +8,7 @@ class ArticlePageAdmin extends AdminPage
     {
         parent::__construct();
         
-        $content = new Template("newpostadmin", ["post-link" => "./news/article/post"]);
+        $content = new Template("newpostadmin", ["post-link" => "./article/post"]);
         $this->changeContent($content);
     }
 }

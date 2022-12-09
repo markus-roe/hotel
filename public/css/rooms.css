@@ -1,0 +1,13 @@
+.ipsum-roomImg .col-md-4 {
+    width: 100%;
+}
+
+.ipsum-roomImg button a {
+    color: white;
+    text-decoration: none;
+}
+
+#booking-inputs {
+    background: white;
+    border: transparent;
+}

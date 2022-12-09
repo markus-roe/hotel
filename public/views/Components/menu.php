@@ -19,7 +19,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "Book",
-                "href"=> "./book"
+                "href"=> "./booking/rooms/index"
             ],
             [
                 "textContent"=> "Help",
@@ -31,7 +31,7 @@ abstract class Menu extends Component
             ],
             [
                 "textContent"=> "News",
-                "href"=> "./news/article/preview/index"
+                "href"=> "./article/preview/index"
             ]
         ];
 

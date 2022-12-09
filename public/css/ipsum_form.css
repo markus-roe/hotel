@@ -2,7 +2,7 @@
     background-color: hsl(0, 0%, 96%);
     max-width: 40rem;
     min-width: 20rem;
-    padding: 2rem 2rem;
+    padding: 4rem 4rem;
     border: 1px solid rgb(225, 225, 225);
     margin: 0 auto;
     width: 100%;
@@ -32,7 +32,6 @@
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
-    width: 100%;
 }
 .ipsum-input-container.labelOnTop {
     margin-bottom: 1rem;
@@ -41,12 +40,12 @@
 }
 
 .labelOnTop label {
-    margin-bottom: 0.2rem !important;
-    margin-top: 0.7rem !important;
+    margin-bottom: 1rem !important;
+    margin-top: 0.5rem !important;
 }
 
 .inputError {
-    border: 2px solid red !important;
+    border: 2px solid red;
 }
 
 .horizontalLine::after {
@@ -99,7 +98,6 @@
 .ipsum-input.textarea {
     height: auto;
     width: 100%;
-    border: 1px solid #CED4D9;
 }
 
 .ipsum-input.text:last-child {
@@ -141,4 +139,25 @@
 
 .font-small {
     /* font-size: 1.1rem; */
+}
+
+.tiny {
+    padding: 0.5rem 1rem !important;
+}
+
+.tiny input {
+    height: 100%;
+    outline: none;
+    border: transparent;
+    box-shadow: inset 0px 0px 2px grey;
+    border-radius: 3px;
+    padding: 3px;
+    margin-right: 1rem;
+}
+
+.float {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    flex-direction: row;
 }

@@ -12,7 +12,6 @@ class BookingPage extends AdminPage
             $bookingCards = $this->createBookingCards($bookingsData);
             $this->changeContent($bookingCards);
         }
-        
 
     }
 

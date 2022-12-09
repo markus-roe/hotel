@@ -14,6 +14,23 @@ function booking_mock()
     ]];
 }
 
+function preview_mock()
+{
+    return [
+        [
+          "room-name" => "24K Suite",
+          "room-price" => "420.69",
+          "picturePath" => "./public/images/hotelroom1.jpg",
+          "room-href" => "./booking/room/1/index"
+        ],
+        [
+          "room-name" => "420K Suite",
+          "room-price" => "420.69",
+          "picturePath" => "./public/images/hotelroom3.jpg"
+        ],
+    ];
+}
+
 
 class BookingController extends Controller
 {
@@ -27,8 +44,25 @@ class BookingController extends Controller
         parent::indexAction();
     }
 
+    public function renderRoomsPage()
+    {
+        $this->getTemplate("/Pages/roomsPreviewPage");
+        $page = new RoomsPreviewPage(preview_mock());
+        $page->parse();
+        $page->render();
 
-    public function renderBookingsPage($params = null)
+    }
+
+    public function renderRoomPage()
+    {
+        $this->getTemplate("/Pages/roomPage");
+        $page = new RoomPage();
+        $page->parse();
+        $page->render();
+    }
+
+
+    public function renderOverviewPage($params = null)
     {
         // $bookingData = $this->bookingModel->getBookingById($this->request["bookingid"]);
         $bookingData = booking_mock();
@@ -49,6 +83,5 @@ class BookingController extends Controller
         $bookingPage = new BookingPage($bookingData);
         $bookingPage->parse();
         $bookingPage->render();
-
     }
 }

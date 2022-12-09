@@ -27,7 +27,7 @@ class AccessControl
         "ProfileController" => ["admin::index" => "admin", "user::index" => "user"],
         "AdminController" => [":index" => "admin"],
         "ClientController" => [":updateprofile"=>"user&admin"],
-        "BookingController" => [":index" => "all"]
+        "BookingController" => ["overview::index" => "user", "rooms::index"=>"all", "room::index"=>"user"]
     ];
 
 
