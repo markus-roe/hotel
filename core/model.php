@@ -1,6 +1,7 @@
 <?php
 
 require_once getcwd()."/core/utils.php";
+require_once getcwd()."/core/config.php";
 
 
  class Model {
@@ -14,7 +15,8 @@ require_once getcwd()."/core/utils.php";
   {
     if(!self::$connection)
     {
-      self::$connection = new mysqli("207.hosttech.eu:3306", "ipsum_admin", "ipsum123", "ipsum");
+      $config = new Config();
+      self::$connection = new mysqli($config->host, $config->user, $config->password, $config->database);
     }
 
   }
