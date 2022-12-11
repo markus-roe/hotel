@@ -66,6 +66,9 @@ require_once getcwd()."/core/config.php";
           {
               $rows[] = $row;
           }
+          // debug backtrace to know which function executed the query -> slows down app so commented out
+          // console_log(debug_backtrace()[1]['function'] . ": ");
+          console_log($rows);
           return $rows;
           }
           return self::$connection->insert_id;

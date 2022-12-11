@@ -21,14 +21,29 @@ class BookingModel extends Model
 
         $bookings = parent::executeQuery($query);
 
-        console_log($bookings);
+        return $bookings;
+    }
+
+    public function getBookingById($bookingId)
+    {
+        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+        JOIN booking_status bs ON b.statusId = bs.statusId
+        WHERE b.bookingId = ?;";
+
+        $bookings = parent::executeQuery($query, "i", [$bookingId]);
 
         return $bookings;
     }
 
-    public function getBookingByUserId()
+    public function getBookingByUserId($userId)
     {
+        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+        JOIN booking_status bs ON b.statusId = bs.statusId
+        WHERE b.userId = ?;";
 
+        $bookings = parent::executeQuery($query, "i", [$userId]);
+
+        return $bookings;
     }
 
     public function getServicesByBookingId()

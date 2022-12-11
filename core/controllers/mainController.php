@@ -1,12 +1,17 @@
 <?php
 
 require_once  getcwd()."/core/controller.php";
+require_once  getcwd()."/core/models/bookingModel.php";
 
 class MainController extends Controller
 {
     public function init()
     {
         parent::init();
+
+        $booking = new BookingModel();
+        // var_dump($booking->getBookingById(1));
+        var_dump($booking->getBookingByUserId(11));
 
     }
 
