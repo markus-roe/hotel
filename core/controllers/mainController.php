@@ -9,10 +9,6 @@ class MainController extends Controller
     {
         parent::init();
 
-        $booking = new BookingModel();
-        // var_dump($booking->getBookingById(1));
-        var_dump($booking->getBookingByUserId(11));
-
     }
 
 

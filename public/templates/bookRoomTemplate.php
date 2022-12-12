@@ -1,5 +1,5 @@
 <article class="ipsum-article horizontalLine">
-    <h2>{{name}}</h2>
+    <h2 class="text-center">{{name}}</h2>
     <p>
     </p>
     <div class="text-center container-fluid w-40">

@@ -2,7 +2,7 @@
     <div class="card mb-3">
         <div class="row g-0">
             <div class="col-md-4" style="width:100%">
-                <img src="public{{picturePath}}" class="img-fluid rounded" alt="..." />
+            <a href="./article/post/id/{{postId}}/index"><img src="public{{picturePath}}" class="img-fluid rounded" alt="..." /></a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">

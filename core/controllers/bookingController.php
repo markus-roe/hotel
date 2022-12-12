@@ -14,26 +14,9 @@ function booking_mock()
     ]];
 }
 
-function preview_mock()
-{
-    return [
-        [
-          "room-name" => "24K Suite",
-          "room-price" => "420.69",
-          "picturePath" => "./public/images/hotelroom1.jpg",
-          "room-href" => "./booking/room/1/index"
-        ],
-        [
-          "room-name" => "420K Suite",
-          "room-price" => "420.69",
-          "picturePath" => "./public/images/hotelroom3.jpg"
-        ],
-    ];
-}
-
-
 class BookingController extends Controller
 {
+
     public function init()
     {
         parent::init();

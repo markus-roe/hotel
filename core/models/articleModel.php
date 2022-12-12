@@ -61,9 +61,4 @@ class ArticleModel extends Model
         return $article;
     }
 
-    public function getArticle()
-    {
-        
-    }
-
 }
