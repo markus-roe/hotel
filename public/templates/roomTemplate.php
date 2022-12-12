@@ -6,7 +6,7 @@
           </div>
           <span class="horizontalLine"></span>
         <p class="text-justify">
-            {{room-description}}
+            {{description}}
         </p>
         <h3>Ipsum - Dolor sit amet</h3>
 

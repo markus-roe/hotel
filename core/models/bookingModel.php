@@ -13,49 +13,102 @@ class BookingModel extends Model
         parent::__construct();
     }
 
+// >>>>> BOOKINGS <<<<<
 
-    public function getBookings()
-    {
-        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
-        JOIN booking_status bs ON b.statusId = bs.statusId;";
+public function createBooking($userId, $roomId, $startDate, $endDate)
+{
 
-        $bookings = parent::executeQuery($query);
+    $query = "INSERT INTO bookings (userId, roomId, startDate, endDate) VALUES (?, ?, ?, ?)";
 
-        return $bookings;
-    }
+    $bookingId = parent::executeQuery($query, "iiss", [$userId, $roomId, $startDate, $endDate]);
 
-    public function getBookingById($bookingId)
-    {
-        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
-        JOIN booking_status bs ON b.statusId = bs.statusId
-        WHERE b.bookingId = ?;";
+    return $bookingId;
+}
 
-        $bookings = parent::executeQuery($query, "i", [$bookingId]);
+public function getAllBookings()
+{
+    $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+    JOIN booking_status bs ON b.statusId = bs.statusId;";
 
-        return $bookings;
-    }
+    $bookings = parent::executeQuery($query);
 
-    public function getBookingByUserId($userId)
-    {
-        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
-        JOIN booking_status bs ON b.statusId = bs.statusId
-        WHERE b.userId = ?;";
+    return $bookings;
+}
 
-        $bookings = parent::executeQuery($query, "i", [$userId]);
+public function getBookingById($bookingId)
+{
+    $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+    JOIN booking_status bs ON b.statusId = bs.statusId
+    WHERE b.bookingId = ?;";
 
-        return $bookings;
-    }
+    $bookings = parent::executeQuery($query, "i", [$bookingId]);
 
-    public function getServicesByBookingId()
-    {
+    return $bookings;
+}
 
-    }
+public function getBookingsByUserId($userId)
+{
+    $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+    JOIN booking_status bs ON b.statusId = bs.statusId
+    WHERE b.userId = ?;";
 
-    public function createBooking()
-    {
+    $bookings = parent::executeQuery($query, "i", [$userId]);
 
-    }
+    return $bookings;
+}
 
+//? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
+public function updateBookingStatus($bookingId, $statusId)
+{
+    $query = "UPDATE bookings SET statusId = ? WHERE bookingId = ?";
+
+    $booking = parent::executeQuery($query, "ii", [$statusId, $bookingId]);
+
+    return $booking;
+}
+
+public function updateBookingById($bookingId)
+{
+    $query = "UPDATE bookings SET statusId = ? WHERE bookingId = ?";
+
+    $booking = parent::executeQuery($query, "ii", [$statusId, $bookingId]);
+
+    return $booking;
+}
+
+//? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
+public function deleteBooking($bookingId)
+{
+    $query = "DELETE from bookings WHERE bookingId = ?";
+
+    $booking = parent::executeQuery($query, "i", [$bookingId]);
+
+    return $booking;
+}
+
+// >>>>> ROOMS <<<<<
     
+// * Rooms ---> roomModel? oder lassen wir es das bookingModel machen?
+
+public function getAllRooms()
+{
+    $query = "SELECT r.*, p.picturePath FROM rooms r
+    JOIN pictures p ON r.pictureId = p.pictureId";
+
+    $rooms = parent::executeQuery($query);
+
+    return $rooms;
+}
+
+public function getRoomById($roomId)
+{
+    $query = "SELECT r.*, p.picturePath FROM rooms r
+    JOIN pictures p ON r.pictureId = p.pictureId
+    WHERE r.roomId = ?;";
+
+    $room = parent::executeQuery($query, "i", [$roomId]);
+
+    return $room[0];
+}
 
 }

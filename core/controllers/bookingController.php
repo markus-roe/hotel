@@ -1,5 +1,6 @@
 <?php
 require_once  getcwd() . "/core/controller.php";
+require_once  getcwd() . "/core/models/bookingModel.php";
 
 function booking_mock()
 {
@@ -29,31 +30,39 @@ class BookingController extends Controller
 
     public function renderRoomsPage()
     {
-        $this->getTemplate("/Pages/roomsPreviewPage");
-        $page = new RoomsPreviewPage(preview_mock());
-        $page->parse();
-        $page->render();
+        $bookingModel = new BookingModel();
 
+        $this->getTemplate("/Pages/roomsPreviewPage");
+        $page = new RoomsPreviewPage($bookingModel->getAllRooms());
+        $page->parse($this->userData);
+        $page->render();
     }
 
     public function renderRoomPage()
     {
+        $bookingModel = new BookingModel();
+
         $this->getTemplate("/Pages/roomPage");
-        $page = new RoomPage();
-        $page->parse();
+
+        $currentRoom = $bookingModel->getRoomById($this->request["id"]);
+        $page = new RoomPage($currentRoom);
+        $page->parse($this->userData);
         $page->render();
     }
 
 
     public function renderOverviewPage($params = null)
     {
-        // $bookingData = $this->bookingModel->getBookingById($this->request["bookingid"]);
-        $bookingData = booking_mock();
+        $bookingData = $this->bookingModel->getBookingById($this->request["id"]);
+        // $bookingData = booking_mock();
 
         if (count($bookingData) <= 0) {
             $this->getTemplate("/Components/page");
             $page = new Page();
-            $page->parse(["content-title" => "Noch keine Buchungen vorhanden!"]);
+            $noBookings = ["content-title" => "Noch keine Buchungen vorhanden!"];
+            $data = array_merge($noBookings, $this->userData);
+
+            $page->parse($data);
             $page->render();
 
             return 1;
@@ -64,7 +73,7 @@ class BookingController extends Controller
         $bookingCardArr = [];
 
         $bookingPage = new BookingPage($bookingData);
-        $bookingPage->parse();
+        $bookingPage->parse($this->userData);
         $bookingPage->render();
     }
 }
