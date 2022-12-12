@@ -34,8 +34,10 @@ class ClientController extends Controller
         $post_firstname = $_POST['firstname'] ? $_POST['firstname'] : "";
         $post_surname = $_POST['surname'] ? $_POST['surname'] : "";
         $post_email = $_POST['email'] ? $_POST['email'] : "";
-
-        $client->changeUserData($post_firstname, $post_surname, $post_email, $userId);
+        $post_phone = $_POST['phone'] ? $_POST['phone'] : "";
+        $post_password = $_POST['new-password'] ? $_POST['new-password'] : "";
+        $post_confirmpassword = $_POST['confirm-new-password'] ? $_POST['confirm-new-password'] : "";
+        $client->updateUserData($post_firstname, $post_surname, $post_email, $post_phone, $post_password, $post_confirmpassword, $userId);
     
         header("Location: ../".$_SESSION["rolename"]."/profile/index");
     }

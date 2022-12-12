@@ -22,7 +22,7 @@ class User
         $this->userRole = @$_SESSION["rolename"] ?? "guest";
         $this->email = @$_SESSION["email"] ?? "";
         $this->gender = @$_SESSION["gender"] ?? "";
-        $this->phone = @$_SESSION["telephone"] ?? "";
+        $this->phone = @$_SESSION["phone"] ?? "";
         $this->profilepath = @$_SESSION["profilepath"] ?? "./login/attempt/index";
     }
 }

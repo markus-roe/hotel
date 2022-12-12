@@ -20,12 +20,13 @@
             </div>
             <div class="ipsum-input-container labelOnTop horizontalLine">
                 <div class="text-center"><h4>Change Password</h5></div>
-                <label for="currPassword">Current Password</label>
-                <input type="password" class="ipsum-input text" id="currPassword" name="password" placeholder="Current Password">
-                <label for="newPassword">New Password</label>
-                <input type="password" class="ipsum-input text" name="newPassword" placeholder="New Password">
-                <label for="passwordRepeat">Repeat new password</label>
-                <input type="password" class="ipsum-input text" id="passwordRepeat" name="newPasswordRepeat" placeholder="Repeat New Password">
+                <label></label> <!-- label for spacing -->
+                <!-- <label for="currPassword">Current Password</label>
+                <input type="password" class="ipsum-input text" id="currPassword" name="password" placeholder="Current Password"> -->
+                <!-- <label for="newPassword">New Password</label> -->
+                <input type="password" class="ipsum-input text" name="new-password" placeholder="New Password">
+                <label></label> <!-- label for spacing -->
+                <input type="password" class="ipsum-input text" name="confirm-new-password" placeholder="Confirm Password">
             </div>
         </div>
         <div class="center">

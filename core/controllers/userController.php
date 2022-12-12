@@ -71,7 +71,7 @@ class UserController extends Controller
 
 
 
-        $client->changeUserData($post_firstname, $post_surname, $post_email, $userId);
+        $client->updateUserData($post_firstname, $post_surname, $post_email, $userId);
 
 
     

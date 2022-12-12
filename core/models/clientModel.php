@@ -95,10 +95,31 @@ class ClientModel extends Model
         }
     }
 
-    public function changeUserData($firstname, $surname, $email, $phone, $userId)
+    public function updateUserData($firstname, $surname, $email, $phone, $password, $confirmpassword, $userId)
     {
         try 
         {
+
+            // If password was changed
+            if($password)
+            {
+                if($password == $confirmpassword)
+                {
+                    $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
+                }
+
+                $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ?, phone = ?, password = ? WHERE userid = ?";
+
+                $user = $this->executeQuery($query, "sssssd", [$firstname, $surname, $email, $phone, $hashedpassword, $userId]);
+    
+                $_SESSION["firstname"] = $firstname;
+                $_SESSION["surname"] = $surname;
+                $_SESSION["email"] = $email;
+                $_SESSION["phone"] = $phone;
+    
+                return $user;
+            }
+
             $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ?, phone = ? WHERE userid = ?";
 
             $user = $this->executeQuery($query, "ssssd", [$firstname, $surname, $email, $phone, $userId]);
@@ -108,8 +129,6 @@ class ClientModel extends Model
             $_SESSION["email"] = $email;
             $_SESSION["phone"] = $phone;
 
-    
-            // * returns pictureID
             return $user;
 
         } catch (\Throwable $th) {
