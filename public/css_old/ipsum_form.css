@@ -39,13 +39,48 @@
     margin-left: 0.6rem;
 }
 
-[type="checkbox"], label  {
-
+[type="checkbox"], [type="radio"], label  {
     margin: auto 3px !important;
     cursor: pointer;
 } 
+[type="radio"] {
+    cursor: pointer;
+}
 
 .ipsum-input.text {
+    border-radius: 3px;
+    border: transparent;
+    /* box-shadow: inset 0px 0px 2px gray;     */
+    border: 1px solid #CED4D9;
+    padding: 0.2rem 0.4rem;
+    margin-right: 1rem;
+    height: 3rem;
+    width: 100%;
+    font-size: 1.25rem;
+}
+
+.ipsum-input.gender {
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.first {    
+
+    width: 20%;
+    height: 25px;
+}
+
+.col:not(.first) {
+
+    width: 26,6666666667%;
+    height: 25px;
+}
+
+
+
+.ipsum-input.dropdown {
     border-radius: 3px;
     border: transparent;
     /* box-shadow: inset 0px 0px 2px gray;     */

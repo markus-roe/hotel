@@ -1,0 +1,10 @@
+h5 .link {
+    text-decoration: none !important;
+    color: black;
+}
+
+button a,
+button a:hover  {
+    text-decoration: none !important;
+    color: white;
+}

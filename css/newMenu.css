@@ -62,7 +62,7 @@
 .carousel-image {
     /* background-image: url(../images/bg_2.jpeg) !important; */
     background-size: cover !important;
-    background-position: center;
+    background-position: center bottom;
     background-repeat: no-repeat !important;
     width: inherit;
     height: 100%;
