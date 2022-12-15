@@ -82,11 +82,11 @@
     width: 100%;
 }
 
-.row ul {
+.row .menuUl ul {
     float: left;
 }
 
-.row ul li {
+.row ul.menuUl li {
     float: left;
     display: inline;
 }
