@@ -50,10 +50,11 @@ class BookingController extends Controller
         $page->render();
     }
 
-
+// TODO
     public function renderOverviewPage($params = null)
     {
-        $bookingData = $this->bookingModel->getBookingById($this->request["id"]);
+        $bookingModel = new BookingModel();
+        $bookingData = $bookingModel->getBookingById($this->request["id"]);
         // $bookingData = booking_mock();
 
         if (count($bookingData) <= 0) {
