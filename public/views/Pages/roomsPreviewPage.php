@@ -34,13 +34,13 @@ class RoomsPreviewPage extends Page
 
         while ($index < $nbrOfCards) {
             $tempCardView_2 = "";
-            $card1 = new Template("roomPreviewCardTemplate", $cardsConfig[$index]);
-            $card1->parse();
+            $card1 = new Template("roomPreviewCardTemplate");
+            $card1->parse($cardsConfig[$index]);
             $tempCardView_1 = $card1->template;
 
             if ($nbrOfCards - $index  >= 2) {
-                $card2 = new Template("roomPreviewCardTemplate", $cardsConfig[$index + 1]);
-                $card2->parse();
+                $card2 = new Template("roomPreviewCardTemplate");
+                $card2->parse($cardsConfig[$index + 1]);
                 $tempCardView_2 = $card2->template;
                 $index++;
             }

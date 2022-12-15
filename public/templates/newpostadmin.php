@@ -12,7 +12,10 @@
                 <div class="ipsum-input-container labelOnTop horizontalLine">
                     <label for="content">Content</label>
                     <textarea class="ipsum-input textarea text" id="content" name="articleContent"
-                        placeholder="Content..." rows="20"></textarea>
+                        placeholder="Content...
+# Große Überschrift
+## Mittelgroße Überschrift
+### Kleine Überschrift" rows="20"></textarea>
                 </div>
                 <div class="ipsum-input-container labelOnTop horizontalLine">
                     <label for="articleImage">Upload Image</label>
@@ -24,6 +27,7 @@
         <div class="center">
             <button class="ipsum-button affirm" type="submit">Submit</button>
         </div>
-
     </form>
+    <a href="https://www.markdownguide.org/cheat-sheet/" target="_blank">Markdown Cheat-Sheet</a>
+
 </div>

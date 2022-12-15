@@ -2,14 +2,13 @@
 
 class Template
 {
-    // public $templates = [];
     protected $params = [];
     protected $externalParams = [];
     protected $requiredParams = [];
     public $name;
     protected $template = '';
 
-    function __construct($fileName=null, $requiredParams = null)
+    function __construct($fileName=null, $requiredParams = [])
     {
         $this->requiredParams = $requiredParams;
         $this->name = $fileName;
@@ -17,6 +16,7 @@ class Template
         {
             $templatePathPrefix = getcwd()."/public/templates/";
             $this->template= Template::readFromFile($templatePathPrefix.$fileName);
+            $this->getSlots();
         }
     }
 
@@ -55,8 +55,25 @@ class Template
     public function parse($params=null): void
     {
         $this->extractRequiredParams($params);
-
         $this->template= Template::parseTemplate($this->template, $this->params);
+    }
+
+    protected function getSlots()
+    {
+        if (preg_match_all("/\{\{([a-zA-Z0-9-]+)\}\}/", $this->template, $matches))
+        {
+            // array_push($this->requiredParams, $matches[1]);
+            foreach($matches[1] as $match)
+            {
+                if (!array_key_exists($match, $this->requiredParams))
+                {
+                    array_push($this->requiredParams, $match);
+                }
+            }
+            // echo "<pre>";
+            // var_dump($this->requiredParams);        
+            // echo "</pre>";
+        }
     }
 
     public function render(): void

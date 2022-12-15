@@ -8,7 +8,7 @@
     </div>
 
     <form action="{{bookingPath}}" method="POST">
-        <div id="booking-inputs" class="text-center ipsum-form tiny float" style="margin-top: 2rem; margin-bottom:2rem">
+        <div id="booking-inputs" class="text-center ipsum-form tiny float">
             <!-- <span class="text-center" style="color: red; position: absolute">{{inputerrormsg}}</span> -->
             <div class="ipsum-input-container">
                 <input type="date" name="startDate" id="">
@@ -23,5 +23,14 @@
     </form>
     <span class="horizontalLine"></span>
     <br>
-    {{description}}
+    <!-- {{description}} -->
+    <h3>Ausstattung</h3>
+    <p>
+        <ul class="ipsum-ul">
+            <li>Klima-Anlage</li>
+            <li>Fernseher</li>
+            <li>WIFI</li>
+            <li>Room Service</li>
+        </ul>
+    </p>
 </article>

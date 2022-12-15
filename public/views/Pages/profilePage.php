@@ -12,12 +12,7 @@ class ProfilePage extends Page
         $content = new Template("personalDataTemplate",
             [
                 "page-title" => "Profile",
-                "profile-update-link" => "./profile/update",
-                "firstname",
-                "surname",
-                "username",
-                "email",
-                "phone"
+                "profile-update-link" => "./profile/update"
             ]
         );
         $this->changeContent($content);
