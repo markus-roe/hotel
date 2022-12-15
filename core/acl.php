@@ -21,7 +21,7 @@ class AccessControl
         "MainController" => [":index" => "all"],
         "LoginController" => [":logout"=>"user&admin", "attempt::index" => "guest_only", "failure::index" => "guest", ":loginrequest" => "guest_only"],
         "RegistrationController" => [":index" => "guest_only", ":register"=>"guest_only"],
-        "ArticleController" => ["post::index" => "all", "preview::index" => "all", "newpost::index" => "all", "new" => "all", ":post"=>"admin"],
+        "ArticleController" => ["post::index" => "admin", "preview::index" => "all", "newpost::index" => "admin", "new" => "all", ":post"=>"admin"],
         // "ImprintController" => [":index" => "all"],
         // "FaqController" => [":index" => "all"],
         "ProfileController" => ["admin::index" => "admin", "user::index" => "user"],
