@@ -1,2 +1,6 @@
 .DS_Store
 Logo.psd
+.vscode
+.VSCodeCounter
+core/config.php
+chatGPT.php

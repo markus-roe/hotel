@@ -1,0 +1,114 @@
+.ipsum-card {
+    border: 1px solid #D5D5D5;
+    box-shadow: 0px 2px 4px #13131352;
+    border-radius: 4px;
+    height: 12rem;
+    padding: 1rem 0.5rem;
+    margin-bottom: 2rem;
+    line-height: 1.1rem;
+    /* max-width: 100%; */
+    width: 85%;
+    margin: 0 auto;
+    margin-bottom: 1rem !important;
+}
+
+.ipsum-card .container {
+    height: inherit;
+}
+
+.cell {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.ipsum-card .row:first-child {
+    margin-bottom: 1rem;
+}
+
+.cell .title {
+    display: block;
+    color: gray;
+    margin-bottom: 3px;
+}
+
+.ipsum-card-input {
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+}
+textarea.ipsum-card-input {
+    resize: none;
+    overflow: hidden;
+    margin-bottom: 0px;
+    width: auto;
+}
+
+.ipsum-card a {
+    color: rgb(67, 54, 129);
+    text-decoration: none;
+}
+
+.ipsum-card a:hover {
+   color: black;
+}
+
+.services-list li {
+    list-style-type: disc !important;
+    clear: both !important;
+    
+}
+
+/* .ipsum-timespan {} */
+
+.ipsum-card-input:focus {
+    outline: none !important;
+    box-shadow: inset 0px 0px 3px rgb(173, 173, 173);
+    /* border: 1px solid #D5D5D5; */
+}
+select.ipsum-card-input {
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+    background-color: #783FF2;
+    color: white;
+    border-radius: 11px;
+    text-align: center;
+    box-shadow: none;
+    padding: 1px 2px;
+    font-size: 0.8rem;
+    max-width: 10rem;
+}
+
+.select-option option {
+    border-radius: 11px;
+    margin-top: 5px;
+}
+
+select.ipsum-card-input:focus {
+    background-color: rgb(106, 106, 106) !important;
+    box-shadow: none !important;
+    -moz-appearance:none; /* Firefox */
+    -webkit-appearance:none; /* Safari and Chrome */
+    appearance:none;
+}
+
+[data-labeltype="confirmed"] {
+    background-color: green !important;
+}
+[data-labeltype="new"] {
+    background-color: #783FF2 !important;
+}
+[data-labeltype="storno"] {
+    background-color: rgb(220 0 0) !important;
+}
+
+.card-checkbox {
+    display: flex;
+}
+
+@media screen and (max-width: 750px),
+(max-height: 600px) {
+    .ipsum-card {
+    width: 100%;
+    }
+}

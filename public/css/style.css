@@ -1,0 +1,298 @@
+  :root {
+    --link-underline: 1.5px;
+  }
+  
+
+    body {
+        background-color: f8f8f8;
+        overflow-x: hidden;
+    }
+
+    * {
+      font-family: "Poppins";
+    }
+    
+    /* h1, h2, h3, h4, p{
+      color: white;
+    } */
+
+    .menu-links {
+      display: flex;
+      
+    }
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+ 
+
+      .nav-item.dropdown {
+        display: inline;
+        float: left;
+      }
+      
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+
+      .navbar {
+        /* display: inline-bloc; */
+        display: flex;
+        z-index: 999;
+        height: 20rem;
+        width: 100%;
+      }
+
+      .menu-links {
+        display: flex;
+        align-items: center;
+        width: 70%;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .account {
+        display: flex;
+        align-items: center;
+        width: 10%;
+        flex-direction: row;
+        justify-content: space-evenly;
+      }
+
+      .account li {
+        display: block;
+        list-style: none;
+      }
+
+      .account a {
+        font-size: 1.95rem;
+        text-shadow: 1px 1px 2px #00000033;
+        color:white;
+      }
+
+      .menu-links li {
+        display: block;
+        list-style: none;
+        
+      }
+      
+      .menu-links a {
+        font-size: 1.95rem;
+        text-shadow: 1px 1px 2px #00000033;
+        color:white;
+      }
+
+      .menu-links a::after {
+        content: "";
+        display: block;
+        width: 0%;
+        height: var(--link-underline);
+        transition: all 200ms;
+      }
+
+      .menu-links a:hover::after {
+        content: "";
+        display: block;
+        height: var(--link-underline);
+        width: 100%;
+        background-color: white;
+      }
+
+      
+      /* .menu-links a.active::after {
+        content: "";
+        display: block;
+        height: var(--link-underline);
+        width: 100%;
+        background-color: white;
+      } */
+
+      .menu-links a:hover {
+        text-decoration: none;
+      }
+
+      .active-link {
+
+      }
+
+      .active-link::after {
+        content: "";
+        display: block;
+        height: var(--link-underline);
+        width: 100% !important;
+        background-color: white;
+      }
+
+      .navbar-logo {
+        display: block;
+        z-index: 9999;
+        position: relative;
+        margin-left: 1.5rem;
+        margin-top: 1.5rem;
+        width: 20rem;
+        
+      }
+
+      .navbar-logo-small {
+        display: block;
+        position: relative;
+        left: 3rem;
+        top: 3rem;
+        height: 7rem;
+      }
+
+      .logo {
+        height: 100%;
+        width: 100%;
+      }
+    
+    .text-wrapper {
+      background: red;
+      display: flex;
+      height: 100%;
+      justify-content: center;
+      align-items: center;
+      width: auto;
+    }
+
+    
+
+    .carousel.slide {
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      height: inherit;
+      width: inherit;
+
+    }
+    /* version f. nebenseiten (imprint, faq, ect) */
+    /* .carousel.slide.small {
+      height: 40vh !important;
+    } */
+    
+    .carousel-inner {
+      height: 100%;
+    }
+      
+    .carousel-inner .item {
+        width: 100%; 
+        height: 100%;
+
+    } 
+
+    .carousel-inner .item img{
+      object-fit: cover;
+      background-position: 50% 50%;
+      background-position: center;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      width: 100vw;
+    }
+  
+    /* Hide the carousel text when the screen is less than 600 pixels wide */
+    @media (max-width: 600px) {
+      .carousel-caption {
+        display:none;
+      }
+    }
+
+    .top-section-main {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .top-section {
+      width: 100vw;
+      height: 35vh;
+    }
+    /* Carousel Indikatoren auf Side-Pages (alle außer index-Page) */
+    .top-section .carousel.slide ol {
+      display: none;
+    }
+
+    .main-section {
+      max-width: 87%;
+      min-height: 500px;
+      margin:auto;
+      padding-bottom: 6rem;
+
+    }
+
+
+    .main-header {
+      text-align: center;
+      color: black;
+    }
+
+.navbar-mobile {
+  display: none;
+}
+
+.imprint-images {
+  display: flex;
+}
+
+.imprint-image-div {
+  justify-content: center;
+  margin: auto;
+}
+
+.imprint-image-div p {
+  text-align: center;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.column {
+  width: 50%;
+}
+
+.imprint-image-name {
+  font-size: 1.4rem;
+  margin: 0.75rem;
+}
+
+.help-text {
+  text-align: center;
+  margin: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+.row {
+  display: block;
+  width: 100%;
+
+}
+
+.column {
+  width: 100%;
+}
+}
+
+.panel-default {
+  padding: 1.5rem;
+}
+
+.panel-heading {
+background-color: white !important;
+}
+
+.panel-title {
+  display: inline-block;
+}
+
+.panel-heading::after {
+  content: "";
+  display: inline-block;
+  height: 2.5rem;
+  width: 2.5rem;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+  float: right;
+  } 
+
