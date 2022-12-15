@@ -2,6 +2,7 @@
 
 require_once  getcwd()."/core/model.php";
 require_once  getcwd()."/core/models/clientModel.php";
+require_once  getcwd()."/parsedown/Parsedown.php";
 
 
 //! Pfad f. pictures zB: ./public/uploads/pictures/stockmarket.jpg
@@ -52,10 +53,14 @@ class ArticleModel extends Model
     // public function createArticle($authorId, $headline, $content)
     public function createArticle($authorId, $headline, $content, $subtitle, $pictureId)
     {
+        $Parsedown = new Parsedown();
+        $Parsedown->setSafeMode(true);
+        $contentMarkdown = $Parsedown->text($content);
+
         $query = "INSERT INTO posts (authorId, headline, content, subtitle, pictureid) VALUES (?, ?, ?, ?, ?)";
     
 
-        $article = parent::executeQuery($query, "dsssd", [$authorId, $headline, $content, $subtitle, $pictureId]);
+        $article = parent::executeQuery($query, "dsssd", [$authorId, $headline, $contentMarkdown, $subtitle, $pictureId]);
 
     // * returns pictureID
         return $article;
