@@ -3,7 +3,7 @@ require_once  getcwd() . "/core/router.php";
 require_once  getcwd() . "/core/acl.php";
 require_once  getcwd() . "/core/models/clientModel.php";
 require_once  getcwd() . "/core/controller.php";
-require_once  getcwd() . "/public/views\Pages/errorPage.php";
+require_once  getcwd() . "/public/views/Pages/errorPage.php";
 
 // require_once "./request.php";
 
