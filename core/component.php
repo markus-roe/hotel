@@ -84,6 +84,7 @@ class Component extends Template
     {
         foreach($templateObj as $template)
         {
+            if ($template == null) continue;
             if (get_class($template) != "Template")
             {
                 $this->filterTemplates($template->templates);
