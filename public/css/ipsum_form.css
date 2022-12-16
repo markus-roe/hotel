@@ -165,3 +165,24 @@
 .ipsum-ul li {
     list-style-type: square;
 }
+
+.ipsum-popup {
+    position: fixed;
+    z-index: 100;
+    left: 50%;
+    opacity: 0;
+    transform: translate(-50%, -240%);
+    animation-name: infoBoxSlideIn;
+    animation-duration: 0.6s;
+    animation-delay: 1s;
+    animation-timing-function: cubic-bezier(0,1.83,.93,.98);
+    animation-fill-mode: forwards;
+}
+
+@keyframes infoBoxSlideIn {
+    to {
+        left: 50%;
+        transform: translate(-50%, 100%);
+        opacity: 1;
+    }
+}
