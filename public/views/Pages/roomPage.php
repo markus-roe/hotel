@@ -8,7 +8,7 @@ class RoomPage extends Page
     {
         parent::__construct();
 
-        $content = new Template("bookRoomTemplate", ["description" => $roomData["description"], "name" => $roomData["name"], "picturePath" => $roomData["picturePath"], "description" => $roomData["description"]]);
+        $content = new Template("bookRoomTemplate", ["actionPath"=>"./booking/".$roomData["roomId"]."/create/", "description" => $roomData["description"], "name" => $roomData["name"], "picturePath" => $roomData["picturePath"], "description" => $roomData["description"]]);
         $this->changeContent($content);
     }
 }

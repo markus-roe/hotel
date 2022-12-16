@@ -9,9 +9,9 @@ class UserMenuBar extends MenuBar
 
         $linkConfig =
         [
-            ["href"=>"", "icon"=>Template::readFromFile("/icons/reservations"), "title"=>"Buchungen"],
-            ["href"=>"", "icon"=>Template::readFromFile("/icons/personalData"), "title"=>"Stammdaten"],
-            ["href"=>"", "icon"=>Template::readFromFile("/icons/logout"), "title"=>"Logout"],
+            ["href"=>"./booking/bookingdetails/index", "icon"=>Template::readFromFile("./public/templates/icons/reservations"), "title"=>"Buchungen"],
+            ["href"=>"./client/profile/index", "icon"=>Template::readFromFile("./public/templates/icons/personalData"), "title"=>"Stammdaten"],
+            ["href"=>"./login/logout", "icon"=>Template::readFromFile("./public/templates/icons/logout"), "title"=>"Logout"],
             
         ];
         $links = $this->createLinks($linkConfig);

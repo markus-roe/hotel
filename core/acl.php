@@ -14,20 +14,21 @@ class AccessControl
     public $errorMsg = ["content-title", "content-body"];
 
     // [view] :: action => clearance level
-    // 
+    // clearanceLevels: all, client (= user & admin), admin, user
 
     private array $clearanceList =
     [
         "MainController" => [":index" => "all"],
-        "LoginController" => [":logout"=>"user&admin", "attempt::index" => "guest_only", "failure::index" => "guest", ":loginrequest" => "guest_only"],
+        "LoginController" => [":logout"=>"client", "attempt::index" => "guest_only", "failure::index" => "guest", ":loginrequest" => "guest_only"],
         "RegistrationController" => [":index" => "guest_only", ":register"=>"guest_only"],
-        "ArticleController" => ["post::index" => "admin", "preview::index" => "all", "newpost::index" => "admin", "new" => "all", ":post"=>"admin"],
-        // "ImprintController" => [":index" => "all"],
-        // "FaqController" => [":index" => "all"],
-        "ProfileController" => ["admin::index" => "admin", "user::index" => "user"],
+        "ArticleController" => ["post::index" => "all", "preview::index" => "all", "newpost::index" => "admin", "new" => "all", ":post"=>"admin"],
+        "ImprintController" => [":index" => "all"],
+        "FaqController" => [":index" => "all"],
+        "ProfileController" => ["client::index" => "client"],
         "AdminController" => [":index" => "admin"],
-        "ClientController" => [":updateprofile"=>"user&admin"],
-        "BookingController" => ["overview::index" => "user", "rooms::index"=>"all", "room::index"=>"user"]
+        "UserController" => [":index"=> "user_only"],
+        "ClientController" => [":updateprofile"=>"client", ":index"=>"client"],
+        "BookingController" => ["bookingdetails::index" => "client", "overview::index" => "user", "rooms::index"=>"all", "room::index"=>"all", ":create"=>"user_only"]
     ];
 
 
@@ -70,30 +71,30 @@ class AccessControl
 
         $userRole = $this->clientModel->user->userRole;
 
-        // TEMPORARY
+        $hasPermission = true;
 
         if ($necessaryClearanceLevel == "all") {
-            return true;
+            $hasPermission = true;
         }
         elseif ($necessaryClearanceLevel == "admin" && $userRole != "admin")
         {
-            return false;
+            $hasPermission = false;
         }
         elseif ($necessaryClearanceLevel == "guest_only" && $userRole != "guest")
         {
-            return false;
+            $hasPermission = false;
         } 
         elseif ($necessaryClearanceLevel == "user_only" && $userRole != "user")
         {
-            return false;
+            $hasPermission = false;
         }
-        elseif ($necessaryClearanceLevel == "user&admin"
+        elseif ($necessaryClearanceLevel == "client"
                 && !($userRole == "admin" || $userRole == "user"))
         {
-            return false;
+            $hasPermission = false;
         }
 
-        return true;
+        return $hasPermission;
     }
 
     protected function getController($controllerName)

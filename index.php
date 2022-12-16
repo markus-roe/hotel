@@ -5,12 +5,15 @@ require_once "./core/console_log.php";
 require_once "./core/app.php";
 require_once "./core/router.php";
 
+define('baseURL', "http://localhost/hotel");
+
 // var_dump($_SERVER);
 try {
     
     $app = new App();
 
     $app->router->get("/:controller/:action");
+    $app->router->post("/:controller/:roomid/:action/");
     $app->router->get("/:controller/:view/:action");
     $app->router->get("/:controller/:view/:id/:action");
     $app->router->get("/:controller");

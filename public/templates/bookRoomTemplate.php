@@ -7,7 +7,7 @@
         <!-- <img src="https://picsum.photos/1100/500" class="rounded img-fluid" alt="..."> -->
     </div>
 
-    <form action="{{bookingPath}}" method="POST">
+    <form action="{{actionPath}}{{roomId}}" method="POST">
         <div id="booking-inputs" class="text-center ipsum-form tiny float">
             <!-- <span class="text-center" style="color: red; position: absolute">{{inputerrormsg}}</span> -->
             <div class="ipsum-input-container">

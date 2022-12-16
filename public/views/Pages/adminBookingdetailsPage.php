@@ -1,7 +1,7 @@
 <?php
 require_once getcwd()."/public/views/Pages/adminPage.php";
 
-class BookingPage extends AdminPage
+class AdminBookingdetailsPage extends AdminPage
 {
     function __construct(?array $bookingsData)
     {
@@ -45,7 +45,5 @@ class BookingPage extends AdminPage
         }
 
         return $cardCollection;
-
-        
     }
 }

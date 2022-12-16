@@ -1,4 +1,5 @@
 <body>
+
     <div class="headsection {{menu-size}}">
         <div id="navbar-mobile">
             <div class="logo-div mobile" title="Homepage">
