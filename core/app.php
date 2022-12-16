@@ -3,6 +3,7 @@ require_once  getcwd() . "/core/router.php";
 require_once  getcwd() . "/core/acl.php";
 require_once  getcwd() . "/core/models/clientModel.php";
 require_once  getcwd() . "/core/controller.php";
+require_once  getcwd() . "/public/views\Pages/errorPage.php";
 
 // require_once "./request.php";
 
@@ -65,26 +66,21 @@ class App
 
         if (!$controllerExists || !$actionExists) {
             $this->getController("errorController");
-            $controller = new ErrorController($request, $this->clientModel);
-
-            $controller->execute();
-            $controller->setErrorMsg(["content-title" => "Sorry...", "content-body" => "This page doesn't seem to exist yet"]);
-            $controller->indexAction();
-
+            $errPage = new ErrorPage();
+            $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Diese Seite existiert leider nicht..."]);
+            $errPage->render();
             return;
         }
+
         $controller = new $controllerName($request, $this->clientModel);
 
         if ($this->acl->isAuthorized($controller, $request)) {
             $controller->execute();
             $controller->$requestAction();
         } else {
-            $this->getController("errorController");
-            $controller = new ErrorController($request, $this->clientModel);
-
-            $controller->execute();
-            $controller->setErrorMsg($this->acl->errorMsg);
-            $controller->indexAction();
+            $errPage = new ErrorPage();
+            $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Sie haben keine Berechtigung sie zu besuchen"]);
+            $errPage->render();
         }
     }
 }
