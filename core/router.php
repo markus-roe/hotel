@@ -44,9 +44,12 @@ class Router
         /* CHANGE: "mvc_test" muss, wenn implementiert in Hotel-Seite wsl
         ** durch "Präfix" der Hotel URL ersetzt werden (zB "ipsumhotel")
         **/
+        $route = preg_replace("/(\?[a-z=]+)/", "", $route);
         $route = str_replace("/mvc_test", "", $route);
         $this->setRequest("method", strtoupper($method));
         $this->setRequest("view", "");
+        $this->setRequest("res", "");
+        $this->request = array_merge($this->request, $_GET);
         $counter = -1;
         foreach($this->routes[$method] as $pattern)
         {
