@@ -29,9 +29,12 @@ abstract class Controller
 
     public function indexAction()
     {
+        $this->pageName = ucfirst($this->requestedView)."Page";
         $requestedMethod = "render".ucfirst($this->requestedView)."Page";
+
         if (method_exists($this, $requestedMethod))
         {
+            $this->getTemplate("/Pages/$this->pageName");
             $this->$requestedMethod();
         }
     }
@@ -42,7 +45,7 @@ abstract class Controller
 
     protected function redirect($url)
     {
-        header("Location: ..".$url);
+        header("Location: ./".$url);
         die();
     }
 

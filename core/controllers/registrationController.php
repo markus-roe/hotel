@@ -9,7 +9,6 @@ class RegistrationController extends Controller
     public function indexAction()
     {
         parent::indexAction();
-
     }
 
     protected function renderPassworderrPage()

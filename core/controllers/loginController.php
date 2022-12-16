@@ -51,7 +51,7 @@ class LoginController extends Controller
         }
 
         // PATCH
-        header("Location: ../".$_SESSION["rolename"]."/profile/index");
+        header("Location: ../client/profile/index");
 
         return 1;
     }

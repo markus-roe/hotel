@@ -18,18 +18,7 @@ class UserController extends Controller
 
     public function indexAction()
     {
-        switch ($this->requestedView)
-        {
-            case "user":
-                $this->renderUserProfilePage();
-                break;
-            case "personaldata":
-                $this->renderProfilePage();
-                break;
-            default:
-                $this->renderErrorPage();
-                break;
-        }
+       parent::indexAction();
     }
 
     private function renderAdminProfilePage()
@@ -40,21 +29,21 @@ class UserController extends Controller
         $page->render();
     }
 
-    private function renderUserProfilePage()
+    public function renderProfilePage()
     {
-        $this->getTemplate("/Pages/userProfilePage");
-        $page = new UserProfilePage();
+        $this->getTemplate("/Pages/userPage");
+        $page = new UserPage();
         $page->parse($this->userData);
         $page->render();
     }
 
-    private function renderProfilePage()
-    {
-        $this->getTemplate("/Pages/profilePage");
-        $page = new ProfilePage();
-        $page->parse($this->userData);
-        $page->render();
-    }
+    // private function renderProfilePage()
+    // {
+    //     $this->getTemplate("/Pages/profilePage");
+    //     $page = new ProfilePage();
+    //     $page->parse($this->userData);
+    //     $page->render();
+    // }
 
     public function updateAction()
     {

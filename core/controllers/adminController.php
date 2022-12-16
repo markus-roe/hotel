@@ -10,8 +10,8 @@ class AdminController extends ClientController
     {
         parent::init();
 
-        $this->getTemplate("/Pages/adminProfilePage");
-        $this->profilePage = new AdminProfilePage();
+        // $this->getTemplate("/Pages/adminProfilePage");
+        // $this->profilePage = new AdminProfilePage();
     }
 
 
