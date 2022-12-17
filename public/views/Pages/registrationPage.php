@@ -7,7 +7,7 @@ class RegistrationPage extends Page
     {
         parent::__construct();
         
-        $content = new Template("registration", ["cssinputclass", "errormsg", "loginpath"=>"./login/attempt/index"]);
+        $content = new Template("registration", ["cssinputclass", "errormsg", "loginpath"=>"./login/attempt"]);
         $this->changeContent($content);
     }
 }

@@ -21,7 +21,6 @@ class ClientController extends Controller
     {
         $this->pageName = $this->clientPagePrefix.ucfirst($this->requestedView)."Page";
         $requestedMethod = "render".ucfirst($this->requestedView)."Page";
-
         if (method_exists($this, $requestedMethod))
         {
             switch($this->pageName)
@@ -50,31 +49,30 @@ class ClientController extends Controller
         }
     }
 
-    public function updateprofileAction()
+    public function updateprofileAction($userId=null)
     {
-
+        // $client = new ClientModel();
         $user = new User();
-        $client = new ClientModel();
-
-        $userId = $user->userId;
+        
+        $userId = $userId ?? $user->userId;
         $post_firstname = $_POST['firstname'] ? $_POST['firstname'] : "";
         $post_surname = $_POST['surname'] ? $_POST['surname'] : "";
         $post_email = $_POST['email'] ? $_POST['email'] : "";
         $post_phone = $_POST['phone'] ? $_POST['phone'] : "";
         $post_password = $_POST['new-password'] ? $_POST['new-password'] : "";
         $post_confirmpassword = $_POST['confirm-new-password'] ? $_POST['confirm-new-password'] : "";
-        $client->updateUserData($post_firstname, $post_surname, $post_email, $post_phone, $post_password, $post_confirmpassword, $userId);
-    
-        header("Location: ../client/profile/index?res=updatesuccess");
+        $this->clientModel->updateUserData($post_firstname, $post_surname, $post_email, $post_phone, $post_password, $post_confirmpassword, $userId);
+        
+        header("Location: ../client/profile?res=updatesuccess");
     }
 
     public function renderProfilePage()
     {
         $this->profilePage = new $this->pageName();
-
         if ($this->request["res"] == "updatesuccess")
-            $this->profilePage->triggerPopup("<span style='font-size:1.5rem'>🥳 </span> Stammdaten erfolgreich upgedated!");
-
+        {
+            $this->profilePage->triggerPopup("<span style='font-size:1.5rem'>🥳</span> Update erfolgreich!");
+        }
         $this->profilePage->parse([...$this->userData, $this->request["current_uri"]]);
         $this->profilePage->render();
     }

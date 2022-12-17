@@ -135,6 +135,11 @@
 .ipsum-button.affirm {
     background-color: #0D6EFD;
     color: white;
+    transition: background-color 150ms;
+}
+
+.ipsum-button.affirm:hover {
+    background-color: #0c55c3;
 }
 
 .font-small {

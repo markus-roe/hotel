@@ -26,6 +26,8 @@ class Component extends Template
 
     public function parse($params=[]): void
     {
+        $this->before();
+
         $this->params = $params;
         $this->extractTemplatesFromComponents();
 
@@ -33,12 +35,13 @@ class Component extends Template
         {
             $template->parse($params);
         }
+        $this->after();
+
     }
 
     public function render(): void
     {
         ob_start();
-        $this->before();
         if (!$this->templatesAlreadyExtracted)
         {
             $this->extractTemplatesFromComponents();
@@ -48,7 +51,6 @@ class Component extends Template
             $template->render();
         }
 
-        $this->after();
         ob_flush();
     }
 

@@ -17,7 +17,7 @@ class LoginController extends Controller
     public function logoutAction()
     {
         $this->clientModel->logoutUser();
-        header("Location: ../main/home/index");
+        header("Location: ../main/home");
     }
 
     protected function renderFailurePage()
@@ -45,13 +45,13 @@ class LoginController extends Controller
             !isset($_POST["password"]) || !isset($_POST["username"]) ||
             !$this->clientModel->loginUser($_POST["username"], $_POST["password"])
         ) {
-            header("Location: ../login/failure/index");
+            header("Location: ../login/failure");
 
             return false;
         }
 
         // PATCH
-        header("Location: ../client/profile/index");
+        header("Location: ../client/profile");
 
         return 1;
     }

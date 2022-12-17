@@ -60,28 +60,52 @@ class App
         $controllerExists = $this->getController($controllerFileName);
 
         $actionExists = $controllerExists
-        ? method_exists($controllerName, $requestAction)
-        : false;
-        
+            ? method_exists($controllerName, $requestAction)
+            : false;
+        $controller = new $controllerName($request, $this->clientModel);
 
-        if (!$controllerExists || !$actionExists) {
-            $this->getController("errorController");
+        if (!$controllerExists) {
             $errPage = new ErrorPage();
-            $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Diese Seite existiert leider nicht..."]);
+            $errPage->parse(["content-title" => "Sorry...", "content-body" => "Diese Seite existiert leider nicht..."]);
             $errPage->render();
             return;
         }
 
-        $controller = new $controllerName($request, $this->clientModel);
+        if ($requestMethod == "GET") {
+            $controller->execute();
+            $controller->indexAction();
 
-        if ($this->acl->isAuthorized($controller, $request)) {
+            return;
+        }
+
+        if ($requestMethod == "POST")
+        {
             $controller->execute();
             $controller->$requestAction();
-        } else {
-            $errPage = new ErrorPage();
-            $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Sie haben keine Berechtigung sie zu besuchen"]);
-            $errPage->render();
+
+            return;
         }
+
+
+
+        // if (!$controllerExists || ($requestMethod == "GET" && $requestAction != null)) {
+        //     // $this->getController("errorController");
+        //     $errPage = new ErrorPage();
+        //     $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Diese Seite existiert leider nicht..."]);
+        //     $errPage->render();
+        //     return;
+        // }
+
+        // $controller = new $controllerName($request, $this->clientModel);
+
+        // if ($this->acl->isAuthorized($controller, $request)) {
+        //     $controller->execute();
+        //     $controller->$requestAction();
+        // } else {
+        //     $errPage = new ErrorPage();
+        //     $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Sie haben keine Berechtigung sie zu besuchen"]);
+        //     $errPage->render();
+        // }
     }
 }
 

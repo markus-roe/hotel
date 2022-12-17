@@ -53,13 +53,13 @@ class RegistrationController extends Controller
         !isset($_POST["password2"])
         )
         {
-            header("Location: ../registration/emptyfield/index");
+            header("Location: ../registration/emptyfield");
             return false;
         }
     
         if ($_POST["password"] != $_POST["password2"])
         {
-            header("Location: ../registration/passworderr/index");
+            header("Location: ../registration/passworderr");
             return false;
         }
     
@@ -79,7 +79,7 @@ class RegistrationController extends Controller
         if ($registrationSuccessfull)
         {
             $this->clientModel->loginUser($_POST["username"], $_POST["password"]);
-            header("Location: ../profile/".$_SESSION["rolename"]."/index");
+            header("Location: ../profile/".$_SESSION["rolename"]."");
 
         }
 

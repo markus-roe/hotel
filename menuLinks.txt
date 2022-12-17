@@ -1,7 +1,7 @@
 [
     {
         "textContent": "Home",
-        "href": "./index.php"
+        "href": "..php"
     },
     {
         "textContent": "Book",

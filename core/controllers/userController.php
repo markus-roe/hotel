@@ -64,7 +64,7 @@ class UserController extends Controller
 
 
     
-        header("Location: /hotel/profile/personaldata/index");
+        header("Location: /hotel/profile/personaldata");
     }
 
 }

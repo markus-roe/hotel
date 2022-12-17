@@ -12,6 +12,7 @@ class MenuBar extends Component
 
 
         $this->linkTemplate = Template::readFromFile("./public/templates/menuBarLink");
+        $this->logoutLinkTemplate = Template::readFromFile("./public/templates/logoutLinkWrapper");
         $this->menuBarTemplate = new Template("menuBarTemplate", ["links", "current_uri"]);
         $this->templates = ["menuBar" => $this->menuBarTemplate];
     }
@@ -27,8 +28,14 @@ class MenuBar extends Component
                     "icon" => $c["icon"],
                     "linkTitle" => $c["title"],
                 ];
-            $htmlString .= Template::parseTemplate($this->linkTemplate, $params);
-        }
+
+                if ($c["title"] != "Logout")
+                {
+                    $htmlString .= Template::parseTemplate($this->linkTemplate, $params);
+                    continue;
+                }
+                $htmlString .= Template::parseTemplate($this->logoutLinkTemplate, $params);
+            }
         
         return $htmlString;
     }

@@ -1,5 +1,4 @@
 <?php
-//DEPRECATED
 require_once getcwd()."/public/views/Pages/adminPage.php";
 
 class AdminProfilePage extends AdminPage

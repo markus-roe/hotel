@@ -3,5 +3,6 @@
 <div class="text-center">
     <p>
         {{content-body}}
+        {{list-items}}
     </p>
 </div>
