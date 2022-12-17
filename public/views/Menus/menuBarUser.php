@@ -9,8 +9,8 @@ class UserMenuBar extends MenuBar
 
         $linkConfig =
         [
-            ["href"=>"./booking/bookingdetails/index", "icon"=>Template::readFromFile("./public/templates/icons/reservations"), "title"=>"Buchungen"],
-            ["href"=>"./client/profile/index", "icon"=>Template::readFromFile("./public/templates/icons/personalData"), "title"=>"Stammdaten"],
+            ["href"=>"./booking/bookingdetails", "icon"=>Template::readFromFile("./public/templates/icons/reservations"), "title"=>"Buchungen"],
+            ["href"=>"./client/profile", "icon"=>Template::readFromFile("./public/templates/icons/personalData"), "title"=>"Stammdaten"],
             ["href"=>"./login/logout", "icon"=>Template::readFromFile("./public/templates/icons/logout"), "title"=>"Logout"],
             
         ];

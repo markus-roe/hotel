@@ -1,8 +1,8 @@
 <?php
 //DEPRECATED
-require_once getcwd()."/public/views/Pages/userPage.php";
+require_once getcwd()."/public/views/Pages/adminPage.php";
 
-class UserProfilePage extends UserPage
+class AdminUserprofilePage extends AdminPage
 {
     function __construct()
     {
@@ -10,19 +10,16 @@ class UserProfilePage extends UserPage
         $persDataConfig =
         [
         "page-title" => "Profile",
-        "userId",
-        "profile-update-link" => "./client/updateprofile",
+        "profile-update-link" => "./admin/updateprofile/",
         "firstname",
         "surname",
         "username",
         "email",
         "phone"
         ];
-        $content = new Template("personalDataTemplate", $persDataConfig);
+        $content = new Template("adminUserDataTemplate", $persDataConfig);
         $this->changeContent($content);
     }
-
-
 }
 //  /profile/menu/
 //  /profile/stammdaten

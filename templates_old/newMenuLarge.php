@@ -2,7 +2,7 @@
     <div class="headsection large">
         <div id="navbar-mobile">
             <div class="logo-div mobile">
-                <a class="navbar-logo" href="./index.html">
+                <a class="navbar-logo" href="..html">
                     <img class="logo-mobile" src="./images/Logo.png" />
                 </a>
             </div>
@@ -15,7 +15,7 @@
 
         <div id="slide-menu" class="closed">
             <ul>
-                <li><a href="./index.html">Home</a></li>
+                <li><a href="..html">Home</a></li>
                 <li><a href="#">Book</a></li>
                 <li><a href="./help.html">Help</a></li>
                 <li><a class="active" href="./imprint.html">Imprint</a></li>
@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-3">
                     <div class="logo-div">
-                        <a class="navbar-logo" href="./index.html">
+                        <a class="navbar-logo" href="..html">
                             <img class="logo" src="./images/Logo.png" />
                         </a>
                     </div>
