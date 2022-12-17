@@ -24,7 +24,28 @@ class ClientController extends Controller
 
         if (method_exists($this, $requestedMethod))
         {
-            $this->getTemplate("/Pages\/$this->pageName");
+            switch($this->pageName)
+            {
+                case ("UserProfilePage"):
+                    $this->getTemplate("/Pages/userProfilePage");
+                    break;
+                case ("UserProfilePage"):
+                    $this->getTemplate("/Pages/userProfilePage");
+                    break;  
+                case ("AdminProfilePage"):
+                    $this->getTemplate("/Pages/adminProfilePage");
+                    break;
+                case ("AdminProfilePage"):
+                    $this->getTemplate("/Pages/adminProfilePage");
+                    break;
+                case ("AdminBookingdetailsPage"):
+                    $this->getTemplate("/Pages/adminBookingdetailsPage");
+                    break;
+                default:
+                    $this->getTemplate("/Pages/$this->pageName");       
+                   
+            }
+            
             $this->$requestedMethod();
         }
     }
