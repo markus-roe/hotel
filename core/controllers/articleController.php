@@ -107,7 +107,7 @@ class ArticleController extends Controller
 
     $newArticleId = $article->createArticle($authorId, $post_headline, $post_content, $post_subtitle, $post_pictureId);
 
-    header("Location: post/id/" . $newArticleId . "/index");
+    header("Location: post/id/" . $newArticleId . "");
 
     }
 }

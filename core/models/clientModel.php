@@ -17,11 +17,12 @@ class ClientModel extends Model
 
     public function getUserById($userId)
     {
-        $query = "
-        select * from users u
-        join roles r on r.userRoleId=u.userRole
-        where u.userId = ?;";
-        $stmt = self::$connection->prepare($query1);
+        $query =
+            "SELECT u.userId, u.firstname, u.surname, u.username, u.userRole, u.email, u.gender, u.active, u.phone FROM users u
+        JOIN roles r ON r.userRoleId=u.userRole
+        WHERE u.userId = ?;";
+
+        $stmt = self::$connection->prepare($query);
         $stmt->bind_param("d", $userId);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -30,10 +31,50 @@ class ClientModel extends Model
         return $user;
     }
 
+    public function getAllGuests()
+    {
+        $query =
+            "SELECT u.userId, u.firstname, u.surname, u.username, u.userRole, u.email, u.gender, u.phone
+        FROM users u
+        JOIN roles r ON r.userRoleId=u.userRole
+        WHERE r.roleName = 'user'";
+
+        $stmt = self::$connection->prepare($query);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $guests = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $guests;
+    }
+
+    public function deactivateUserById($userId)
+    {
+        $query =
+        "UPDATE users
+        SET active = 0
+        WHERE userId = ?";
+
+        $stm = self::$connection->prepare($query);
+        $stm->bind_param("d", $userId);
+        $stm->execute();
+        $result = $stm->get_result();
+    }
+
+    public function activateUserById($userId)
+    {
+        $query =
+        "UPDATE users
+        SET active = 1
+        WHERE userId = ?";
+
+        $stm = self::$connection->prepare($query);
+        $stm->bind_param("d", $userId);
+        $stm->execute();
+        $result = $stm->get_result();
+    }
+
     public function loginUser($username, $password)
     {
-
-
         $query = "SELECT * FROM users u
         JOIN roles r ON r.userRoleId=u.userRole
         WHERE u.userName = ?;";
@@ -44,10 +85,8 @@ class ClientModel extends Model
         $result = $stmt->get_result();
         $row = $result->fetch_array(MYSQLI_ASSOC);
 
-        if($row)
-        {
-            if(password_verify($password, $row["password"])) 
-            {
+        if ($row) {
+            if (password_verify($password, $row["password"]) && $row["active"] == 1) {
 
                 $_SESSION["userId"] = $row["userId"];
                 $_SESSION["username"] = $row["username"];;
@@ -58,9 +97,9 @@ class ClientModel extends Model
                 $_SESSION["gender"] = $row["gender"];
                 $_SESSION["rolename"] = $row["roleName"];
                 $_SESSION["phone"] = $row["phone"];
-                $_SESSION["profilepath"] = "./client/profile/index";
+                $_SESSION["profilepath"] = "./client/profile";
                 $this->user = new User();
-    
+
                 return true;
             }
         }
@@ -72,14 +111,14 @@ class ClientModel extends Model
     public function logoutUser()
     {
         session_destroy();
-        header("Location: ../home/index");
+        header("Location: ../home");
     }
 
     public function registerNewUser($firstname, $surname, $username, $password1, $gender, $email, $phone)
     {
         try {
-         
-        $query = "INSERT INTO users
+
+            $query = "INSERT INTO users
         (firstname, surname, username, password, gender, email, phone)
         VALUES (?,?,?,?,?,?,?);";
 
@@ -87,9 +126,8 @@ class ClientModel extends Model
             $stmt->bind_param("sssssss", $firstname, $surname, $username, $password1, $gender, $email, $phone);
             $stmt->execute();
             $result1 = $stmt->get_result();
-            
-            return true;
 
+            return true;
         } catch (\Throwable $th) {
             echo $th;
         }
@@ -97,26 +135,26 @@ class ClientModel extends Model
 
     public function updateUserData($firstname, $surname, $email, $phone, $password, $confirmpassword, $userId)
     {
-        try 
-        {
+        try {
 
             // If password was changed
-            if($password)
-            {
-                if($password == $confirmpassword)
-                {
+            if ($password) {
+                if ($password == $confirmpassword) {
                     $hashedpassword = password_hash($password, PASSWORD_DEFAULT);
                 }
 
                 $query = "UPDATE users SET firstname = ? ,surname = ? ,email = ?, phone = ?, password = ? WHERE userid = ?";
 
                 $user = $this->executeQuery($query, "sssssd", [$firstname, $surname, $email, $phone, $hashedpassword, $userId]);
-    
-                $_SESSION["firstname"] = $firstname;
-                $_SESSION["surname"] = $surname;
-                $_SESSION["email"] = $email;
-                $_SESSION["phone"] = $phone;
-    
+
+                if ($userId == $this->user->userId) {
+
+
+                    $_SESSION["firstname"] = $firstname;
+                    $_SESSION["surname"] = $surname;
+                    $_SESSION["email"] = $email;
+                    $_SESSION["phone"] = $phone;
+                }
                 return $user;
             }
 
@@ -124,67 +162,61 @@ class ClientModel extends Model
 
             $user = $this->executeQuery($query, "ssssd", [$firstname, $surname, $email, $phone, $userId]);
 
-            $_SESSION["firstname"] = $firstname;
-            $_SESSION["surname"] = $surname;
-            $_SESSION["email"] = $email;
-            $_SESSION["phone"] = $phone;
+            if ($userId == $this->user->userId) {
 
+
+                $_SESSION["firstname"] = $firstname;
+                $_SESSION["surname"] = $surname;
+                $_SESSION["email"] = $email;
+                $_SESSION["phone"] = $phone;
+            }
             return $user;
-
         } catch (\Throwable $th) {
             echo $th;
         }
     }
 
     public function executeQuery($query, $paramString = "", $paramsArray = [])
-    {        
-        try
-        {
+    {
+        try {
             $rows = [];
             $params = array();
-  
+
             // * push params to bind in array
-            foreach ($paramsArray as $key => $value)
-            {
+            foreach ($paramsArray as $key => $value) {
                 array_push($params, $value);
             }
-            
+
             // * execute sql with parent model connection
             $stmt = self::$connection->prepare($query);
 
-            if(count($paramsArray))
-            {
+            if (count($paramsArray)) {
                 $stmt->bind_param($paramString, ...$params);
             }
 
             $stmt->execute();
             $result = $stmt->get_result();
 
-            if(str_contains($query, "SELECT"))
-            {
-                while($row = $result->fetch_assoc())
-            {
-                $rows[] = $row;
-            }
-            return $rows;
+            if (str_contains($query, "SELECT")) {
+                while ($row = $result->fetch_assoc()) {
+                    $rows[] = $row;
+                }
+                return $rows;
             }
             return self::$connection->insert_id;
-
-        } 
-        catch (\Throwable $th) {
+        } catch (\Throwable $th) {
             throw $th;
         }
     }
 
     public function authenticate()
     {
-
         if (isset($_SESSION["userId"]) && isset($_SESSION["username"])) {
             $this->user = new User();
             return true;
         }
 
-        // $this->user->profilepath = "./hotel/login/attempt/index";
+        // $this->user->profilepath = "./hotel/login/attempt";
         return false;
     }
 

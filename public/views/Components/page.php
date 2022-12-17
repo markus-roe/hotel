@@ -29,7 +29,7 @@ class Page extends Component
         $this->insert("popup", $popupEl);
     }
 
-    protected function changeContent($newContent)
+    public function changeContent($newContent)
     {
         $this->templates["content"]->changeContentBody($newContent);
     }

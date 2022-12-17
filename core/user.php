@@ -23,6 +23,6 @@ class User
         $this->email = @$_SESSION["email"] ?? "";
         $this->gender = @$_SESSION["gender"] ?? "";
         $this->phone = @$_SESSION["phone"] ?? "";
-        $this->profilepath = @$_SESSION["profilepath"] ?? "./login/attempt/index";
+        $this->profilepath = @$_SESSION["profilepath"] ?? "./login/attempt";
     }
 }

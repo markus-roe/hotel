@@ -41,11 +41,10 @@ class BookingController extends ClientController
     {
         $this->getTemplate("/Pages/roomPage");
         $bookingModel = new BookingModel();
-        $currentRoom = $bookingModel->getRoomById($this->request["id"]);
+        $currentRoom = $bookingModel->getRoomById($this->request["roomid"]);
         $page = new RoomPage($currentRoom);
-        
-        if ($this->request["res"] == "invalid")
-        {
+
+        if ($this->request["res"] == "invalid") {
             $page->triggerPopup("Dieses Zimmer ist im gewünschten Zeitraum leider nicht verfügbar...");
         }
 
@@ -59,42 +58,43 @@ class BookingController extends ClientController
         $bookingModel = new BookingModel();
 
         $inputIsValid =
-        isset($_POST["startDate"]) &&
-        isset($_POST["endDate"]) &&
-        $_POST["startDate"] != "" &
-        $_POST["endDate"] != "";
+            isset($_POST["startDate"]) &&
+            isset($_POST["endDate"]) &&
+            $_POST["startDate"] != "" &
+            $_POST["endDate"] != "";
 
         if (!$inputIsValid || !$bookingModel->createBooking($this->userData["userId"], $this->request["roomid"], $_POST["startDate"], $_POST["endDate"])) {
-            header("Location: ".baseURL."/booking/room/{$this->request["roomid"]}/index?res=invalid");
+            header("Location: " . baseURL . "/booking/room/{$this->request["roomid"]}?res=invalid");
 
             return 0;
         }
         // TODO redirect to personal booking page
-        header("Location: ".baseURL."/booking/bookingdetails/index?res=success");
-
+        header("Location: " . baseURL . "/booking/bookingdetails?res=success");
     }
 
     // TODO
     public function renderBookingdetailsPage($params = null)
     {
+        $bookingPage = new $this->pageName();
         $this->getTemplate("/Content/bookingCard");
         $bookingModel = new BookingModel();
-        $bookingData = $bookingModel->getBookingById(@$this->request["id"]);
-        $bookingPage = new $this->pageName($bookingData);
+
+        $bookingData = $bookingModel->getBookingByUserId(@$this->request["userid"]);
+
         $bookingCardArr = [];
         $pageText = ["content-title" => "Buchungen", "content-body" => "Noch keine Buchungen vorhanden!"];
 
-        if (count($bookingData) > 0) {
-            // TODO hier
+        if (count($bookingData) <= 0) {
             $pageText["content-body"] = "";
-
+            $bookingPage->parse([...$this->userData, ...$pageText]);
+            $bookingPage->render();
             return 0;
         }
 
-        if ($this->request["res"] == "success")
-        {
+        if ($this->request["res"] == "success") {
             $bookingPage->triggerPopup("<span style='font-size:1.5rem'>🥳</span> Buchung erfolgreich!");
         }
+        $bookingPage->createBookingCards($bookingData);
         $bookingPage->parse([...$this->userData, ...$bookingCardArr, ...$pageText]);
         $bookingPage->render();
 
