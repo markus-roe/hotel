@@ -16,7 +16,7 @@
                                     Zeitraum
                                 </span>
                                 <textarea rows="1" cols="10" name="startDate" class="ipsum-card-input">{{startDate}}</textarea>
-                                <textarea rows="1" cols="10" name="endDate" class="ipsum-card-input">{{endDate}}</textarea>
+                                <textarea rows="1" cols="10" name="endDate" class="ipsum-card-input">{{enddate}}</textarea>
                             </div>
                         </div>
                         <div class="col-4">

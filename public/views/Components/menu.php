@@ -15,23 +15,23 @@ abstract class Menu extends Component
 
             [
                 "textContent"=> "Home",
-                "href"=> "./main/home/index"
+                "href"=> "./main/home"
             ],
             [
                 "textContent"=> "Book",
-                "href"=> "./booking/rooms/index"
+                "href"=> "./booking/rooms"
             ],
             [
                 "textContent"=> "Help",
-                "href"=> "./main/faq/index"
+                "href"=> "./main/faq"
             ],
             [
                 "textContent"=> "Imprint",
-                "href"=> "./main/imprint/index"
+                "href"=> "./main/imprint"
             ],
             [
                 "textContent"=> "News",
-                "href"=> "./article/preview/index"
+                "href"=> "./article/preview"
             ]
         ];
 
@@ -42,7 +42,7 @@ abstract class Menu extends Component
 
         $this->templates = 
         [
-            "menu" => new Template("menu", [ "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "homepath"=>"./main/home/index"])
+            "menu" => new Template("menu", [ "menu-links"=>$menuLinksHtml, "menu-size"=>$menuSize, "homepath"=>"./main/home"])
         ];
     }
 

@@ -23,7 +23,7 @@
 </div>
 
 <div class="navbar-mobile">
-        <a class="navbar-logo" href="./index.html">
+        <a class="navbar-logo" href="..html">
             <img class="logo" src="./images/Logo.png" />
         </a>
     <div class="hamburger">
