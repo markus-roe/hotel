@@ -51,6 +51,11 @@ class Router
         $this->setRequest("res", "");
         $this->request = array_merge($this->request, $_GET);
         $counter = -1;
+        preg_match_all("/([a-z-]+)/", $route, $controllerAndView);
+        // var_dump($controllerAndView);
+        $this->setRequest("controller", $controllerAndView[0][0]);
+        $this->setRequest("view", $controllerAndView[0][1]);
+        
         foreach($this->routes[$method] as $pattern)
         {
             ++$counter;
