@@ -27,6 +27,7 @@ class AdminBookingdetailsPage extends AdminPage
                         "startDate" => $data["startDate"],
                         "endDate" => $data["endDate"],
                         "roomId" => $data["roomId"],
+                        "price" => $data["price"],
                         $data["bookingStatus"] => "selected",
                         "services" => ""
                     ];

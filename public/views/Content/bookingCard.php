@@ -17,7 +17,8 @@ class BookingCard extends Component
             "new",
             "storno",
             "services",
-            "status"
+            "status",
+            "price"
         ];
         
         $bookingCardTemplate = new Template("bookingCardTemplate", $params);
