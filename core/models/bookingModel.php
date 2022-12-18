@@ -34,13 +34,38 @@ class BookingModel extends Model
         if (!$this->roomIsVacant($startDate, $endDate, intval($roomId))) {
             return 0;
         }
-
+        
         $query = "INSERT INTO bookings (userId, roomId, startDate, endDate) VALUES (?, ?, ?, ?)";
         $bookingId = parent::executeQuery($query, "iiss", [$userId, $roomId, $startDate, $endDate]);
-
-        // create Receipt, insert receiptId into bookings
+        
+        $price = $this->calculatePrice($bookingId, $roomId);
+        $receiptId = $this->createReceipt($price);
+        $this->setReceiptId($bookingId, $receiptId);
 
         return $bookingId;
+    }
+
+    public function setReceiptId($bookingId, $receiptId)
+    {
+        $query =
+        "UPDATE bookings
+        SET receiptId = ?
+        WHERE bookingId = ?";
+        
+        $receiptId = parent::executeQuery($query, "ii", [$receiptId, $bookingId]);
+
+        return $receiptId;
+    }
+
+    public function updatePrice($receiptId, $price)
+    {
+        $query =
+        "UPDATE receipt
+        SET price = ?
+        WHERE id = ?";
+        $receiptId = parent::executeQuery($query, "di", [$price, $receiptId]);
+
+        return $receiptId;
     }
 
     public function calculatePrice($bookingId, $roomId)
@@ -72,18 +97,24 @@ class BookingModel extends Model
     public function countNightsByBookingId($bookingId): int
     {
         $query =
-            "SELECT DATEDIFF(
-                (SELECT startDate FROM bookings WHERE bookingId = ?),
-                (SELECT endDate FROM bookings WHERE bookingId = ?)
-            ) AS res;";
+        "SELECT startDate, endDate
+        FROM bookings
+        WHERE bookingId = ?;";
+            // "SELECT DATEDIFF(
+            //     (SELECT startDate FROM bookings WHERE bookingId = ?),
+            //     (SELECT endDate FROM bookings WHERE bookingId = ?)
+            // ) AS res;";
 
         $stm = self::$connection->prepare($query);
 
-        $result = $this->executeQuery($query, "ii", [$bookingId, $bookingId]);
+        $result = $this->executeQuery($query, "i", [$bookingId]);
+        
+        $startDate = new DateTime($result[0]["startDate"]);
+        $endDate = new DateTime($result[0]["endDate"]);
 
-        $result = $result[0]["res"] * (-1);
+        $numberOfNights = $startDate->diff($endDate)->days;
 
-        return $result;
+        return $numberOfNights;
     }
 
     // public function createReceiptByB
@@ -103,10 +134,11 @@ class BookingModel extends Model
     public function getAllBookings()
     {
         $query =
-            "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
+            "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name, r.price, bs.name as bookingStatus, u.firstname, u.surname
             FROM bookings b
             JOIN booking_status bs ON b.statusId = bs.statusId
-            JOIN users u ON u.userId=b.userId";
+            JOIN users u ON u.userId=b.userId
+            JOIN receipt r ON r.id = b.receiptId";
 
         $bookings = parent::executeQuery($query);
 
