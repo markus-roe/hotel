@@ -10,7 +10,7 @@
                 <a href="./admin/userprofile/{{userId}}">{{firstname}} {{surname}}</a>
             </div>
             </div>
-            <div class="col-4">
+            <div class="col-5">
             <div class="cell">
                 <span class="title">
                 Zeitraum
@@ -19,7 +19,7 @@
                 <input type="date" name="endDate" class="ipsum-card-input" value="{{endDate}}"></input>
             </div>
             </div>
-            <div class="col-4">
+            <div class="col-3">
                 <div class="cell">
                     <span class="title">
                     Status
@@ -60,13 +60,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12">
+            <div class="col-9">
+                </div>
                 <div class="col-3">
                     <div class="cell" style="display: flex; flex-direction:column">
                     <a href="./booking/{{id}}/update"><button type="submit" class="btn btn-success">Bearbeiten</button></a>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

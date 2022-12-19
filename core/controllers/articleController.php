@@ -22,10 +22,10 @@ class ArticleController extends Controller
                 $this->renderPreviewPage();
                 break;
             case "post":
-                $this->renderArticlePage($this->request["articleid"]);
+                $this->renderPostPage($this->request["articleid"]);
                 break;
             case "newpost":
-                $this->renderNewPostPage();
+                $this->renderNewpostPage();
                 break;
             default:
                 $this->renderErrorPage(["content-title" => "markus duftet"]);
@@ -33,7 +33,7 @@ class ArticleController extends Controller
         }
     }
     
-    private function renderArticlePage($articleId)
+    private function renderPostPage($articleId)
     {
 
         $article = $this->articleModel->getArticleById($articleId);
@@ -54,7 +54,7 @@ class ArticleController extends Controller
 
     }
 
-    private function renderNewPostPage()
+    private function renderNewpostPage()
     {
         $this->getTemplate("/Pages/articlePageAdmin");
         $page = new ArticlePageAdmin();

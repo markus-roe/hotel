@@ -62,58 +62,44 @@ class App
         $actionExists = $controllerExists
             ? method_exists($controllerName, $requestAction)
             : false;
-        $viewExists = method_exists($controllerName, "render".ucfirst($request["view"])."Page");
 
+        if ($controllerName == "Controller") {
+            header("Location: " . baseURL . "/main/home");
 
-        if ($controllerName == "Controller")
-        {
-            header("Location: ".baseURL."/main/home");
-        }
-
-        if (!$controllerExists || !$viewExists) {
-            $errPage = new ErrorPage();
-            $errPage->parse(["content-title" => "Sorry...", "content-body" => "Diese Seite existiert leider nicht..."]);
-            $errPage->render();
             return;
         }
-
-        $controller = new $controllerName($request, $this->clientModel);
 
         if ($requestMethod == "GET") {
-            $controller->execute();
-            $controller->indexAction();
+            $controller = new $controllerName($request, $this->clientModel);
 
-            return;
+            $viewExists = method_exists($controllerName, "render" . ucfirst($request["view"]) . "Page");
+
+            if ($viewExists) {
+                $controller->execute();
+                $controller->indexAction();
+
+                return;
+            }
         }
 
-        if ($requestMethod == "POST")
-        {
+        if ($requestMethod == "POST") {
+            $controller = new $controllerName($request, $this->clientModel);
+
             $controller->execute();
             $controller->$requestAction();
 
             return;
         }
 
+        if ($controllerName == "Controller") {
+            header("Location: " . baseURL . "/main/home");
 
+            return;
+        }
 
-        // if (!$controllerExists || ($requestMethod == "GET" && $requestAction != null)) {
-        //     // $this->getController("errorController");
-        //     $errPage = new ErrorPage();
-        //     $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Diese Seite existiert leider nicht..."]);
-        //     $errPage->render();
-        //     return;
-        // }
-
-        // $controller = new $controllerName($request, $this->clientModel);
-
-        // if ($this->acl->isAuthorized($controller, $request)) {
-        //     $controller->execute();
-        //     $controller->$requestAction();
-        // } else {
-        //     $errPage = new ErrorPage();
-        //     $errPage->parse(["content-title"=>"Sorry...", "content-body"=>"Sie haben keine Berechtigung sie zu besuchen"]);
-        //     $errPage->render();
-        // }
+        $errPage = new ErrorPage();
+        $errPage->parse(["content-title" => "Sorry...", "content-body" => "Diese Seite existiert leider nicht..."]);
+        $errPage->render();
     }
 }
 
