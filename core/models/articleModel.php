@@ -17,7 +17,7 @@ class ArticleModel extends Model
 
     public function getArticles()
     {
-        $query = "SELECT content, updated, headline, authorId, picturePath, postId FROM posts p
+        $query = "SELECT content, created, headline, authorId, thumbnailPath, postId FROM posts p
         JOIN pictures pic ON p.pictureid = pic.pictureId;";
 
         $articles = parent::executeQuery($query);

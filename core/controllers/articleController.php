@@ -89,17 +89,18 @@ class ArticleController extends Controller
     $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
     $NewImageName = $ImageName.'.'.$ImageExt;
 
-    $destinationPath = getcwd() . "/public/uploads/pictures/" . $_FILES["articleImage"]["name"];
-    $thumbnailPath = getcwd() . "/public/uploads/pictures/thumbnails/" . $_FILES["articleImage"]["name"];
+    $pictureDestinationPath = getcwd() . "/public/uploads/pictures/" . $_FILES["articleImage"]["name"];
+    $thumbnailDestinationPath = getcwd() . "/public/uploads/pictures/thumbnails/" . $_FILES["articleImage"]["name"];
 
     $picturePath = "/uploads/pictures/" . $_FILES["articleImage"]["name"];
+    $thumbnailPath = "/uploads/pictures/thumbnails/" . $_FILES["articleImage"]["name"];
 
-    move_uploaded_file($_FILES["articleImage"]["tmp_name"], $destinationPath);
+    move_uploaded_file($_FILES["articleImage"]["tmp_name"], $pictureDestinationPath);
 
-    if (is_file($destinationPath)) 
+    if (is_file($pictureDestinationPath)) 
     {
         // get width and height of source image
-        list ($width, $height) = getimagesize($destinationPath);
+        list ($width, $height) = getimagesize($pictureDestinationPath);
         $ratio = $width / $height;
 
         $max = 500;
@@ -123,13 +124,34 @@ class ArticleController extends Controller
         }
 
         $thumbnail = imagecreatetruecolor($newWidth, $newHeight);
-        $source = imagecreatefromjpeg($destinationPath);
 
-        // copy thumbnail with new size
-        imagecopyresized($thumbnail, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        switch($ImageExt)
+        {
+            case ("jpeg"):
+            case ("jpg"):
+            {
+                $source = imagecreatefromjpeg($pictureDestinationPath);
 
-        // save new resized thumbnail to "/thumbnails" folder
-        imagejpeg($thumbnail, $thumbnailPath);
+                // copy thumbnail with new size
+                imagecopyresized($thumbnail, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+                // save new resized thumbnail to "/thumbnails" folder
+                imagejpeg($thumbnail, $thumbnailDestinationPath);
+
+                break;
+            }
+            case ("png"):
+            {
+                $source = imagecreatefrompng($pictureDestinationPath);
+
+                // copy thumbnail with new size
+                imagecopyresized($thumbnail, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+                // save new resized thumbnail to "/thumbnails" folder
+                imagepng($thumbnail, $thumbnailDestinationPath);
+                break;
+            }
+        }
 
     }
 
