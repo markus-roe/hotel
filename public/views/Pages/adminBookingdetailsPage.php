@@ -17,20 +17,23 @@ class AdminBookingdetailsPage extends AdminPage
         $cardCollection = new Component();
 
         foreach ($bookingsData as $data) {
+            $bookingStatus = $data["bookingStatus"];
             $params =
                 [
                     "userId" => @$data["userId"],
-                    "id" => $data["userId"],
+                    "bookingId" => $data["bookingId"],
                     "firstname" => $data["firstname"],
                     "surname" => $data["surname"],
                     "startDate" => $data["startDate"],
                     "endDate" => $data["endDate"],
                     "roomId" => $data["roomId"],
                     "price" => $data["price"],
-                    $data["bookingStatus"] => "selected",
+                    $bookingStatus => "selected",
                     "services" => ""
                 ];
-
+                // echo "<pre>";
+                // var_dump($params);
+                // echo "</pre>";
             if (array_key_exists("services", $data)) {
                 foreach ($data["services"] as $service) {
                     $params["services"] .= "<li>" . $service["name"] . "</li>";

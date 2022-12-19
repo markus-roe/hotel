@@ -1,4 +1,4 @@
-<form action="./booking/{{id}}/update" method="POST">
+<form action="./booking/{{bookingId}}/update" method="POST">
 <div class="ipsum-card">
     <div class="container">
         <div class="row">
@@ -24,10 +24,10 @@
                     <span class="title">
                     Status
                     </span>
-                    <select class="ipsum-card-input select-option" data-labeltype="{{bookingStatus}}" name="" id="">
-                    <option data-labeltype="confirmed" value="confirmed" {{confirmed}}>Bestätigt</option>
-                    <option data-labeltype="new" value="new" {{new}}>Neu</option>
-                    <option data-labeltype="storno" value="storno" {{storno}}>Storniert</option>
+                    <select class="ipsum-card-input select-option" data-labeltype="{{bookingStatus}}" name="bookingStatus" id="">
+                    <option data-labeltype="confirmed" value="2" {{confirmed}}>Bestätigt</option>
+                    <option data-labeltype="new" value="1" {{new}}>Neu</option>
+                    <option data-labeltype="storno" value="3" {{canceled}}>Storniert</option>
                     </select>
                 </div>
             </div>
