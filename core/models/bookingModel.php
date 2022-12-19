@@ -35,17 +35,22 @@ class BookingModel extends Model
             return 0;
         }
 
+        $servicesPrice = 0;
+        $priceTotal = 0;
+
         $query = "INSERT INTO bookings (userId, roomId, startDate, endDate) VALUES (?, ?, ?, ?)";
         $bookingId = parent::executeQuery($query, "iiss", [$userId, $roomId, $startDate, $endDate]);
 
-        $price = $this->calculatePrice($bookingId, $roomId);
-        $receiptId = $this->createReceipt($price);
-        $this->setReceiptId($bookingId, $receiptId);
-        
+        $roomPrice = $this->calculatePrice($bookingId, $roomId);
 
         foreach ($serviceIds as $serviceId) {
-            $this->createServiceReceipt($bookingId, $serviceId);
+            $serviceReceiptId = $this->createServiceReceipt($bookingId, $serviceId);
+            $servicesPrice += $this->getServicePrice($serviceId);
         }
+
+        $priceTotal = $roomPrice + $servicesPrice;
+        $receiptId = $this->createReceipt($bookingId, $priceTotal);
+        $this->setReceiptId($bookingId, $receiptId);
 
         return $bookingId;
     }
@@ -53,12 +58,12 @@ class BookingModel extends Model
     public function getServicePrice($serviceId)
     {
         $query =
-        "SELECT price
+            "SELECT price
         FROM serviceoverview
         WHERE serviceId = ?;";
 
         $servicePrice = self::executeQuery($query, "i", [$serviceId])[0]["price"];
-        
+
         return $servicePrice;
     }
 
@@ -69,9 +74,9 @@ class BookingModel extends Model
         (bookingId, serviceId)
         VALUES(?, ?);";
 
-        $result = parent::executeQuery($query, "ii", [$bookingId, $serviceId]);
+        $serviceReceiptId = parent::executeQuery($query, "ii", [$bookingId, $serviceId]);
 
-        return $result;
+        return $serviceReceiptId;
     }
 
     public function setReceiptId($bookingId, $receiptId)
@@ -92,9 +97,13 @@ class BookingModel extends Model
             "UPDATE receipt
         SET price = ?
         WHERE fk_bookingId = ?";
-        $receiptId = parent::executeQuery($query, "di", [$price, $bookingId]);
 
-        return $receiptId;
+        $stmt = self::$connection->prepare($query);
+        $stmt->bind_param("di", $price, $bookingId);
+        $stmt->execute();
+        $res = $stmt->get_result();
+
+        return $res;
     }
 
     public function calculatePrice($bookingId, $roomId)
@@ -107,14 +116,14 @@ class BookingModel extends Model
         return $price;
     }
 
-    public function createReceipt($price)
+    public function createReceipt($bookingId, $price)
     {
 
         $query =
-            "INSERT INTO receipt (price) VALUES(?);";
+            "INSERT INTO receipt (price, fk_bookingId) VALUES(?, ?);";
 
         $stmt = self::$connection->prepare($query);
-        $stmt->bind_param("d", $price);
+        $stmt->bind_param("di", $price, $bookingId);
         $stmt->execute();
         $receiptId = self::$connection->insert_id;
 
@@ -149,7 +158,7 @@ class BookingModel extends Model
     public function getBookingByBookingId($bookingId)
     {
         $query =
-            "SELECT b.userId, b.bookingId, b.startDate, b.endDate, b.roomId, r.price, bs.name as bookingStatus, u.firstname, u.surname
+            "SELECT b.userId, b.bookingId, b.date, b.startDate, b.endDate, b.roomId, r.price, bs.name as bookingStatus, u.firstname, u.surname
         FROM bookings b
         JOIN booking_status bs ON b.statusId = bs.statusId
         JOIN users u ON u.userId=b.userId
@@ -251,7 +260,7 @@ class BookingModel extends Model
         $bookingsColl = [];
 
         $query =
-            "SELECT b.bookingId, r.price, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
+            "SELECT b.bookingId, b.date, r.price, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
         FROM bookings b
         JOIN booking_status bs ON b.statusId = bs.statusId
         JOIN users u ON u.userId=b.userId

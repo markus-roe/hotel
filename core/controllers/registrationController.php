@@ -66,7 +66,7 @@ class RegistrationController extends Controller
 
         $hashedPassword = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        $registrationSuccessfull = $this->clientModel->registerNewUser(
+        @$registrationSuccessfull = $this->clientModel->registerNewUser(
             $_POST["firstname"],
             $_POST["surname"],
             $_POST["username"],
@@ -81,6 +81,11 @@ class RegistrationController extends Controller
             $this->clientModel->loginUser($_POST["username"], $_POST["password"]);
             header("Location: ../profile/".$_SESSION["rolename"]."");
 
+        }
+
+        else
+        {
+            header("Location: ../registration/passworderr");
         }
 
     }

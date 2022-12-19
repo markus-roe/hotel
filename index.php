@@ -21,8 +21,10 @@ else
 
 // $model = new BookingModel();
 
-// $res = $model->getBookingByBookingId(24);
+// $res = $model->updatePrice(27, 1.00);
+// echo "<pre>";
 // var_dump($res);
+// echo "</pre>";
 
 // return 0;
 // die();
@@ -30,14 +32,17 @@ else
 try {
     
     $app = new App();
-
+    
     $app->router->get("/main/:view");
     $app->router->get("/booking/rooms");
     $app->router->get("/booking/bookingdetails/:userid");
     $app->router->get("/booking/bookingdetails");
     $app->router->get("/booking/room/:roomid");
+    $app->router->get("/registration/newuser");
+    $app->router->get("/registration/:view");
+    $app->router->post("/registration/:action");
     $app->router->post("/booking/:id/:action");
-    $app->router->post("/booking/:id/:action");
+    // $app->router->post("/booking/:id/:action");
     $app->router->get("/article/preview");
     $app->router->get("/article/newpost");
     $app->router->get("/article/post/:articleid");
