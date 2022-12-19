@@ -1,4 +1,4 @@
-<form action="./login/logout" method="post">
+<form action="./login/logout" method="post" style="margin: 0px;">
     <input style="position:absolute; width: 100%; opacity: 0;" type="submit">
     <li class="{{isActive}}" style="cursor: pointer">
         <div class="iconwrapper">

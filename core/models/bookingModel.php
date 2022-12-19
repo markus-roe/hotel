@@ -152,7 +152,7 @@ class BookingModel extends Model
 
     public function mergeBookingWithServices($booking, $services)
     {
-        $booking["services"] = [...$services];
+        $booking[0]["services"] = [...$services];
         // $booking = array_merge($booking, $services);
         return $booking;
     }
@@ -236,7 +236,7 @@ class BookingModel extends Model
     //TODO get service names
     public function getBookingsByUserId($userId)
     {
-        $bookings = [];
+        $bookingsColl = [];
 
         $query =
             "SELECT b.bookingId, r.price, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
@@ -253,8 +253,10 @@ class BookingModel extends Model
         $bookings = $result->fetch_all(MYSQLI_ASSOC);
 
         for ($index = 0; $index < count($bookings); $index++) {
+            $temp = [];
             $serviceNames = $this->getServiceNamesByBookingId($bookings[$index]["bookingId"]);
-            array_push($bookings[$index], $this->mergeBookingWithServices($bookings[$index], $serviceNames));
+            $temp[0] = $bookings[$index];
+            $bookings[$index] =  $this->mergeBookingWithServices($temp, $serviceNames)[0];
         }
 
         return $bookings;

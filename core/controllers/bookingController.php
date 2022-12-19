@@ -63,8 +63,8 @@ class BookingController extends ClientController
             $_POST["startDate"] != "" &&
             $_POST["endDate"] != "";
 
-        if (!$inputIsValid || !$bookingModel->createBooking($this->userData["userId"], $this->request["roomid"], $_POST["startDate"], $_POST["endDate"], $_POST["services"])) {
-            header("Location: " . baseURL . "/booking/room/{$this->request["roomid"]}?res=invalid");
+        if (!$inputIsValid || !$bookingModel->createBooking($this->userData["userId"], $this->request["id"], $_POST["startDate"], $_POST["endDate"], $_POST["services"])) {
+            header("Location: " . baseURL . "/booking/room/{$this->request["id"]}?res=invalid");
 
             return 0;
         }
@@ -74,7 +74,7 @@ class BookingController extends ClientController
 
     public function updateAction()
     {
-        $bookingId = $this->request["bookingid"];
+        $bookingId = $this->request["id"];
 
         $price = $_POST["price"] ? $_POST["price"] : 0;
         $startDate = $_POST["startDate"] ? $_POST["startDate"] : "2010-10-10";

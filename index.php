@@ -36,8 +36,8 @@ try {
     $app->router->get("/booking/bookingdetails/:userid");
     $app->router->get("/booking/bookingdetails");
     $app->router->get("/booking/room/:roomid");
-    $app->router->post("/booking/:roomid/:action/");
-    $app->router->post("/booking/:bookingid/:action");
+    $app->router->post("/booking/:id/:action");
+    $app->router->post("/booking/:id/:action");
     $app->router->get("/article/preview");
     $app->router->get("/article/newpost");
     $app->router->get("/article/post/:articleid");
