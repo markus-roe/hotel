@@ -8,11 +8,11 @@ class ArticlePreviewCard extends Component
     {        
         parent::__construct();
 
-        // article-preview, article-updated, article-headline, article-author
+        // article-preview, article-created, article-headline, article-author
         $newPreview = new Template("articlePreviewCard", 
         [
             "article-preview"=>$previewConfig["preview"],
-            "article-updated"=>$previewConfig["updated"],
+            "article-created"=>$previewConfig["created"],
             "article-headline"=>$previewConfig["headline"],
             "article-author"=>$previewConfig["author"]
         ]);
