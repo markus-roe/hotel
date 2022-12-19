@@ -28,7 +28,7 @@ class AccessControl
         "AdminController" => [":index" => "admin", ":updateprofile"=>"admin", ":updatebooking" => "admin"],
         "UserController" => [":index"=> "user_only"],
         "ClientController" => [":updateprofile"=>"client", ":index"=>"client"],
-        "BookingController" => ["bookingdetails::index" => "client", "overview::index" => "user", "rooms::index"=>"all", "room::index"=>"all", ":create"=>"user_only", ":bookingId::update" =>"admin"],
+        "BookingController" => ["bookingdetails::index" => "client", "overview::index" => "user", "rooms::index"=>"all", "room::index"=>"all", ":create"=>"user_only", ":update" =>"admin"],
         "ErrorController" => [":index"=>"all"]
     ];
 
@@ -57,9 +57,9 @@ class AccessControl
         return $keyToClearanceLevel;
     }
 
-    public function isAuthorized($controller, $request)
+    public function isAuthorized($controllerName, $request)
     {
-        $controllerName = get_class($controller);
+        // $controllerName = get_class($controller);
         $key = $this->keyToClearanceLevel($controllerName, $request);
         $necessaryClearanceLevel = $this->clearanceList[$controllerName][$key];
 

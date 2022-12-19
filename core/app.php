@@ -69,6 +69,15 @@ class App
             return;
         }
 
+        if (!$this->acl->isAuthorized($controllerName, $request))
+        {
+            $errPage = new ErrorPage();
+            $errPage->parse(["content-title" => "Sorry...", "content-body" => "Sie haben keine Befugnis diese Seite zu besuchen"]);
+            $errPage->render();
+
+            return 0;
+        }
+        
         if ($requestMethod == "GET") {
             $controller = new $controllerName($request, $this->clientModel);
 
@@ -98,7 +107,7 @@ class App
         }
 
         $errPage = new ErrorPage();
-        $errPage->parse(["content-title" => "Sorry...", "content-body" => "Diese Seite existiert leider nicht..."]);
+        $errPage->parse(["content-title" => "Sorry...", "content-body" => "😔 Diese Seite existiert leider nicht..."]);
         $errPage->render();
     }
 }

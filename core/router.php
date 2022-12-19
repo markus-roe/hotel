@@ -91,6 +91,11 @@ class Router
         // get query-params here?
         $this->setRequest("current_uri", $this->getUri());
         $this->request = $this->matchRoute($route, $method);
+        // TEMPORARY
+        if ($method == "GET")
+        {
+            $this->setRequest("action", "index");
+        }
 
         return $this->request;
     }
