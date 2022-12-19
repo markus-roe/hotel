@@ -1,9 +1,0 @@
-{
-        "login":
-        {
-                "headerTitle":"Login",
-                "mainSection":"<div class=\"ipsum-form\">\n<form action=\"\" method=\"POST\">\n                <div class=\"ipsum-fieldset\">\n                    <div class=\"ipsum-input-wrapper\">\n                        <div class=\"ipsum-input-container\">\n                            <input class=\"ipsum-input text\" type=\"text\" name=\"username\" placeholder=\"Benutzername\"/>                            \n                        </div>\n                        <div class=\"ipsum-input-container\">\n                            <input class=\"ipsum-input text\" type=\"password\" name=\"password\" placeholder=\"Passwort\"/>\n                        </div>\n                    </div>\n                </div>\n\n                <div class=\"spaceBetween font-small\">\n                    <div class=\"ipsum-checkbox\">\n                        <input class=\"ipsum-input\" type=\"checkbox\" id=\"remember\" name=\"remember\">\n                        <label for=\"remember\">Remember me</label>\n                    </div>\n                    <a style=\"display: block;\" href=\"\">Passwort vergessen</a>\n\n                </div>\n\n                <div class=\"center\">\n                <button class=\"ipsum-button affirm\" type=\"submit\">Login</button>\n                Don't have an account yet? <a style=\"display: block\" href=\"./register.html\">Register</a>\n            </div>\n\n            </form>\n        </div>"
-             
-        }
-
-}
