@@ -28,7 +28,7 @@ class AdminguestsPage extends AdminPage
         
         unset($params["guestInfo"]);
 
-        parent::parse($params = []);
+        parent::parse($params);
     }
     
     public function addGuestCard($card)

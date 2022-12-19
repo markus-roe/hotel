@@ -49,7 +49,7 @@ class AdminController extends ClientController
         {
             $page->triggerPopup("<span style='font-size:1.5rem'>🥳</span> Update erfolgreich!");
         }
-        $page->parse([...$this->userData, "guestInfo"=>$guests]);
+        $page->parse([...$this->userData, "guestInfo"=>$guests, "content-title" => "Gäste"]);
         $page->render();
     }
 
