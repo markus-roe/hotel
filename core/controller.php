@@ -5,7 +5,7 @@
 require_once "./core/utils.php";
 require_once "./core/controllers/errorController.php";
 
-abstract class Controller
+ class Controller
 {
     protected $userData;
 
