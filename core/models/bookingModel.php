@@ -29,7 +29,7 @@ class BookingModel extends Model
         return $isVacantCount;
     }
 
-    public function createBooking($userId, $roomId, $startDate, $endDate)
+    public function createBooking($userId, $roomId, $startDate, $endDate, array $serviceIds)
     {
         if (!$this->roomIsVacant($startDate, $endDate, intval($roomId))) {
             return 0;
@@ -38,9 +38,50 @@ class BookingModel extends Model
         $query = "INSERT INTO bookings (userId, roomId, startDate, endDate) VALUES (?, ?, ?, ?)";
         $bookingId = parent::executeQuery($query, "iiss", [$userId, $roomId, $startDate, $endDate]);
 
-        // create Receipt, insert receiptId into bookings
+        $price = $this->calculatePrice($bookingId, $roomId);
+        $receiptId = $this->createReceipt($price);
+        $this->setReceiptId($bookingId, $receiptId);
+
+        foreach ($serviceIds as $serviceId) {
+            $this->createServiceReceipt($bookingId, $serviceId);
+        }
 
         return $bookingId;
+    }
+
+    public function createServiceReceipt($bookingId, $serviceId)
+    {
+        $query =
+            "INSERT INTO serviceReceipt
+        (bookingId, serviceId)
+        VALUES(?, ?);";
+
+        $result = parent::executeQuery($query, "ii", [$bookingId, $serviceId]);
+
+        return $result;
+    }
+
+    public function setReceiptId($bookingId, $receiptId)
+    {
+        $query =
+            "UPDATE bookings
+        SET receiptId = ?
+        WHERE bookingId = ?";
+
+        $receiptId = parent::executeQuery($query, "ii", [$receiptId, $bookingId]);
+
+        return $receiptId;
+    }
+
+    public function updatePrice($receiptId, $price)
+    {
+        $query =
+            "UPDATE receipt
+        SET price = ?
+        WHERE id = ?";
+        $receiptId = parent::executeQuery($query, "di", [$price, $receiptId]);
+
+        return $receiptId;
     }
 
     public function calculatePrice($bookingId, $roomId)
@@ -72,21 +113,49 @@ class BookingModel extends Model
     public function countNightsByBookingId($bookingId): int
     {
         $query =
-            "SELECT DATEDIFF(
-                (SELECT startDate FROM bookings WHERE bookingId = ?),
-                (SELECT endDate FROM bookings WHERE bookingId = ?)
-            ) AS res;";
+            "SELECT startDate, endDate
+        FROM bookings
+        WHERE bookingId = ?;";
+        // "SELECT DATEDIFF(
+        //     (SELECT startDate FROM bookings WHERE bookingId = ?),
+        //     (SELECT endDate FROM bookings WHERE bookingId = ?)
+        // ) AS res;";
 
         $stm = self::$connection->prepare($query);
 
-        $result = $this->executeQuery($query, "ii", [$bookingId, $bookingId]);
+        $result = $this->executeQuery($query, "i", [$bookingId]);
 
-        $result = $result[0]["res"] * (-1);
+        $startDate = new DateTime($result[0]["startDate"]);
+        $endDate = new DateTime($result[0]["endDate"]);
 
-        return $result;
+        $numberOfNights = $startDate->diff($endDate)->days;
+
+        return $numberOfNights;
     }
 
-    // public function createReceiptByB
+    public function getBookingByBookingId($bookingId)
+    {
+        $query =
+            "SELECT b.userId, b.startDate, b.endDate, b.roomId, r.price, bs.name as bookingStatus, u.firstname, u.surname
+        FROM bookings b
+        JOIN booking_status bs ON b.statusId = bs.statusId
+        JOIN users u ON u.userId=b.userId
+        JOIN receipt r ON r.id = b.receiptId
+        WHERE bookingId = ?";
+
+        $booking = parent::executeQuery($query, "i", ["$bookingId"]);
+        $serviceNames = $this->getServiceNamesByBookingId($bookingId);
+        $booking = $this->mergeBookingWithServices($booking, $serviceNames);
+
+        return $booking;
+    }
+
+    public function mergeBookingWithServices($booking, $services)
+    {
+        $booking[0]["services"] = [...$services];
+        // $booking = array_merge($booking, $services);
+        return $booking;
+    }
 
     public function getPricePerNightByRoomId($roomId)
     {
@@ -100,26 +169,81 @@ class BookingModel extends Model
         return $pricePerNight;
     }
 
-    public function getAllBookings()
+    public function getAllBookingIdsByUserId($userId)
     {
         $query =
-            "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
-            FROM bookings b
-            JOIN booking_status bs ON b.statusId = bs.statusId
-            JOIN users u ON u.userId=b.userId";
+            "SELECT bookingId
+        FROM bookings
+        WHERE userId = ?";
 
-        $bookings = parent::executeQuery($query);
+        $bookingIds = parent::executeQuery($query, "i", [$userId]);
+
+        return $bookingIds;
+    }
+
+    //TODO get service names
+    public function getAllBookings()
+    {
+        $bookings = [];
+        $services = [];
+        $bookingIdRows = $this->getAllBookingIds();
+
+        for ($index = 0; $index < count($bookingIdRows); $index++)
+        {
+            $booking = $this->getBookingByBookingId($bookingIdRows[$index]["bookingId"]);
+            array_push($bookings, $booking[0]);
+        }
+
 
         return $bookings;
     }
 
-    public function getBookingByUserId($userId)
+    public function getServiceNamesByBookingId($bookingId)
+    {
+        $services = $this->getServicesByBookingId($bookingId);
+        // $serviceNames = array_column($services, "name");
+
+        return $services;
+    }
+
+    public function getAllBookingIds()
     {
         $query =
-            "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
+            "SELECT bookingId
+        FROM bookings;";
+
+        $stmt = self::$connection->prepare($query);
+        $stmt->execute();
+        $res = $stmt->get_result();
+        $bookingIds = $res->fetch_all(MYSQLI_ASSOC);
+
+        return $bookingIds;
+    }
+
+
+    public function getServicesByBookingId($bookingId)
+    {
+        $query =
+            "SELECT so.name
+        FROM serviceoverview so
+        JOIN serviceReceipt sr ON sr.id = so.serviceId
+        WHERE sr.bookingId = ?";
+
+        $serviceNames = parent::executeQuery($query, "i", [$bookingId]);
+
+        return $serviceNames;
+    }
+    //TODO get service names
+    public function getBookingsByUserId($userId)
+    {
+        $bookings = [];
+
+        $query =
+            "SELECT b.bookingId, r.price, b.userId, b.startDate, b.endDate, b.roomId, bs.name, bs.name as bookingStatus, u.firstname, u.surname
         FROM bookings b
         JOIN booking_status bs ON b.statusId = bs.statusId
         JOIN users u ON u.userId=b.userId
+        JOIN receipt r ON r.id = b.receiptId
         WHERE b.userId = ?;";
 
         $stmt = self::$connection->prepare($query);
@@ -128,19 +252,24 @@ class BookingModel extends Model
         $result = $stmt->get_result();
         $bookings = $result->fetch_all(MYSQLI_ASSOC);
 
-        return $bookings;
-    }
-
-    public function getBookingsByUserId($userId)
-    {
-        $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
-    JOIN booking_status bs ON b.statusId = bs.statusId
-    WHERE b.userId = ?;";
-
-        $bookings = parent::executeQuery($query, "i", [$userId]);
+        for ($index = 0; $index < count($bookings); $index++) {
+            $serviceNames = $this->getServiceNamesByBookingId($bookings[$index]["bookingId"]);
+            $bookings[$index]["services"] = [...$serviceNames];
+        }
 
         return $bookings;
     }
+
+    // public function getBookingsByUserId($userId)
+    // {
+    //     $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
+    // JOIN booking_status bs ON b.statusId = bs.statusId
+    // WHERE b.userId = ?;";
+
+    //     $bookings = parent::executeQuery($query, "i", [$userId]);
+
+    //     return $bookings;
+    // }
 
     //? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
     public function updateBookingStatusById($bookingId, $statusName)

@@ -20,17 +20,29 @@
                 <button class="ipsum-button btn btn-primary" type="submit">Buchen</button>
             </div>
         </div>
-    </form>
-    <span class="horizontalLine"></span>
-    <br>
+        <span class="horizontalLine"></span>
+        <br>
     <!-- {{description}} -->
     <h3>Ausstattung</h3>
     <p>
-        <ul class="ipsum-ul">
-            <li>Klima-Anlage</li>
-            <li>Fernseher</li>
-            <li>WIFI</li>
-            <li>Room Service</li>
-        </ul>
-    </p>
+    <div class="ipsum-checkbox">
+        <input type="checkbox" name="services[]" id="ac" class="ipsum-input" value="3"/>
+        <label for="ac">Klima-Anlage</label>
+    </div>
+    <div class="ipsum-checkbox">
+        <input type="checkbox" name="services[]" id="tv" class="ipsum-input" value="4">
+        <label for="tv">TV</label>
+    </div>
+    <div class="ipsum-checkbox">
+        <input type="checkbox" name="services[]" id="parking" class="ipsum-input" value="1">
+        <label for="parking">Parkplatz</label>
+    </div>
+    <div class="ipsum-checkbox">
+        <input type="checkbox" name="services[]" id="wifi" class="ipsum-input" value="2">
+        <label for="wifi">WIFI</label>
+    </div>
+
+
+</p>
+</form>
 </article>

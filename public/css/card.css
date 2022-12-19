@@ -2,7 +2,7 @@
     border: 1px solid #D5D5D5;
     box-shadow: 0px 2px 4px #13131352;
     border-radius: 4px;
-    height: 12rem;
+    /* height: 12rem; */
     padding: 1rem 0.5rem;
     margin-bottom: 2rem;
     line-height: 1.1rem;
@@ -53,7 +53,7 @@ textarea.ipsum-card-input {
 }
 
 .services-list li {
-    list-style-type: disc !important;
+    list-style-type: circle !important;
     clear: both !important;
     
 }

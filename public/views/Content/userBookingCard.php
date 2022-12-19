@@ -1,7 +1,7 @@
 <?php
 require_once getcwd()."/core/component.php";
 
-class BookingCard extends Component
+class UserBookingCard extends Component
 {
     function __construct()
     {
@@ -21,7 +21,7 @@ class BookingCard extends Component
             "price"
         ];
         
-        $bookingCardTemplate = new Template("bookingCardTemplate", $params);
+        $bookingCardTemplate = new Template("guestBookingCardTemplate", $params);
 
         $this->templates =
         [

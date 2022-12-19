@@ -12,7 +12,7 @@ class UserBookingdetailsPage extends UserPage
     {
         if (count($bookingsData) <= 0) return 0;
 
-        $this->getTemplate("/Content/bookingCard");
+        $this->getTemplate("/Content/guestBookingCard");
         $cardCollection = new Component();
 
         foreach ($bookingsData as $data) {
@@ -24,15 +24,21 @@ class UserBookingdetailsPage extends UserPage
                         "startDate" => $data["startDate"],
                         "endDate" => $data["endDate"],
                         "roomId" => $data["roomId"],
+                        "price" => $data["price"],
                         $data["bookingStatus"] => "selected",
                         "services" => ""
                     ];
+                
+                if (array_key_exists("services", $data))
+                {
+                    foreach ($data["services"] as $service) {
+                        $params["services"] .= "<li>" . $service["name"] . "</li>";
+                    }
 
-                // foreach ($data["services"] as $service) {
-                //     $params["services"] .= "<li>" . $service . "</li>";
-                // }
+                }
 
-                $card = new BookingCard();
+
+                $card = new UserBookingCard();
                 $card->parse($params);
 
                 array_push($cardCollection->templates, $card);
