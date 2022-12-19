@@ -28,6 +28,9 @@ class ClientController extends Controller
                 case ("UserProfilePage"):
                     $this->getTemplate("/Pages/userProfilePage");
                     break;
+                case ("UserBookingdetailsPage"):
+                    $this->getTemplate("/Pages/userBookingdetailsPage");
+                    break;
                 case ("UserProfilePage"):
                     $this->getTemplate("/Pages/userProfilePage");
                     break;  
