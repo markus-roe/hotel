@@ -22,6 +22,7 @@ class AdminBookingdetailsPage extends AdminPage
                 $params =
                     [
                         "userId" => @$data["userId"],
+                        "bookingId" => $data["bookingId"],
                         "firstname" => $data["firstname"],
                         "surname" => $data["surname"],
                         "startDate" => $data["startDate"],

@@ -25,10 +25,10 @@ class AccessControl
         "ImprintController" => [":index" => "all"],
         "FaqController" => [":index" => "all"],
         "ProfileController" => ["client::index" => "client"],
-        "AdminController" => [":index" => "admin", ":updateprofile"=>"admin"],
+        "AdminController" => [":index" => "admin", ":updateprofile"=>"admin", ":updatebooking" => "admin"],
         "UserController" => [":index"=> "user_only"],
         "ClientController" => [":updateprofile"=>"client", ":index"=>"client"],
-        "BookingController" => ["bookingdetails::index" => "client", "overview::index" => "user", "rooms::index"=>"all", "room::index"=>"all", ":create"=>"user_only"],
+        "BookingController" => ["bookingdetails::index" => "client", "overview::index" => "user", "rooms::index"=>"all", "room::index"=>"all", ":create"=>"user_only", ":bookingId::update" =>"admin"],
         "ErrorController" => [":index"=>"all"]
     ];
 
