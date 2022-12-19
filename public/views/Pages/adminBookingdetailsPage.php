@@ -29,7 +29,8 @@ class AdminBookingdetailsPage extends AdminPage
                     "roomId" => $data["roomId"],
                     "price" => $data["price"],
                     $bookingStatus => "selected",
-                    "services" => ""
+                    "services" => "",
+                    "date" => $data["date"]
                 ];
                 // echo "<pre>";
                 // var_dump($params);
