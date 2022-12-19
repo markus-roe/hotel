@@ -6,7 +6,18 @@ require_once "./core/app.php";
 require_once "./core/router.php";
 require_once "./core/models/bookingModel.php";
 
-define('baseURL', "http://localhost/hotel");
+// differnt roots on mac and windows
+if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
+{
+    // mac baseURL
+    define('baseURL', "http://192.168.64.2/hotel");
+}
+else 
+{
+    // windows baseURL
+    define('baseURL', "http://localhost/hotel");
+}
+
 
 $model = new BookingModel();
 
@@ -26,7 +37,8 @@ try {
     $app->router->get("/booking/bookingdetails/:userid");
     $app->router->get("/booking/bookingdetails");
     $app->router->get("/booking/room/:roomid");
-    $app->router->post("/booking/:roomid/:action/");
+    // $app->router->post("/booking/:roomid/:action");
+    $app->router->post("/booking/:bookingid/:action");
     $app->router->get("/article/preview");
     $app->router->get("/article/newpost");
     $app->router->get("/article/post/:articleid");
