@@ -41,12 +41,25 @@ class BookingModel extends Model
         $price = $this->calculatePrice($bookingId, $roomId);
         $receiptId = $this->createReceipt($price);
         $this->setReceiptId($bookingId, $receiptId);
+        
 
         foreach ($serviceIds as $serviceId) {
             $this->createServiceReceipt($bookingId, $serviceId);
         }
 
         return $bookingId;
+    }
+
+    public function getServicePrice($serviceId)
+    {
+        $query =
+        "SELECT price
+        FROM serviceoverview
+        WHERE serviceId = ?;";
+
+        $servicePrice = self::executeQuery($query, "i", [$serviceId])[0]["price"];
+        
+        return $servicePrice;
     }
 
     public function createServiceReceipt($bookingId, $serviceId)
@@ -73,13 +86,13 @@ class BookingModel extends Model
         return $receiptId;
     }
 
-    public function updatePrice($receiptId, $price)
+    public function updatePrice($bookingId, $price)
     {
         $query =
             "UPDATE receipt
         SET price = ?
-        WHERE id = ?";
-        $receiptId = parent::executeQuery($query, "di", [$price, $receiptId]);
+        WHERE fk_bookingId = ?";
+        $receiptId = parent::executeQuery($query, "di", [$price, $bookingId]);
 
         return $receiptId;
     }
@@ -136,12 +149,12 @@ class BookingModel extends Model
     public function getBookingByBookingId($bookingId)
     {
         $query =
-            "SELECT b.userId, b.startDate, b.endDate, b.roomId, r.price, bs.name as bookingStatus, u.firstname, u.surname
+            "SELECT b.userId, b.bookingId, b.startDate, b.endDate, b.roomId, r.price, bs.name as bookingStatus, u.firstname, u.surname
         FROM bookings b
         JOIN booking_status bs ON b.statusId = bs.statusId
         JOIN users u ON u.userId=b.userId
         JOIN receipt r ON r.id = b.receiptId
-        WHERE bookingId = ?";
+        WHERE b.bookingId = ?";
 
         $booking = parent::executeQuery($query, "i", ["$bookingId"]);
         $serviceNames = $this->getServiceNamesByBookingId($bookingId);
@@ -188,8 +201,7 @@ class BookingModel extends Model
         $services = [];
         $bookingIdRows = $this->getAllBookingIds();
 
-        for ($index = 0; $index < count($bookingIdRows); $index++)
-        {
+        for ($index = 0; $index < count($bookingIdRows); $index++) {
             $booking = $this->getBookingByBookingId($bookingIdRows[$index]["bookingId"]);
             array_push($bookings, $booking[0]);
         }
@@ -262,22 +274,11 @@ class BookingModel extends Model
         return $bookings;
     }
 
-    // public function getBookingsByUserId($userId)
-    // {
-    //     $query = "SELECT b.bookingId, b.userId, b.startDate, b.endDate, b.roomId, bs.name FROM bookings b
-    // JOIN booking_status bs ON b.statusId = bs.statusId
-    // WHERE b.userId = ?;";
-
-    //     $bookings = parent::executeQuery($query, "i", [$userId]);
-
-    //     return $bookings;
-    // }
-
     //? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
     public function updateBookingStatusById($bookingId, $statusName)
     {
-        $query = 
-        "UPDATE bookings SET statusId bs = 
+        $query =
+            "UPDATE bookings SET statusId bs = 
         (SELECT bs.statusId FROM booking_status
         WHERE bs.name = ?)
         WHERE bookingId = ?";
@@ -290,15 +291,31 @@ class BookingModel extends Model
     public function updateBookingById($bookingId, $startDate, $endDate, $bookingStatus, $price, $roomId)
     {
         $query =
-        "UPDATE bookings
-        SET startdate = ?, SET endDate = ?, SET price = ?, 
+            "UPDATE bookings
+        SET startDate = ?, endDate = ?, statusId = ?, roomId = ?
         WHERE bookingId = ?;";
 
-    $booking = parent::executeQuery($query, "ssi", [$startDate, $endDate, $price]);
+        $stmt = self::$connection->prepare($query);
+        $stmt->bind_param("ssiii", $startDate, $endDate, $bookingStatus, $roomId, $bookingId);
+        $stmt->execute();
+        $res = $stmt->get_result();
 
-    $this->updateBookingStatusById($bookingId, $bookingStatus);
+        $this->updatePrice($bookingId, $price);
+        // $this->updateBookingStatusById($bookingId, $bookingStatus);
 
-    return true;
+        return true;
+    }
+
+    public function updateReceipt($bookingId, $price)
+    {
+        $query =
+            "UPDATE receipt
+        SET price = ?
+        WHERE fk_bookingId = ?";
+
+        $res = parent::executeQuery($query, "ii", [$price, $bookingId]);
+
+        return $res;
     }
 
     //? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
