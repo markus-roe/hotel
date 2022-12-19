@@ -100,12 +100,12 @@ class BookingController extends ClientController
         $pageText = ["content-title" => "Buchungen", "content-body" => "Noch keine Buchungen vorhanden!"];
 
         if (count($bookingData) <= 0) {
-            $pageText["content-body"] = "";
             $bookingPage->parse([...$this->userData, ...$pageText]);
             $bookingPage->render();
             return 0;
         }
-
+        
+        $pageText["content-body"] = "";
         if ($this->request["res"] == "success") {
             $bookingPage->triggerPopup("<span style='font-size:1.5rem'>🥳</span> Buchung erfolgreich!");
         }
