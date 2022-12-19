@@ -9,11 +9,33 @@
     border-radius: 3px;
 }
 
+@media screen and (max-width: 750px),
+(max-height: 600px) {
+    .ipsum-form {
+        padding: 2rem 2rem !important;
+      }
+}
+
 .ipsum-fieldset {
     display: flex;
     height: auto;
     flex-direction: column;
 }
+
+.ipsum-input-container-vertical {
+    display: flex;
+    flex-direction: row !important;
+    justify-content: space-between;
+    align-content: flex-end;
+    flex-wrap: wrap; 
+}
+
+.ipsum-input-container-vertical  input
+{
+    margin: 0 !important;    
+    display: block;
+}
+
 
 .ipsum-article {
     padding: 1rem 1rem;
@@ -64,8 +86,9 @@
 .ipsum-input-wrapper {
     display: flex;
     flex-direction: column;
+
     height: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .ipsum-button-container {
@@ -193,3 +216,4 @@
         opacity: 1;
     }
 }
+

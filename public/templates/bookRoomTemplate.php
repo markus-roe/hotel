@@ -10,39 +10,35 @@
     <form action="{{actionPath}}{{roomId}}" method="POST">
         <div id="booking-inputs" class="text-center ipsum-form tiny float">
             <!-- <span class="text-center" style="color: red; position: absolute">{{inputerrormsg}}</span> -->
-            <div class="ipsum-input-container">
+            <div class="ipsum-input-container-vertical">
                 <input type="date" name="startDate" id="">
-            </div>
-            <div class="ipsum-input-container">
                 <input type="date" name="endDate" id="">
-            </div>
-            <div class="ipsum-input-container">
                 <button class="ipsum-button btn btn-primary" type="submit">Buchen</button>
             </div>
         </div>
         <span class="horizontalLine"></span>
         <br>
-    <!-- {{description}} -->
-    <h3>Ausstattung</h3>
-    <p>
-    <div class="ipsum-checkbox">
-        <input type="checkbox" name="services[]" id="ac" class="ipsum-input" value="3"/>
-        <label for="ac">Klima-Anlage</label>
-    </div>
-    <div class="ipsum-checkbox">
-        <input type="checkbox" name="services[]" id="tv" class="ipsum-input" value="4">
-        <label for="tv">TV</label>
-    </div>
-    <div class="ipsum-checkbox">
-        <input type="checkbox" name="services[]" id="parking" class="ipsum-input" value="1">
-        <label for="parking">Parkplatz</label>
-    </div>
-    <div class="ipsum-checkbox">
-        <input type="checkbox" name="services[]" id="wifi" class="ipsum-input" value="2">
-        <label for="wifi">WIFI</label>
-    </div>
+        <!-- {{description}} -->
+        <h3>Ausstattung</h3>
+        <div class="text-center container-fluid w-40">
+            <div class="ipsum-checkbox">
+                <input type="checkbox" name="services[]" id="ac" class="ipsum-input" value="3" />
+                <label for="ac">Klima-Anlage</label>
+            </div>
+            <div class="ipsum-checkbox">
+                <input type="checkbox" name="services[]" id="tv" class="ipsum-input" value="4">
+                <label for="tv">TV</label>
+            </div>
+            <div class="ipsum-checkbox">
+                <input type="checkbox" name="services[]" id="parking" class="ipsum-input" value="1">
+                <label for="parking">Parkplatz</label>
+            </div>
+            <div class="ipsum-checkbox">
+                <input type="checkbox" name="services[]" id="wifi" class="ipsum-input" value="2">
+                <label for="wifi">WIFI</label>
+            </div>
 
 
-</p>
-</form>
+        </div>
+    </form>
 </article>

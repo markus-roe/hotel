@@ -2,9 +2,13 @@
     --link-underline: 1.5px;
   }
   
-
+html {
+  overflow-x: hidden !important;
+}
     body {
         background-color: f8f8f8;
+        overflow-x: hidden;
+        width: 100vw;
         overflow-x: hidden;
     }
 
