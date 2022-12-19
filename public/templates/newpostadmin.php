@@ -19,7 +19,7 @@
                 </div>
                 <div class="ipsum-input-container labelOnTop horizontalLine">
                     <label for="articleImage">Upload Image</label>
-                    <input type="file" name="articleImage" id="articleImage" placeholder="Upload Image">
+                    <input type="file" accept="image/png, image/gif, image/jpeg" name="articleImage" id="articleImage" placeholder="Upload Image">
                 </div>
 
             </div>
