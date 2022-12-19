@@ -60,10 +60,10 @@ class BookingController extends ClientController
         $inputIsValid =
             isset($_POST["startDate"]) &&
             isset($_POST["endDate"]) &&
-            $_POST["startDate"] != "" &
+            $_POST["startDate"] != "" &&
             $_POST["endDate"] != "";
 
-        if (!$inputIsValid || !$bookingModel->createBooking($this->userData["userId"], $this->request["roomid"], $_POST["startDate"], $_POST["endDate"])) {
+        if (!$inputIsValid || !$bookingModel->createBooking($this->userData["userId"], $this->request["roomid"], $_POST["startDate"], $_POST["endDate"], $_POST["services"])) {
             header("Location: " . baseURL . "/booking/room/{$this->request["roomid"]}?res=invalid");
 
             return 0;
@@ -76,10 +76,10 @@ class BookingController extends ClientController
     public function renderBookingdetailsPage($params = null)
     {
         $bookingPage = new $this->pageName();
-        $this->getTemplate("/Content/bookingCard");
+        $this->getTemplate("/Content/userBookingCard");
         $bookingModel = new BookingModel();
 
-        $bookingData = $bookingModel->getBookingByUserId(@$this->request["userid"]);
+        $bookingData = $bookingModel->getBookingsByUserId(@$this->userData["userId"]);
 
         $bookingCardArr = [];
         $pageText = ["content-title" => "Buchungen", "content-body" => "Noch keine Buchungen vorhanden!"];

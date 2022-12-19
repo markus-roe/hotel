@@ -46,7 +46,7 @@
 
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-5">
                             <div class="cell">
                                 <span class="title">
                                     Gesamtpreis
@@ -55,7 +55,7 @@
                                 <input style="width:5rem" class="ipsum-card-input" type="number" min="0.00" step="0.01" name="roomId" id="" value="{{price}}">
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="cell">
                                 <span class="title">Zimmernr.</span>
                                 <input class="ipsum-card-input" type="text" name="roomId" id="" value="{{roomId}}">
