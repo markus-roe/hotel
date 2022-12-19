@@ -72,6 +72,21 @@ class BookingController extends ClientController
         header("Location: " . baseURL . "/booking/bookingdetails?res=success");
     }
 
+    public function updateAction()
+    {
+        $bookingId = $this->request["bookingid"];
+
+        $price = $_POST["price"] ? $_POST["price"] : 0;
+        $startDate = $_POST["startDate"] ? $_POST["startDate"] : "2010-10-10";
+        $endDate = $_POST["endDate"] ? $_POST["endDate"] : "2010-10-10";;
+        $roomId = $_POST["roomId"] ? $_POST["roomId"] : "2";
+        $bookingStatus = $_POST["bookingStatus"] ? $_POST["bookingStatus"] : 0;
+
+        $this->bookingModel->updateBookingById($bookingId, $startDate, $endDate, $bookingStatus, $price, $roomId);
+
+        header("Location: ".baseURL. "/admin/bookingdetails");
+    }
+
     // TODO
     public function renderBookingdetailsPage($params = null)
     {

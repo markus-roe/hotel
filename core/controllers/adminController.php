@@ -62,21 +62,6 @@ class AdminController extends ClientController
         header("Location: ../../admin/guests?res=success");
     }
 
-    public function updatebookingAction()
-    {
-        $bookingId = $this->request["bookingid"];
-
-        $price = $_POST["price"];
-        $startDate = $_POST["startDate"];
-        $endDate = $_POST["endDate"];
-        $roomId = $_POST["roomId"];
-        $bookingStatus = $_POST["bookingStatus"];
-
-        $this->bookingModel->updateBookingById($bookingId, $startDate, $endDate, $bookingStatus, $price, $roomId);
-
-        header("Location: ".baseURL. "/admin/bookingdetails?del=success");
-    }
-
     public function renderBookingdetailsPage($params = null)
     {
         $bookingPage = new $this->pageName();
