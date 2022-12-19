@@ -1,6 +1,5 @@
 <?php
 session_start();
-// session_destroy();
 require_once "./core/console_log.php";
 require_once "./core/app.php";
 require_once "./core/router.php";
@@ -18,17 +17,6 @@ else
     define('baseURL', "http://localhost/hotel");
 }
 
-
-// $model = new BookingModel();
-
-// $res = $model->updatePrice(27, 1.00);
-// echo "<pre>";
-// var_dump($res);
-// echo "</pre>";
-
-// return 0;
-// die();
-
 try {
     
     $app = new App();
@@ -42,12 +30,12 @@ try {
     $app->router->get("/registration/:view");
     $app->router->post("/registration/:action");
     $app->router->post("/booking/:id/:action");
-    // $app->router->post("/booking/:id/:action");
     $app->router->get("/article/preview");
     $app->router->get("/article/newpost");
     $app->router->get("/article/post/:articleid");
     $app->router->get("/article/post/id/:articleid");
     $app->router->post("/article/:action");
+    $app->router->post("/client/:action/:userid");
     $app->router->get("/client/profile");
     $app->router->get("/admin/guests");
     $app->router->get("/admin/bookingdetails");
@@ -57,7 +45,6 @@ try {
     $app->router->post("/client/:action");
     $app->router->get("/login/:action");
     $app->router->post("/login/:action");
-    $app->router->post("/client/:action/:userid");
 
 
 
