@@ -14,9 +14,10 @@ if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
 }
 else 
 {
-    define('baseURL', "http://localhost/hotel");
     // windows baseURL
+    define('baseURL', "http://localhost/hotel");
 }
+
 
 // $model = new BookingModel();
 
