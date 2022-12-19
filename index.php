@@ -7,27 +7,26 @@ require_once "./core/router.php";
 require_once "./core/models/bookingModel.php";
 
 // differnt roots on mac and windows
-if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
-{
-    // mac baseURL
-    define('baseURL', "http://192.168.64.2/hotel");
-}
-else 
-{
-    // windows baseURL
-    define('baseURL', "http://localhost/hotel");
-}
+// define('baseURL', "http://192.168.64.2/hotel");
+// if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
+// {
+//     // mac baseURL
+// }
+// else 
+// {
+//     // windows baseURL
+// }
+define('baseURL', "http://localhost/hotel");
 
 
-$model = new BookingModel();
+// $model = new BookingModel();
 
-// $res = $model->createReceipt(69.69);
+// $res = $model->getBookingByBookingId(24);
 // var_dump($res);
 
 // return 0;
 // die();
 
-// var_dump($_SERVER);receiptId
 try {
     
     $app = new App();
@@ -37,7 +36,7 @@ try {
     $app->router->get("/booking/bookingdetails/:userid");
     $app->router->get("/booking/bookingdetails");
     $app->router->get("/booking/room/:roomid");
-    // $app->router->post("/booking/:roomid/:action");
+    $app->router->post("/booking/:roomid/:action/");
     $app->router->post("/booking/:bookingid/:action");
     $app->router->get("/article/preview");
     $app->router->get("/article/newpost");

@@ -152,7 +152,7 @@ class BookingModel extends Model
 
     public function mergeBookingWithServices($booking, $services)
     {
-        $booking[0]["services"] = [...$services];
+        $booking["services"] = [...$services];
         // $booking = array_merge($booking, $services);
         return $booking;
     }
@@ -226,7 +226,7 @@ class BookingModel extends Model
         $query =
             "SELECT so.name
         FROM serviceoverview so
-        JOIN serviceReceipt sr ON sr.id = so.serviceId
+        JOIN serviceReceipt sr ON sr.serviceId = so.serviceId
         WHERE sr.bookingId = ?";
 
         $serviceNames = parent::executeQuery($query, "i", [$bookingId]);
@@ -254,7 +254,7 @@ class BookingModel extends Model
 
         for ($index = 0; $index < count($bookings); $index++) {
             $serviceNames = $this->getServiceNamesByBookingId($bookings[$index]["bookingId"]);
-            $bookings[$index]["services"] = [...$serviceNames];
+            array_push($bookings[$index], $this->mergeBookingWithServices($bookings[$index], $serviceNames));
         }
 
         return $bookings;
