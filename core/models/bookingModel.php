@@ -145,62 +145,29 @@ class BookingModel extends Model
     //? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
     public function updateBookingStatusById($bookingId, $statusName)
     {
-        $query =
-            "UPDATE bookings SET statusId = 
+        $query = 
+        "UPDATE bookings SET statusId bs = 
         (SELECT bs.statusId FROM booking_status
         WHERE bs.name = ?)
-         WHERE bookingId = ?";
+        WHERE bookingId = ?";
 
         $booking = parent::executeQuery($query, "si", [$statusName, $bookingId]);
 
         return $booking;
     }
 
-    public function updateTimeSpanByBookingId($bookingId, $startDate, $endDate)
-    {
-        $query =
-            "UPDATE bookings
-        SET startDate = ?,
-        endDate = ?
-        WHERE bookingId = ?;";
-
-        $booking = parent::executeQuery($query, "ssi", [$startDate, $endDate, $bookingId]);
-
-        return $booking;
-    }
-
-    public function updatePriceByBookingId($bookingId, $price)
-    {
-        $query =
-            "UPDATE bookings
-        SET price = ?
-        WHERE bookingId = ?;";
-
-        $booking = parent::executeQuery($query, "ii", [$price, $bookingId]);
-
-        return $booking;
-    }
-
     public function updateBookingById($bookingId, $startDate, $endDate, $bookingStatus, $price, $roomId)
     {
-        $this->updatePriceByBookingId($bookingId, $price);
-        $this->updateBookingStatusById($bookingId, $bookingStatus);
-        $this->updateTimeSpanByBookingId($bookingId, $startDate, $endDate);
-        $this->updateRoomIdByBookingId($bookingId, $roomId);
-
-        return true;
-    }
-
-    public function updateRoomIdByBookingId($bookingId, $roomId)
-    {
         $query =
-            "UPDATE bookings
-        SET roomId = ?
+        "UPDATE bookings
+        SET startdate = ?, SET endDate = ?, SET price = ?, 
         WHERE bookingId = ?;";
 
-        $booking = parent::executeQuery($query, "ii", [$roomId, $bookingId]);
+    $booking = parent::executeQuery($query, "ssi", [$startDate, $endDate, $price]);
 
-        return $booking;
+    $this->updateBookingStatusById($bookingId, $bookingStatus);
+
+    return true;
     }
 
     //? EVTL alternative überlegen -> updateBookingsStatus(1,1) ist nicht sehr intuitiv..
