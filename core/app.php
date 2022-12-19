@@ -62,14 +62,22 @@ class App
         $actionExists = $controllerExists
             ? method_exists($controllerName, $requestAction)
             : false;
-        $controller = new $controllerName($request, $this->clientModel);
+        $viewExists = method_exists($controllerName, "render".ucfirst($request["view"])."Page");
 
-        if (!$controllerExists) {
+
+        if ($controllerName == "Controller")
+        {
+            header("Location: ".baseURL."/main/home");
+        }
+
+        if (!$controllerExists || !$viewExists) {
             $errPage = new ErrorPage();
             $errPage->parse(["content-title" => "Sorry...", "content-body" => "Diese Seite existiert leider nicht..."]);
             $errPage->render();
             return;
         }
+
+        $controller = new $controllerName($request, $this->clientModel);
 
         if ($requestMethod == "GET") {
             $controller->execute();
