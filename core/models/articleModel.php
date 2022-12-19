@@ -38,12 +38,12 @@ class ArticleModel extends Model
         return $article;
     }
 
-    public function uploadImage($imagePath)
+    public function uploadImage($imagePath, $thumbnailPath)
     {
 
-        $query = "INSERT INTO pictures (picturePath) VALUES (?)";
+        $query = "INSERT INTO pictures (picturePath, thumbnailPath) VALUES (?, ?)";
 
-        $article = parent::executeQuery($query, "s", [$imagePath]);
+        $article = parent::executeQuery($query, "ss", [$imagePath, $thumbnailPath]);
 
         // * returns pictureID
         return $article;

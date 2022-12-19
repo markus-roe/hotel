@@ -90,14 +90,51 @@ class ArticleController extends Controller
     $NewImageName = $ImageName.'.'.$ImageExt;
 
     $destinationPath = getcwd() . "/public/uploads/pictures/" . $_FILES["articleImage"]["name"];
+    $thumbnailPath = getcwd() . "/public/uploads/pictures/thumbnails/" . $_FILES["articleImage"]["name"];
 
     $picturePath = "/uploads/pictures/" . $_FILES["articleImage"]["name"];
 
     move_uploaded_file($_FILES["articleImage"]["tmp_name"], $destinationPath);
 
+    if (is_file($destinationPath)) 
+    {
+        // get width and height of source image
+        list ($width, $height) = getimagesize($destinationPath);
+        $ratio = $width / $height;
+
+        $max = 500;
+        if($width > $max || $height > $max)
+        {
+            if($width > $height)
+            {
+                $newWidth = round($max);
+                $newHeight = round($max / $ratio);
+            }
+            else 
+            {
+                $newHeight = round($max);
+                $newWidth = round($max * $ratio);
+            }
+        }
+        else 
+        {
+            $newWidth = round($width);
+            $newHeight = round($height);
+        }
+
+        $thumbnail = imagecreatetruecolor($newWidth, $newHeight);
+        $source = imagecreatefromjpeg($destinationPath);
+
+        // copy thumbnail with new size
+        imagecopyresized($thumbnail, $source, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+
+        // save new resized thumbnail to "/thumbnails" folder
+        imagejpeg($thumbnail, $thumbnailPath);
+
+    }
 
     // * upload Image path to database
-    $post_pictureId = $article->uploadImage($picturePath);
+    $post_pictureId = $article->uploadImage($picturePath, $thumbnailPath);
 
     $authorId = $user->userId;
     $post_headline = $_POST['articleTitle'] ? $_POST['articleTitle'] : "";
