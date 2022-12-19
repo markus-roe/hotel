@@ -1,4 +1,4 @@
-<form action="./booking/{{bookingId}}/update" method="POST">
+<form action="./booking/{{id}}/update" method="POST">
 <div class="ipsum-card">
     <div class="container">
         <div class="row">
@@ -61,12 +61,11 @@
         </div>
         <div class="row">
             <div class="col-12">
-            <div class="col-3">
+                <div class="col-3">
                     <div class="cell" style="display: flex; flex-direction:column">
-                    <a href="./booking/{{bookingId}}/update"><button type="submit" class="btn btn-success">Bearbeiten</button></a>
+                    <a href="./booking/{{id}}/update"><button type="submit" class="btn btn-success">Bearbeiten</button></a>
                     </div>
                 </div>
-            </div>
             </div>
         </div>
     </div>

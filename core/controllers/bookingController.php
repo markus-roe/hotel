@@ -74,7 +74,7 @@ class BookingController extends ClientController
 
     public function updateAction()
     {
-        $bookingId = $this->request["bookingid"];
+        $bookingId = $this->request["id"];
 
         $price = $_POST["price"] ? $_POST["price"] : 0;
         $startDate = $_POST["startDate"] ? $_POST["startDate"] : "2010-10-10";
