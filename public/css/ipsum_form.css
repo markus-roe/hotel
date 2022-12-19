@@ -44,6 +44,8 @@
     margin-top: 1rem !important;
 }
 
+.label
+
 .inputError {
     border: 2px solid red;
 }
