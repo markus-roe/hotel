@@ -7,16 +7,16 @@ require_once "./core/router.php";
 require_once "./core/models/bookingModel.php";
 
 // differnt roots on mac and windows
-// define('baseURL', "http://192.168.64.2/hotel");
-// if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
-// {
-//     // mac baseURL
-// }
-// else 
-// {
-//     // windows baseURL
-// }
-define('baseURL', "http://localhost/hotel");
+if(str_contains($_SERVER["DOCUMENT_ROOT"], 'lamp'))
+{
+    // mac baseURL
+    define('baseURL', "http://192.168.64.2/hotel");
+}
+else 
+{
+    // windows baseURL
+    define('baseURL', "http://localhost/hotel");
+}
 
 
 // $model = new BookingModel();
