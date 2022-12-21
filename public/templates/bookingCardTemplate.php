@@ -55,7 +55,7 @@
                 <div class="col-3">
                     <div class="cell">
                         <span class="title">Zimmernr.</span>
-                        <input class="ipsum-card-input" type="text" name="roomId" id="" value="{{roomId}}">
+                        <input class="ipsum-card-input" type="number" name="roomId" id="" value="{{roomId}}">
                     </div>
                 </div>
             </div>
