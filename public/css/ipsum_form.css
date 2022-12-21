@@ -197,7 +197,7 @@
 }
 
 .ipsum-popup {
-    position: absolute;
+    position: fixed;
     z-index: 100;
     left: 50%;
     opacity: 0;
