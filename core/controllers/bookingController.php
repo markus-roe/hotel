@@ -84,7 +84,7 @@ class BookingController extends ClientController
 
         $this->bookingModel->updateBookingById($bookingId, $startDate, $endDate, $bookingStatus, $price, $roomId);
 
-        header("Location: ".baseURL. "/admin/bookingdetails");
+        header("Location: ".baseURL. "/admin/bookingdetails?res=success");
     }
 
     // TODO

@@ -26,7 +26,7 @@ class AdminController extends ClientController
 
         $this->clientModel->deactivateUserById($userId);
 
-        header("Location: ".baseURL. "/admin/guests?del=success");
+        header("Location: ".baseURL. "/admin/guests?res=success");
     }
 
     public function activateAction()
@@ -35,7 +35,7 @@ class AdminController extends ClientController
 
         $this->clientModel->activateUserById($userId);
 
-        header("Location: ".baseURL. "/admin/guests?del=success"); 
+        header("Location: ".baseURL. "/admin/guests?res=success"); 
     }
 
     public function renderGuestsPage()
@@ -106,6 +106,10 @@ class AdminController extends ClientController
         $userStatusFormLink = $foreignUser["active"] ? "./admin/deactivate/".$foreignUser['userId'] : "./admin/activate/".$foreignUser["userId"];
         $userStatusBtnTxt = $foreignUser["active"] ? "Deaktivieren" : "Aktivieren";
         $profilePage->insert("menu", $menu);            
+        
+        if ($this->request["res"] == "success") {
+            $profilePage->triggerPopup("<span style='font-size:1.5rem'>🥳</span> Update erfolgreich!");
+        }
         $profilePage->parse([...$foreignUser, "userStatusFormLink"=>$userStatusFormLink, "userStatusBtnTxt"=>$userStatusBtnTxt]);
         $profilePage->render();
     }
