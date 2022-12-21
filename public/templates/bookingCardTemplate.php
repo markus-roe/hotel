@@ -1,4 +1,4 @@
-<form action="./booking/{{bookingId}}/update" method="POST">
+<form action="hotel/booking/{{bookingId}}/update" method="POST">
     <div class="ipsum-card">
         <div class="container">
             <div class="row">

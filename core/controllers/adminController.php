@@ -57,7 +57,7 @@ class AdminController extends ClientController
     {
         parent::updateprofileAction($this->request["userid"]);
 
-        header("Location: ../../admin/guests?res=success");
+        header("Location: hotel/admin/guests?res=success");
     }
 
     public function renderBookingdetailsPage($params = null)
