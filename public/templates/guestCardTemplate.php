@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-3">
                     <div class="cell" style="display: flex; flex-direction:column">
-                    <a href="{{user-data-path}}"><button type="button" class="btn btn-success">Bearbeiten</button></a>
+                    <a href="{{user-data-path}}"><button type="button" class="btn btn-success ipsum-edit-btn"><span>&#9998;</span></button></a>
                     </div>
                 </div>
             </div>

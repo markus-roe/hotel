@@ -68,9 +68,9 @@
                 </div>
                 <div class="col-5">
                 </div>
-                <div class="col-3">
+                <div class="col-3" style="display: flex;flex-direction: column;flex-wrap: nowrap; justify-content: flex-end;">
                     <div class="cell" style="display: flex; flex-direction:column">
-                        <a href="./booking/{{id}}/update"><button type="submit" class="btn btn-success">Bearbeiten</button></a>
+                       <button type="submit" class="btn btn-success"> <span style="font-size: 1.0rem; font-weight: bold;"> &#x2713;</span></button>
                     </div>
                 </div>
             </div>

@@ -197,7 +197,7 @@
 }
 
 .ipsum-popup {
-    position: fixed;
+    position: absolute;
     z-index: 100;
     left: 50%;
     opacity: 0;
@@ -221,4 +221,8 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
     -webkit-appearance: none;
+}
+
+.ipsum-edit-btn {
+    width: 100%;
 }
