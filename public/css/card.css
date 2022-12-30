@@ -52,10 +52,19 @@ textarea.ipsum-card-input {
    color: black;
 }
 
+.services-list {
+    padding-left: 0px;
+}
+
 .services-list li {
-    list-style-type: circle !important;
-    clear: both !important;
-    
+    list-style-type: none !important;
+    clear: both !important;   
+}
+
+.services-list li::before {
+    content: "\2713  ";
+    display: inline;
+    font-weight: bold;
 }
 
 /* .ipsum-timespan {} */
